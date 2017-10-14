@@ -1,0 +1,6 @@
+.weui-panel-zdy{
+  background-color:#fff;
+  margin-top:10px;
+  position:relative;
+  overflow:hidden;
+}

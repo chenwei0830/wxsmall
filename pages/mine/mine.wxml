@@ -1,0 +1,74 @@
+<view class="page">
+    <view class="page__bd" style='margin-top:20px;'>
+        <view class="weui-panel-zdy weui-panel_access">
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_appmsg">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="{{headImage}}" style='border-radius:50%;'/>
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-cell__bd">
+                          <view style="display: inline-block; vertical-align: middle">{{userName}}</view>
+                          <view class="weui-badge" style="margin-left: 5px;">游客</view>
+                        </view>
+                        <view class="weui-media-box__desc">简单的介绍下自己</view>
+                    </view>
+                    <view> <button class="weui-btn mini-btn" type="default" size="mini">未认证</button></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-panel" style='margin-top:20px;'>
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
+                        <view class="weui-cell__hd"><image src="../../icons/zp.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view>我的作品</view>
+                        </view>
+                    </navigator>
+                    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
+                        <view class="weui-cell__hd"><image src="../../icons/sc.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view>收藏关注</view>
+                        </view>
+                    </navigator>
+                    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
+                        <view class="weui-cell__hd"><image src="../../icons/fl.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view>艺术门类</view>
+                        </view>
+                    </navigator>
+                    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
+                        <view class="weui-cell__hd"><image src="../../icons/rz.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view>认证信息</view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="weui-panel" style='margin-top:20px;'>
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
+                        <view class="weui-cell__hd"><image src="../../icons/yjfk.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view>意见反馈</view>
+                        </view>
+                    </navigator>
+                    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
+                        <view class="weui-cell__hd"><image src="../../icons/lxwm.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view>联系我们</view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
