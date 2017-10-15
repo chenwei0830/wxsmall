@@ -1,11 +1,8 @@
-var base64 = require("../../images/base64");
 //获取应用实例
-const app = getApp()
+const app = getApp();
 
 Page({
   data:{
-      icon20: base64.icon20,
-      icon60: base64.icon60,
       headImage:'../../images/head.png',
       userName:'李敏',
       list: [

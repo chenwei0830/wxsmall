@@ -1,15 +1,16 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs",
+    "pages/art/art",
+    "pages/msg/msg",
     "pages/mine/mine"
   ],
   "window":{
-    "backgroundColor": "#eeeeee",
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "black",
+    "navigationBarBackgroundColor": "#2c2c2c",
     "navigationBarTitleText": "西南艺术馆",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle":"white",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light"
   },
   "tabBar":{
     "color":"#8a8a8a",
@@ -24,13 +25,13 @@
         "selectedIconPath":"icons/1-1.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/art/art",
         "text": "艺术圈",
         "iconPath": "icons/2-0.png",
         "selectedIconPath": "icons/2-1.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/msg/msg",
         "text": "消息",
         "iconPath": "icons/3-0.png",
         "selectedIconPath": "icons/3-1.png"
