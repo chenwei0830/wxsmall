@@ -1,0 +1,15 @@
+<view class="page">
+  <view class="page__hd_zdy">
+    <view class="page__title_zdy" style='color:#d81e06;'>#开始创作#</view>
+    <view class="page__desc_zdy">点击右下角的选项，开始创作吧</view>
+  </view>
+  <view class="font-btn-wrapper" catchtap="onGoTextPage">
+    <view class="font-btn"></view>
+  </view>
+  <view class="photo-btn-wrapper" catchtap="onGoPhotoPage">
+    <view class="photo-btn"></view>
+  </view>
+  <view class="video-btn-wrapper" catchtap="onGoVideoPage">
+    <view class="video-btn"></view>
+  </view>
+</view>

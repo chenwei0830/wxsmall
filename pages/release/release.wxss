@@ -1,0 +1,121 @@
+.weui-grid_zdy {
+  position:relative;
+  float:left;
+  padding-top:5px;
+  width:32%;
+  box-sizing:border-box;
+  border-radius:8px;
+  margin-left:.5%;
+  margin-right:.5%;
+  margin-bottom:6px;
+  background-size:100% 100%;
+}
+.weui-btn-fb_zdy{
+  overflow:hidden;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+.weui-media-box__hd_in-appmsg_zdy {
+  margin:auto;
+  width:60px;
+  height:60px;
+  line-height:60px;
+  text-align:center;
+}
+
+.weui-form-preview_zdy {
+  position:relative;
+  background-color:#fff;
+  margin-left:15px;
+  margin-right:15px;
+  border-radius:8px;
+}
+
+.page__title_zdy {
+  text-align: left;
+  font-size: 20px;
+  font-weight: 400;
+}
+.page__desc_zdy {
+  margin-top: 5px;
+  color: #888;
+  text-align: left;
+  font-size: 14px;
+}
+.page__hd_zdy {
+    padding: 20px;
+}
+
+.weui-form-preview__hd_zdy {
+  position:relative;
+  padding:2px 15px;
+  text-align:right;
+  line-height:2.5em;
+}
+.weui-form-preview__hd_zdy::after {
+  content:" ";
+  position:absolute;
+  left:0;
+  bottom:0;
+  right:0;
+  height:1px;
+  border-bottom:1rpx solid #d9d9d9;
+  color:#d9d9d9;
+}
+.weui-form-preview__label_zdy {
+  margin-right:1em;
+  min-width:4em;
+  color:#999;
+  text-align:center;
+}
+
+.font-btn-wrapper {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  bottom: 120px;
+  right: 10px;
+  border:2px solid #ffffff;
+  border-radius:50%;
+
+}
+.photo-btn-wrapper {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  bottom: 70px;
+  right: 10px;
+  border:2px solid #ffffff;
+  border-radius:50%;
+}
+.video-btn-wrapper {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  bottom: 20px;
+  right: 10px;
+  border:2px solid #ffffff;
+  border-radius:50%;
+}
+
+.video-btn-wrapper .video-btn {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url(http://7xjhv4.com1.z0.glb.clouddn.com/btn-video.png) no-repeat center center;
+    background-size: 100%;
+}
+.photo-btn-wrapper .photo-btn {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url(http://7xjhv4.com1.z0.glb.clouddn.com/btn-photo.png) no-repeat center center;
+    background-size: 100%;
+}
+.font-btn-wrapper .font-btn {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url(http://7xjhv4.com1.z0.glb.clouddn.com/btn-font.png) no-repeat center center;
+    background-size: 100%;
+}

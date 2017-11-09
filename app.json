@@ -1,12 +1,15 @@
 {
   "pages":[
+    "pages/home/home",
     "pages/index/index",
     "pages/art/art",
     "pages/msg/msg",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/release/release",
+    "pages/release/textpage/textpage"
   ],
   "window":{
-    "navigationBarBackgroundColor": "#2c2c2c",
+    "navigationBarBackgroundColor": "#d81e06",
     "navigationBarTitleText": "西南艺术馆",
     "navigationBarTextStyle":"white",
     "backgroundColor": "#eeeeee",
@@ -14,21 +17,27 @@
   },
   "tabBar":{
     "color":"#8a8a8a",
-    "selectedColor":"#1aad19",
+    "selectedColor":"#d81e06",
     "backgroundColor":"#ffffff",
     "borderStyle":"white",
     "list":[
       {
-        "pagePath":"pages/index/index",
-        "text":"专题",
+        "pagePath":"pages/home/home",
+        "text":"首页",
         "iconPath":"icons/1-0.png",
         "selectedIconPath":"icons/1-1.png"
       },
       {
         "pagePath": "pages/art/art",
-        "text": "艺术圈",
+        "text": "艺术家",
         "iconPath": "icons/2-0.png",
         "selectedIconPath": "icons/2-1.png"
+      },
+      {
+        "pagePath": "pages/release/release",
+        "text": "开始创作",
+        "iconPath": "icons/5-0.png",
+        "selectedIconPath": "icons/5-1.png"
       },
       {
         "pagePath": "pages/msg/msg",

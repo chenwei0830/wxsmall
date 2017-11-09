@@ -5,6 +5,9 @@ Page({
   data:{
       headImage:'../../images/head.png',
       userName:'李敏',
+      isArt:true,
+      artLevel:"省级艺术家",
+      artIcon:"../../icons/art-sj.png",
       list: [
         {
           id: 'form',
