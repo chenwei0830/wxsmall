@@ -1,0 +1,7 @@
+
+<template name='empty'>
+<view class="tc" style="font-size: 15pt;font-weight: 400;color: #b2b2b2;">
+  <view style='background-image:url(http://oj1itelvn.bkt.clouddn.com/art/noMsg-img.png);background-position:center;background-size:80px;background-repeat:no-repeat;height:20vh;'></view>
+  <text>{{msg}}</text>
+</view>
+</template>

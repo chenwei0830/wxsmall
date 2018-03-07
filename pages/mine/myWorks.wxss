@@ -1,0 +1,193 @@
+/* pages/mine/myWorks.wxss */
+
+.search {
+    height: 70rpx;
+    line-height: 70rpx;
+    border-radius: 35rpx;
+    padding: 0 20rpx;
+    background-color: #eee;
+}
+
+.holder {
+    color: #999;
+}
+
+.search input {
+    width: 100%;
+    height: 100%;
+}
+
+.sort-wrap {
+    width: 30%;
+    margin-left: 0ch;
+}
+
+/*排序文字激活状态  */
+
+.sort.active {
+    color: #03b9bb;
+}
+
+/*三角  */
+
+.triangle {
+    display: inline-block;
+    position: relative;
+    width: 40rpx;
+    height: 30rpx;
+}
+
+.triangle::before {
+    position: absolute;
+    top: 25%;
+    bottom: 50%;
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 0 10rpx 10rpx;
+    border-style: solid;
+    border-color: transparent transparent #ccc; /*透明 透明  灰*//* margin:0 auto; */
+}
+
+.triangle::after {
+    position: absolute;
+    top: 75%;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: solid 10rpx #ccc;
+    border-left: solid 10rpx transparent;
+    border-right: solid 10rpx transparent;
+    border-bottom: solid 10rpx transparent;
+}
+
+.triangle.up::before {
+    border-color: transparent transparent #03b9bb; /*透明 透明  灰*/
+}
+
+.triangle.down::after {
+    border-top: solid 10rpx #03b9bb;
+}
+
+.keep-item {
+    border-top: 1rpx solid #e6e6e6;
+}
+
+.content {
+    padding: 30rpx 20rpx;
+}
+
+.content .keep-img {
+    width: 260rpx;
+    height: 200rpx;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 30rpx;
+}
+
+.keep-info {
+    width: 420rpx;
+    position: relative;
+}
+
+.keep-info .title, .keep-info .intro {
+    line-height: 100%;
+}
+
+.keep-info .title {
+    font-size: 32rpx;
+}
+
+.keep-info .intro {
+    color: #999;
+    font-size: 24rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-top: 16rpx;
+    line-height: 30rpx;
+}
+
+.keep-info .icon-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    line-height: 100%;
+}
+
+/* .icon-talk,.icon-like {
+  width: 38rpx;
+  height: 36rpx;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.icon-talk {
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/talk1.png);
+  padding-left: 50rpx;
+  background-position: left center;
+  background-size: 34rpx;
+  color: #999;
+  line-height: 44rpx;
+}
+
+.icon-like {
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/like1.png);
+  padding-left: 50rpx;
+  background-position: left center;
+  background-size: 38rpx;
+  color: #999;
+  margin-right:40rpx;
+  line-height: 44rpx;
+} */
+
+.icon-like, .icon-talk {
+    display: inline-block;
+    width: 38rpx;
+    height: 36rpx;
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+.icon-like {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/like1.png);
+}
+
+.icon-talk {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/talk1.png);
+}
+
+.icon-txt {
+    font-size: 24rpx;
+    color: #666;
+}
+
+.keep-time text {
+    font-size: 24rpx;
+    color: #666;
+}
+
+.keep-del {
+    width: 260rpx;
+    height: 260rpx;
+    line-height: 260px;
+    text-align: center;
+}
+
+.action {
+    position: absolute;
+    right: -25vw;
+    top: 0;
+    bottom: 0;
+    width: 25vw;
+    align-items: center;
+    background: #03b9bb;
+    color: #fff;
+    transition: all 0.2s;
+    font-size: 26rpx;
+}

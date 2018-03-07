@@ -1,0 +1,44 @@
+<!--pages/mine/myWorks.wxml-->
+<view class='header weui-flex common-pd bg-white align'>
+    <view class='search weui-flex__item'>
+        <input placeholder='输入关键字' type='text' placeholder-class='holder' class='tc'></input>
+    </view>
+    <view class='sort-wrap weui-flex__item'>
+        <view class='weui-flex align' style='justify-content:flex-end'>
+            <!-- <view class='sort {{hot==1||hot==2?"active":""}}' bindtap='sortClick'>热度 <text class='triangle {{hot==1?"down" : hot ==2 ? "up" : ""}}'></text></view> -->
+            <view class='sort {{hot==1?"active":""}}' bindtap='sortClick'>热度 <text class='triangle {{hot==1?"down":"up"}}'></text></view>
+            <view class='sort ml-10 active' bindtap='timeSortClick'>时间 <text class='triangle down'></text></view>
+        </view>
+    </view>
+</view>
+
+<view class='mt-10 bg-white'>
+    <navigator url='/pages/home/detail?id={{item.id}}' hover-class='none' class='keep-list' wx:for='{{category}}' wx:key='{{index}}'>
+        <view class='keep-item' wx:for='{{item.content}}' wx:for-item='cell' wx:key='{{index2}}'>
+            <view class='content weui-flex'>
+                <view class='keep-img' style='background-image:url({{cell.image}})'></view>
+                <view class='keep-info weui-flex__item'>
+                    <view class='title'>{{cell.title}}</view>
+                    <view class='intro'>{{cell.intro}}</view>
+                    <view class='weui-flex icon-wrap align'>
+                        <!-- <view class='icon-like {{cell.is_like?"active":""}}' bindtap='bindLike'>1</view>        
+          <view class='icon-talk' bindtap='commentClick' data-pos="{{[index,index2]}}">10</view> -->
+                        <view class='' style='margin-right:40rpx;'>
+                            <text class='icon-like'></text>
+                            <text class='icon-txt ml-5'>1</text>
+                        </view>
+                        <view class=''>
+                            <text class='icon-talk'></text>
+                            <text class='icon-txt ml-5'>10</text>
+                        </view>
+                        <view class='keep-time weui-flex__item tr'>
+                            <text class='mr-10'>{{cell.date}}</text>
+                            <text>{{cell.time}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class='keep-del' wx:if='{{}}'>删除</view>
+        </view>
+    </navigator>
+</view>

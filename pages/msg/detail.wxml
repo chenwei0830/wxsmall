@@ -1,0 +1,14 @@
+<view class="wrap">
+    <scroll-view class='chat-list' scroll-y scroll-into-view="msg{{list.length-1}}" scroll-with-animation>
+        <view id="msg{{index}}" class='weui-flex chat-item {{item.mine?"me":""}}' wx:for="{{list}}">
+            <image class='avatar' src='https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3321327869,1925632019&fm=27&gp=0.jpg' mode='aspectFill'></image>
+            <view class='content {{item.mine?"right":"left"}}'>的发打发斯蒂，地方撒旦法撒旦反攻倒算费鬼地方个第三方给第三方刚的第三方广东省和第三方刚第三方给第三方刚</view>
+        </view>
+    </scroll-view>
+    <view class='input-wrap weui-flex'>
+        <view class='weui-flex__item'>
+            <input></input>
+        </view>
+        <view class='send tr'>发送</view>
+    </view>
+</view>

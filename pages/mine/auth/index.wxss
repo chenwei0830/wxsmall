@@ -1,0 +1,174 @@
+/* pages/auth/index.wxss */
+
+.cell {
+    padding: 20rpx;
+    background: #fff;
+    align-items: center;
+    justify-content: center;
+}
+
+.cell .label {
+    width: 150rpx;
+}
+
+.cell .get-code {
+    background: #03b9bb;
+    color: #fff;
+    border-radius: 5rpx;
+    padding: 10rpx;
+    font-size: 28rpx;
+}
+/* 
+.ssl-list {
+    padding: 20rpx;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: #fff;
+    flex-wrap: wrap;
+}
+
+.ssl-list .ssl {
+    width: 25%;
+    box-sizing: border-box;
+    border: solid 10rpx #fff;
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/sczs.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.ssl-list .ssl:nth-child(4n) {
+    align-self: flex-end;
+}
+
+.ssl-list .ssl::after {
+    content: "";
+    display: block;
+    margin-top: 100%;
+}
+
+.ssl-list .ssl.add {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/sczs.png);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 8pt;
+    white-space: nowrap;
+    text-align: center;
+    align-items: flex-end;
+    background-position-y: 30%;
+    color: #ccc;
+}
+
+.ssl-list .ssl.add image {
+    width: 50%;
+    height: 50%;
+} */
+
+.img-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding:20rpx 20rpx 0;
+}
+
+.img-list .img {
+     margin-bottom: 20rpx; 
+    margin-right: 20rpx;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* .img-list .img:first-child::after {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "封面";
+    color: #fff;
+    padding: 5rpx 0;
+    text-align: center;
+    font-size: 24rpx;
+} */
+
+.img-list .img:nth-child(3n) {
+    margin-right: 0;
+}
+
+.img-list .add {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.img-list .add text {
+    font-size: 24rpx;
+    color: #888;
+}
+
+.img-list .add image {
+    width: 50%;
+    height: 50%;
+    margin-bottom: 15rpx;
+}
+
+
+checkbox {
+    transform: scale(0.6);
+    vertical-align: middle;
+}
+
+.deal {
+    color: #03b9bb;
+    text-decoration: underline;
+    line-height: 100%;
+    font-size: 12pt;
+}
+
+.box{
+    background-color: #f0eff5;
+    position: fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:20rpx;
+}
+
+.submit {
+    width:100%;
+    height:100%;
+    background: #03b9bb;
+    border-radius: 10rpx;
+    color: #fff;
+    padding: 25rpx 0;
+    text-align: center;
+    font-size: 34rpx;
+}
+
+.submit .iconfont {
+    font-size: 34rpx;
+    margin-right: 10rpx;
+}
+
+.submit .money {
+    display: inline-block;
+    margin-left: 25rpx;
+    font-size: 34rpx;
+}
+
+.icon-wxpay {
+    display: inline-block;
+    width: 58rpx;
+    height: 50rpx;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-wxpay.png);
+    vertical-align: middle;
+}

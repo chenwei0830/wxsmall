@@ -1,52 +1,61 @@
-//获取应用实例
-const app = getApp();
-
+// pages/mine/mine.js
+const app = getApp()
 Page({
-  data:{
-      headImage:'../../images/head.png',
-      userName:'李敏',
-      isArt:true,
-      artLevel:"省级艺术家",
-      artIcon:"../../icons/art-sj.png",
-      list: [
-        {
-          id: 'form',
-          name: '表单',
-          open: false,
-          pages: ['button', 'list', 'input', 'slider', 'uploader']
-        },
-        {
-          id: 'widget',
-          name: '基础组件',
-          open: false,
-          pages: ['article', 'badge', 'flex', 'footer', 'gallery', 'grid', 'icons', 'loadmore', 'panel', 'preview', 'progress']
-        },
-        {
-          id: 'feedback',
-          name: '操作反馈',
-          open: false,
-          pages: ['actionsheet', 'dialog', 'msg', 'picker', 'toast']
-        },
-        {
-          id: 'nav',
-          name: '导航相关',
-          open: false,
-          pages: ['navbar', 'tabbar']
-        },
-        {
-          id: 'search',
-          name: '搜索相关',
-          open: false,
-          pages: ['searchbar']
+
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        advice: false,
+    },
+
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        wx.login({
+            success: res => {
+                wx.getUserInfo({
+                    success: info => {
+                        this.setData({
+                            user: info.userInfo
+                        })
+                        app.user = this.data.user
+                    }
+                })
+            }
+        })
+        getApp().editTabBar();
+    },
+    loadData() {
+        // 请求接口
+    },
+    onInput(evt) {
+        this.setData({
+            content: evt.detail.value
+        })
+    },
+    submit() {
+        if (!this.data.content) {
+            app.wxToast.error('请输入您的意见或建议~');
+            return;
         }
-      ]
-  },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-  }
+        // 请求接口，提交意见反馈
+
+    },
+    adviceClick() {
+        this.setData({
+            advice: true
+        })
+    },
+    closeClick() {
+        this.setData({
+            advice: false
+        })
+    },
+    call() {
+        wx.makePhoneCall({
+            phoneNumber: '18888888888'
+        })
+    }
 })

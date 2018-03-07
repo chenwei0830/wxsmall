@@ -1,0 +1,352 @@
+/* pages/home/detail.wxss */
+
+.main-content {
+    margin-top: 10rpx;
+}
+
+.main-content .main-header {
+    padding: 20rpx 30rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.main-content .main-header .avatar {
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 1rpx solid #eee;
+    margin-right: 20rpx;
+}
+
+.main-content .main-header .name {
+    color: #686868;
+    font-size: 34rpx;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.main-content .main-header .name .s-title {
+    font-size: 24rpx;
+    color: #999;
+    background: #efefef;
+    padding: 6rpx 16rpx;
+    line-height: 100%;
+    /* vertical-align: middle; */
+    border-radius: 10rpx;
+    display: inline-block;
+    transform-origin: center;
+    transform: scale(0.9);
+}
+
+.main-content .main-header .user-wrap .intro view,
+.main-content .main-header .user-wrap .intro view text {
+    font-size: 26rpx;
+    color: #999;
+}
+
+.grade {
+    width: 86rpx;
+    height: 28rpx;
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* margin-right:10rpx; */
+}
+
+.grade.province {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-sj.png);
+}
+
+.grade.countries {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-gj.png);
+}
+
+.grade.city {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-szj.png);
+}
+
+.grade.county {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-xqj.png);
+}
+
+.grade.students {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-xy.png);
+}
+
+.user-wrap {
+    position: relative;
+    height: 90rpx;
+}
+
+.intro {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.main-content .main-header .user-wrap .intro .address {
+    font-size: 24rpx;
+    color: #666;
+    padding-left: 20rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/addr-icon.png);
+    background-size: 18rpx;
+    background-repeat: no-repeat;
+}
+
+.main-content .content {
+    padding: 20rpx 30rpx;
+    border-bottom: 1rpx solid #e6e6e6;
+    /* margin-bottom:10rpx; */
+}
+
+.main-content .content .content-img {
+    width: 100%;
+    height: 420rpx;
+    margin-top: 20rpx;
+    position: relative
+}
+
+.main-content .content .icon-wrap {
+    margin-top: 30rpx;
+}
+
+.main-content .content .icon-heart, .main-content .content .icon-talk,
+.main-content .content .icon-like, .main-content .content .icon-share {
+    width: 38rpx;
+    height: 36rpx;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.main-content .content .icon-like.active {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/zan1.png);
+}
+
+.main-content .content .icon-share button {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+}
+
+.main-content .content .icon-heart {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/heart2.png);
+    margin-right: 60rpx;
+    height: 39rpx;
+}
+
+.main-content .content .icon-heart.active {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/heart1.png);
+}
+
+.main-content .content .icon-talk {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/talk1.png);
+    padding-left: 68rpx;
+    background-position: left center;
+    background-size: 38rpx;
+    color: #999;
+    line-height: 36rpx;
+}
+
+.main-content .content .icon-like {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/like1.png);
+    padding-left: 50rpx;
+    background-position: left center;
+    background-size: 38rpx;
+    padding-right: 20rpx;
+    color: #999;
+}
+
+.main-content .content .icon-share {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/share-icon.png);
+    padding: 0 20rpx;
+    background-position: center;
+    background-size: 36rpx;
+    color: #999;
+    margin-left: 30rpx;
+}
+
+.add-focus {
+    box-sizing: border-box;
+    /* width:120rpx; */
+    height: 68rpx;
+    line-height: 70rpx;
+    padding-left: 50rpx;
+    padding-right: 14rpx;
+    text-align: center;
+    color: #fff;
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/art-add.png);
+    background-size: 26rpx;
+    background-position: 14rpx center;
+    background-color: #03b9bb;
+    background-repeat: no-repeat;
+    border-radius: 16rpx;
+}
+
+.end-focus {
+    width: 120rpx;
+    height: 68rpx;
+    line-height: 70rpx;
+    border-radius: 16rpx;
+    background-color: #efeff4;
+    color: #ccc;
+}
+
+#myVideo {
+    height: 420rpx;
+    width: 100%;
+}
+
+.click {
+    position: absolute;
+    bottom: 14rpx;
+    left: 30rpx;
+    right: 0;
+    color: #fff;
+    background-color: rgba(0,0,0,.5);
+    width: 70rpx;
+    min-width: 70rpx;
+    height: 40rpx;
+    border-radius: 35rpx;
+    font-size: 26rpx;
+    line-height: 40rpx;
+    text-align: center;
+}
+
+.comments-wrap {
+    background: #fff;
+}
+
+.comments-wrap .tab-wrap {
+    border-bottom: solid 1rpx #e6e6e6;
+    padding: 10rpx 30rpx 0 30rpx;
+}
+
+.comments-wrap .tab-item {
+    /* padding: 20rpx; */
+    height: 70rpx;
+    line-height: 70rpx;
+    background: #fff;
+    font-size: 28rpx;
+    color: #999;
+}
+
+.comments-wrap .tab-item.active {
+    transform: translateY(1rpx);
+    border-top: 1rpx solid #e6e6e6;
+    border-left: 1rpx solid #e6e6e6;
+    border-right: 1rpx solid #e6e6e6;
+    color: #333;
+}
+
+/*评论  */
+
+.commentaries {
+    transform-origin: 0 0;
+    background: #fff;
+    /* margin-top: 30rpx; */
+    padding: 20rpx;
+    /* position: relative; */
+    animation: commentaries 0.2s;
+}
+
+.commentaries .com-avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    border: 1rpx solid #fff;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: 26rpx;
+}
+
+.commentaries .com-name {
+    color: #999;
+    font-size: 28rpx;
+}
+
+.commentaries .com-name .com-label {
+    font-size: 24rpx;
+    margin-left: 16rpx;
+    background-color: #eee;
+    border-radius: 6rpx;
+    line-height: 100%;
+    padding: 5rpx 10rpx;
+    display: inline-block;
+    transform-origin: center;
+    transform: scale(0.9);
+}
+
+.commentaries .com-content {
+    color: #666;
+    line-height: 34rpx;
+    margin-top: 10rpx;
+    font-size: 28rpx;
+}
+
+.commentaries .reply {
+    font-size: 28rpx;
+    color: #03b9bb;
+    padding: 6rpx 20rpx;
+    background-color: #eee;
+    margin-right: 40rpx;
+}
+
+.commentaries .com-time view, .commentaries .com-time view text {
+    color: #999;
+    font-size: 26rpx;
+}
+
+.commentaries .com-time .com-like {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/like1.png);
+    padding-left: 50rpx;
+    background-position: left center;
+    background-size: 34rpx;
+    /* padding-right: 20rpx; */
+    color: #999;
+    background-repeat: no-repeat;
+}
+
+.commentaries .com-time .com-like.active {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/zan1.png);
+}
+
+.edit {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: #fff;
+    border-top: 1rpx solid #e6e6e6;
+    padding: 20rpx;
+}
+
+.edit .edit-input {
+    height: 80rpx;
+    line-height: 80rpx;
+    background: #eee;
+    border-radius: 10rpx;
+    margin-right: 40rpx;
+}
+
+.edit .edit-input input {
+    width: 100%;
+    height: 100%;
+    padding: 0 20rpx;
+}
+
+.edit .edit-smile {
+    width: 80rpx;
+    color:#03b9bb;
+    font-size:32rpx;
+}

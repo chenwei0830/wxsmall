@@ -1,0 +1,54 @@
+/* pages/mine/set.wxss */
+
+.item-wrap {
+    border-bottom: 1rpx solid #e6e6e6;
+}
+
+.item-wrap:last-child {
+    border-bottom: 0;
+}
+
+.avatar {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    border: 1rpx solid #e6e6e6;
+}
+
+.avatar image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.label {
+    width: 200rpx;
+}
+
+.intro-edit {
+    padding: 0 20rpx 20rpx;
+    box-sizing: border-box;
+}
+
+.intro-edit textarea {
+    /* border: 1rpx solid #e6e6e6; */
+    width: 100%;
+    height: 300rpx;
+    padding: 20rpx;
+    box-sizing: border-box;
+    box-shadow: 0 0 4rpx #e6e6e6;
+}
+
+.sure {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: #03b9bb;
+    color: #fff;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    font-size: 34rpx;
+}

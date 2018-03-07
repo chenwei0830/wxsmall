@@ -1,0 +1,129 @@
+/* pages/art/search.wxss */
+.search {
+  padding: 26rpx 76rpx;
+}
+
+.search .search-wrap {
+  border: 1rpx solid #999;
+  border-radius: 10rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  padding-left: 84rpx;
+  padding-right: 30rpx;
+  /* background: transparent; */
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/art/art-search.png);
+  background-size: 34rpx;
+  background-position: 30rpx center;
+  background-repeat: no-repeat;
+}
+
+.search .search-input {
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+}
+
+.search .placeholder {
+  color: #999;
+  font-size: 28rpx;
+}
+
+.no-search{
+    height:200rpx;
+    line-height: 200rpx;
+    color:#999;
+}
+.container{
+    margin-top:30rpx;
+}
+
+.artist-wrap {
+    margin-top: 20rpx;
+}
+
+.art-list .art-item {
+    padding-top: 20rpx;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    overflow: hidden;
+    transition: transform 0.2s;
+    padding:20rpx 38rpx 0;
+}
+
+.art-list .art-item .art-avatar {
+    width: 140rpx;
+    height: 140rpx;
+    border-radius: 50%;
+    border: 1rpx solid #e6e6e6;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.art-info-pd {
+    padding-left: 36rpx;
+    /* padding-right: 30rpx; */
+    border-bottom: 1rpx solid #efeff4;
+}
+
+.art-list .art-item .art-name {
+    font-size: 34rpx;
+}
+
+.art-list .art-item .art-name, .art-list .art-item .art-category,
+.art-list .art-item .art-works {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.art-list .art-item .art-category, .art-list .art-item .art-works {
+    font-size: 24rpx;
+    color: #999;
+    line-height: 100%;
+}
+
+.art-list .art-item .art-works {
+    padding-bottom: 22rpx;
+    padding-top: 40rpx;
+}
+
+.add-focus {
+    box-sizing: border-box;
+    width: 130rpx;
+    height: 68rpx;
+    line-height: 70rpx;
+    padding-left: 50rpx;
+    padding-right: 14rpx;
+    text-align: center;
+    color: #fff;
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/art-add.png);
+    background-size: 26rpx;
+    background-position: 14rpx center;
+    background-color: #666;
+    background-repeat: no-repeat;
+    border-radius: 16rpx;
+}
+
+.end-focus {
+    width: 130rpx;
+    height: 68rpx;
+    line-height: 70rpx;
+    border-radius: 16rpx;
+    background-color: #efeff4;
+    color: #ccc;
+}
+
+.action {
+    position: absolute;
+    right: -25vw;
+    top: 0;
+    bottom: 0;
+    width: 25vw;
+    align-items: center;
+    background: #03b9bb;
+    color: #fff;
+    transition: all 0.2s;
+    font-size: 26rpx;
+}

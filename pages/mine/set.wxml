@@ -1,0 +1,40 @@
+<!--pages/mine/set.wxml-->
+<view class='container mt-10 bg-white'>
+    <view class='item-wrap weui-flex common-pd align' bindtap='choose'>
+        <view class='label weui-flex__item'>我的头像</view>
+        <view class='weui-flex align'>
+            <view class='avatar'>
+                <image mode='aspectFill' src='{{cover||user.avatarUrl}}'></image>
+            </view>
+            <view class='arrow-right'></view>
+        </view>
+    </view>
+    <view class='item-wrap weui-flex common-pd align'>
+        <view class='label'>名称</view>
+        <view class='weui-flex__item tr'>
+            <input type='text' placeholder='请输入~' value='{{user.nickName||post.name}}' bindinput='onInput' data-key='name'></input>
+        </view>
+        <view class='arrow-right'></view>
+    </view>
+    <view class='item-wrap weui-flex common-pd align'>
+        <view class='label'>性别</view>
+        <view class='weui-flex__item tr info'>
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{sex}}">
+                <view class="picker">
+                    {{sex[index]||'请选择'}}
+                </view>
+            </picker>
+        </view>
+        <view class='arrow-right'></view>
+    </view>
+</view>
+
+
+<view class='mt-10 bg-white'>
+    <view class='intro common-pd'>个人简介</view>
+    <view class='intro-edit'>
+        <textarea maxlength='-1' class='' placeholder='说点什么吧~' bindinput='onInput' data-key='intro'></textarea>
+    </view>
+</view>
+
+<view class='sure'>提交</view>

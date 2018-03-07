@@ -1,0 +1,106 @@
+<!--pages/home/detail.wxml-->
+<import src="/utils/tps/empty.wxml" />
+
+<view class='main-content bg-white'>
+    <view class='main-header weui-flex align'>
+        <view class='avatar' style='background-image:url({{content.avatar}})'></view>
+        <view class='user-wrap weui-flex__item'>
+            <view class='name'>{{content.name}}
+                <text class='s-title'>{{content.label}}</text>
+            </view>
+            <view class='weui-flex intro align' style='line-height:100%;'>
+                <view class='grade {{content.grade==0?"countries mr-5":""}}' wx:if='{{content.grade==0}}'></view>
+                <view class='grade {{content.grade==1?"province":""}}' wx:if='{{content.grade==1}}'></view>
+                <view class='grade {{content.grade==2?"city mr-5":""}}' wx:if='{{content.grade==2}}'></view>
+                <view class='grade {{content.grade==3?"county mr-5":""}}' wx:if='{{content.grade==3}}'></view>
+                <view class='grade {{content.grade==4?"students":""}}' wx:if='{{content.grade==4}}'></view>
+                <view class='weui-flex__item address'>{{content.address}}</view>
+            </view>
+        </view>
+        <view class='end-focus tc' wx:if='{{content.is_watch}}'>已关注</view>
+        <view class='add-focus' wx:else bindtap='watch'>关注</view>
+    </view>
+    <view class='content'>
+        <view class='music mt-5 tc'>
+            <audio poster="{{content.music.image}}" name="{{content.music.name}}" author="{{content.music.author}}" src="{{content.music.src}}" id="myAudio" controls loop='true' class='tl'></audio>
+        </view>
+        <view class='content-txt'>{{content.title}}</view>
+        <!-- <view class='content-img' wx:if='{{content.image}}'>
+            <image src='http://oj1itelvn.bkt.clouddn.com/test.jpg' mode='aspectFit' mode='aspectFill'></image>
+            <view class='click'></view>
+        </view> -->
+
+         <swiper duration='800' circular='true' class='content-img' wx:if='{{content.image}}'>
+            <block wx:for="{{content.image}}" wx:key='{{index}}'>
+                <swiper-item style='position:relative'>
+                    <image src="{{item}}" class="slide-image" width="100%" height="100%" bindtap="preImg" data-imgs="{{content.image}}" data-current="{{item}}" />
+                    <view class='click'>{{content.click}}</view>
+                </swiper-item>
+            </block>
+        </swiper> 
+
+        <video id="myVideo" src="http://oj1itelvn.bkt.clouddn.com/art/test-mp4.mp4" controls wx:if='{{content.video}}'>
+            <cover-view class='click'>111</cover-view>
+        </video>
+        <view class='weui-flex icon-wrap align'>
+            <view class='icon-heart {{content.is_keep?"active":""}}' bindtap='keep'></view>
+            <view class='weui-flex__item'>
+                <view class='icon-talk'>10</view>
+            </view>
+            <view class='icon-like {{content.is_like?"active":""}}' bindtap='like'>1</view>
+            <view class='icon-share'>
+                <button open-type='share'>22</button>
+            </view>
+        </view>
+    </view>
+</view>
+<view class='comments-wrap'>
+    <view class='tab-wrap weui-flex'>
+        <view class='tab-item weui-flex__item tc {{current==1?"active":""}}' bindtap='currentClick' data-current='1'>艺术家评论(100)</view>
+        <view class='tab-item weui-flex__item tc {{current==2?"active":""}}' bindtap='currentClick' data-current='2'>普通评论(301)</view>
+    </view>
+    <view class='commentaries weui-flex' wx:for='{{content.commentList}}' wx:key='{{index}}' wx:if='{{current==2}}'>
+        <view class='com-avatar' style='background-image:url({{item.avatar}})'></view>
+        <view class='weui-flex__item'>
+            <view class='com-name'>
+                <text>{{item.name}}</text>
+                <text class='com-label'>{{item.label}}</text>
+            </view>
+            <view class='com-time weui-flex align'>
+                <view class='weui-flex__item'>
+                    <text>{{item.date}}</text>
+                    <text class='ml-10'>{{item.time}}</text>
+                </view>
+                <view class='com-like {{item.is_like?"active":""}}' data-index="{{index}}" bindtap='likeComment1'>{{item.num_like}}</view>
+            </view>
+            <view class='com-content'>{{item.detail}}</view>
+            <navigator url='reply-detail' hover-class='none' class='reply mt-5'>查看24条回复：</navigator>
+        </view>
+    </view>
+    <view class='commentaries weui-flex' wx:for='{{content.artComment}}' wx:key='{{index}}' wx:if='{{current==1}}'>
+        <view class='com-avatar' style='background-image:url({{item.avatar}})'></view>
+        <view class='weui-flex__item'>
+            <view class='com-name'>
+                <text>{{item.name}}</text>
+                <text class='com-label'>{{item.label}}</text>
+            </view>
+            <view class='com-time weui-flex align'>
+                <view class='weui-flex__item'>
+                    <text>{{item.date}}</text>
+                    <text class='ml-10'>{{item.time}}</text>
+                </view>
+                <view class='com-like {{item.is_like?"active":""}}' data-index="{{index}}" bindtap='likeComment2'>{{item.num_like}}</view>
+            </view>
+            <view class='com-content'>{{item.detail}}</view>
+            <navigator url='reply-detail' hover-class='none' class='reply mt-5'>查看2条回复：</navigator>
+        </view>
+    </view>
+</view>
+<template is="empty" data="{{msg:'暂无数据'}}" wx:if="{{!content.artComment.length||!content.commentList.length}}"></template>
+<view style='height:130rpx;'></view>
+<view class='edit weui-flex align'>
+    <view class='weui-flex__item edit-input'>
+        <input type='text' placeholder='写评论~' placeholder-class='comment-edit'></input>
+    </view>
+    <view class='edit-smile'>提交</view>
+</view>

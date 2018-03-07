@@ -1,0 +1,44 @@
+   <!-- pages/home/reply-detail.wxml    -->
+<view class='container border_top1'>
+    <view class='header weui-flex align'>
+        <view class='avatar mr-10' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/timg.jpg)'></view>
+        <view class='weui-flex__item'>
+            <view class='name'>
+                SHERRY&MOLLY
+                <text class='label'>摄影</text>
+            </view>
+            <view class='time-wrap'>
+                <text>10/10</text>
+                <text class='ml-10'>15:55</text>
+            </view>
+        </view>
+    </view>
+    <view class='reply'>阿拉快递放假奥斯卡地方奥斯卡两地分居撒快递费，啊空间撒地方哈市将快</view>
+    <view class='reply-wrap'>
+        <view class='title'>全部评论</view>
+        <view class='reply-item header weui-flex' wx:for='{{3}}'>
+            <view class='avatar mr-10' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/timg.jpg)'></view>
+            <view class='weui-flex__item'>
+                <view class='name'>
+                    阿斯顿发送到
+                    <text class='label'>摄影</text>
+                </view>
+                <view class='time-wrap'>
+                    <text>10/10</text>
+                    <text class='ml-10'>15:55</text>
+                    <text class='huif'>-回复</text>
+                    <text class='com-like'>1</text>
+                </view>
+                <view class='detail mt-5'>阿迪水煎服撒地方见艾斯快递了减肥撒考虑到斯蒂芬克撒娇阿斯兰的咖啡机撒快递阿里斯柯达</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view style='height:130rpx;'></view>
+<view class='edit weui-flex align'>
+    <view class='weui-flex__item edit-input'>
+        <input type='text' placeholder='写评论~' placeholder-class='comment-edit'></input>
+    </view>
+    <view class='edit-smile'>提交</view>
+</view>

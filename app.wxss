@@ -1,4 +1,133 @@
-@import "style/weui.wxss";
+/**app.wxss**/
+@import 'assets/style/weui.wxss';
+@import 'assets/style/tool.wxss';
+@import 'pages/template/tabBar.wxss';
+
 Page {
-  background: #eeeeee;
+    font-size: 30rpx;
+    background-color: #f0eff5;
+    font-family: 'PingFang SC', "sans-serif", "STHeitiSC-Light", "Arial", "Microsoft YaHei";
+    font-weight: 400;
+    margin-top: 0;
+    color: #353535;
+    height: 100%;
+    /* margin-bottom: 114rpx; */
+}
+
+view, text {
+    font-size: 30rpx;
+    box-sizing: border-box;
+}
+
+image {
+    width: 100%;
+    height: 100%;
+}
+
+view, navigator {
+    box-sizing: border-box;
+}
+
+.empty {
+     background-image: url(http://img.zhxcxmall.com/static/empty-data.png); 
+    /* background-image:url(http://oj1itelvn.bkt.clouddn.com/art/noMsg-img.png); */
+    background-repeat: no-repeat;
+    background-size: 80px;
+    background-position: center center;
+    min-height: 300px;
+}
+
+.no-image {
+    background-image: url(http://www.axpet120.com/Upload/PicFiles/image/20140224/20140224111980918091.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    opacity: 0.5;
+}
+
+/*"tabBar": {
+    "borderStyle": "white",
+    "color": "#333",
+    "selectedColor": "#03b9bc",
+    "list": [
+        {
+            "pagePath": "pages/home/home",
+            "text": "首页",
+            "iconPath": "assets/icon/nav-home.png",
+            "selectedIconPath": "assets/icon/nav-home2.png"
+         },
+        {
+            "pagePath": "pages/dynamic/dynamic",
+            "text": "艺术家",
+            "iconPath": "assets/icon/nav-art.png",
+            "selectedIconPath": "assets/icon/nav-art2.png"
+        },
+        {
+            "pagePath": "pages/dynamic/dynamic",
+            "iconPath": "assets/icon/nav-fb.png",
+            "selectedIconPath": "assets/icon/nav-fb.png"
+        },
+        {
+            "pagePath": "pages/encyclopedias/bk",
+            "text": "消息",
+            "iconPath": "assets/icon/nav-talk.png",
+            "selectedIconPath": "assets/icon/nav-talk2.png"
+        },
+        {
+            "pagePath": "pages/personal/personal",
+            "text": "我的",
+            "iconPath": "assets/icon/nav-mine.png",
+            "selectedIconPath": "assets/icon/nav-mine2.png"
+        }
+    ]
+} */
+
+.tabbar_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 120rpx;
+    border-top: 1rpx solid gray;
+}
+
+.tabbar_nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 28rpx;
+    height: 100%;
+    position: relative
+}
+
+.tabbar_icon {
+    width: 61rpx;
+    height: 61rpx;
+}
+
+.tabbar_big {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.tabbar_msg {
+    position: absolute;
+    background: #f00;
+    border-radius: 50%;
+    width: 40rpx;
+    height: 40rpx;
+    color: #fff;
+    z-index: 10;
+    display: inline-block;
+    top: 6rpx;
+    right: 22rpx;
+    font-size: 8pt;
+    text-align: center;
+    line-height: 38rpx;
+    border: 1rpx solid #fff;
 }

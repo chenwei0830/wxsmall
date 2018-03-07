@@ -1,0 +1,183 @@
+/* pages/mine/myKeep.wxss */
+
+page {
+    background: #fff;
+}
+
+.category {
+    left: 0;
+    right: 0;
+    top: 0;
+    font-size: 0;
+    line-height: 0;
+    white-space: nowrap;
+    background-color: #fff;
+    position: fixed;
+    z-index: 10000;
+    /* border-bottom:1rpx solid #e6e6e6; */
+}
+
+.category scroll-view {
+    background-color: #fff;
+    line-height: 50px;
+    height: 50px;
+    position: relative;
+    width: 100%;
+}
+
+.category scroll-view .cat-tag {
+    position: absolute;
+    left: 0;
+    top: 88rpx;
+    width: 0;
+    height: 2px;
+    background: #02bbbd;
+    transition: all 0.1s;
+    z-index: 99;
+}
+
+.category scroll-view .item {
+    display: inline-block;
+    padding: 0 30rpx;
+    position: relative;
+    transition: all 0.1s;
+    font-size: 34rpx;
+    box-sizing: border-box;
+}
+
+.category scroll-view .item.active {
+    color: #02bbbd;
+    /* transform: scale(1.1); */
+    transform-origin: 50% 100%;
+    font-weight: bold;
+    font-style: unset;
+}
+
+/* .keep-item {
+    border-top: 1rpx solid #e6e6e6;
+} */
+
+.content {
+    padding: 30rpx 20rpx;
+}
+
+.content .keep-img {
+    width: 260rpx;
+    height: 200rpx;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 30rpx;
+}
+
+.keep-info {
+    width: 420rpx;
+    position: relative;
+}
+
+.keep-info .title, .keep-info .intro {
+    line-height: 100%;
+}
+
+.keep-info .title {
+    font-size: 32rpx;
+}
+
+.keep-info .intro {
+    color: #999;
+    font-size: 24rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-top: 16rpx;
+    line-height: 30rpx;
+}
+
+.keep-info .icon-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    line-height: 100%;
+}
+
+/* .icon-talk,.icon-like {
+  width: 38rpx;
+  height: 36rpx;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.icon-talk {
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/talk1.png);
+  padding-left: 50rpx;
+  background-position: left center;
+  background-size: 34rpx;
+  color: #999;
+  line-height: 44rpx;
+}
+
+.icon-like {
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/like1.png);
+  padding-left: 50rpx;
+  background-position: left center;
+  background-size: 38rpx;
+  color: #999;
+  margin-right:40rpx;
+  line-height: 44rpx;
+} */
+
+.icon-like, .icon-talk {
+    display: inline-block;
+    width: 38rpx;
+    height: 36rpx;
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+.icon-like {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/like1.png);
+}
+
+.icon-talk {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/talk1.png);
+}
+
+.icon-txt {
+    font-size: 24rpx;
+    color: #666;
+}
+
+.keep-time text {
+    font-size: 24rpx;
+    color: #666;
+}
+
+
+
+.art-list .art-item {
+    padding: 20rpx 0 0 30rpx;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.action {
+    position: absolute;
+    right: -25vw;
+    top: 0;
+    bottom: 0;
+    width: 25vw;
+    align-items: center;
+    background: #666;
+    color: #fff;
+    transition: all 0.2s;
+    font-size: 26rpx;
+}
+
+

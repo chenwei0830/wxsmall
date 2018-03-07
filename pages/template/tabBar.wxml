@@ -1,0 +1,35 @@
+<!-- <template name='tabBar'>
+    <view class='navbar weui-flex'>
+        <view class='weui-flex__item tc'>
+          <image class='icon' src='/assets/icon/nav-home.png'></image>
+          <view class='nav-txt'>首页</view>
+        </view>
+        <view class='weui-flex__item tc'>
+           <image class='icon' src='/assets/icon/nav-art.png'></image>
+          <view class='nav-txt'>艺术家</view>
+        </view>
+        <view class='weui-flex__item tc'>
+           <image class='icon fb' src='/assets/icon/nav-fb.png'></image>
+        </view>
+        <view class='navbar-item weui-flex__item tc'>
+           <image class='icon' src='/assets/icon/nav-talk.png'></image>
+          <view class='nav-txt'>消息</view>
+          <text class='bar'>1</text>
+        </view>
+        <view class='weui-flex__item tc'>
+           <image class='icon' src='/assets/icon/nav-mine.png'></image>
+          <view class='nav-txt'>我的</view>
+        </view>
+    </view>
+</template>  -->
+<template name="tabbar">  
+    <view class="tabbar_box" style="background-color:{{tabbar.backgroundColor}}; border-top-color:{{tabbar.borderStyle}}; {{tabbar.position == 'top' ? 'top:0' : 'bottom:0'}}">  
+        <block wx:for="{{tabbar.list}}" wx:for-item="item" wx:key="index">  
+            <navigator hover-class='none' open-type='redirect' class="tabbar_nav" url="{{item.pagePath}}" style="width:{{1/tabbar.list.length*100}}%; color:{{item.selected ? tabbar.selectedColor : tabbar.color}}" open-type="redirect">  
+                <image class="tabbar_icon {{item.size?'tabbar_big':''}}" src="{{item.selected ? item.selectedIconPath : item.iconPath}}"></image>  
+                <text style='font-size:24rpx;'>{{item.text}}</text>  
+                <view class='tabbar_msg' wx:if='{{item.msg}}'>8</view>
+            </navigator>  
+        </block>  
+    </view>  
+</template> 

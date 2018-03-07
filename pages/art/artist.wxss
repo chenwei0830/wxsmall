@@ -1,0 +1,95 @@
+/* pages/art/artist.wxss */
+
+.header {
+    height: 300rpx;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    position: relative;
+}
+
+.header .author-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.5));
+    color: #fff;
+    height: 50%;
+}
+
+.header .author-txt {
+    padding: 0 30rpx 20rpx 30rpx;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.title {
+    line-height: 100%;
+    margin-bottom: 10rpx;
+    font-size: 32rpx;
+    text-shadow: 4rpx 4rpx 10rpx #000;
+}
+
+.category {
+    font-size: 24rpx;
+}
+
+.search {
+    padding: 38rpx 75rpx;
+}
+
+.search .search-wrap {
+    border: 1rpx solid #999;
+    border-radius: 10rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    padding-left: 84rpx;
+    padding-right: 30rpx;
+    /* background: transparent; */
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/art-search.png);
+    background-size: 34rpx;
+    background-position: 30rpx center;
+    background-repeat: no-repeat;
+}
+
+.search .search-input {
+    height: 70rpx;
+    line-height: 70rpx;
+    font-size: 28rpx;
+    color: #999;
+}
+
+.search .placeholder {
+    color: #999;
+    font-size: 28rpx;
+}
+
+.container {
+    flex-wrap: wrap;
+}
+
+.container .cate-wrap {
+    width: 370rpx;
+    height: 370rpx;
+    margin-right: 10rpx;
+    margin-bottom: 10rpx;
+    line-height: 370rpx;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.container .cate-wrap:nth-child(even) {
+    margin-right: 0;
+}
+
+.container .cate-wrap .nav-mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 40rpx;
+}

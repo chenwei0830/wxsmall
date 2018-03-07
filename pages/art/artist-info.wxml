@@ -1,0 +1,59 @@
+<!--pages/art/artist-info.wxml-->
+<view class='header' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/art/artist-bg.png)'>
+    <view class='avatar' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/timg.jpg)'></view>
+</view>
+<view class='user-wrap'>
+    <view class='user-name tc'>张三</view>
+    <view class='user-level tc'> 业余爱好者</view>
+    <view class='grade countries'></view>
+    <view class='grade {{cell.grade==1?"province":""}}' wx:if='{{cell.grade==1}}'></view>
+    <view class='grade {{cell.grade==2?"city":""}}' wx:if='{{cell.grade==2}}'></view>
+    <view class='grade {{cell.grade==3?"county":""}}' wx:if='{{cell.grade==3}}'></view>
+    <view class='grade {{cell.grade==4?"students":""}}' wx:if='{{cell.grade==4}}'></view>
+    <view class='weui-flex align btn-wrap'>
+        <view class='end-focus tc' wx:if='{{is_watch}}'>已关注</view>
+        <view class='add-focus' wx:else bindtap='focus'>关注</view>
+        <navigator url='/pages/msg/detail' class='wechat'>私聊</navigator>
+    </view>
+</view>
+<view class='intro'>
+    吴道子，(约公元680~759年)，唐代著名画家，画史尊称画 圣，又名道玄。汉族，阳翟(今河南禹州)人。约生于公元68 0(永隆元年) ，卒于公元758(乾元元年)前后。少孤贫，年轻 时即有画名。曾任兖州瑕丘(今山东滋阳)县尉，不久即辞职。 后流落洛阳，从事壁画创作。开元年间以善画被召入宫廷， 历任供奉、内教博士、宁王友。曾随张旭、贺知章学习书法， 通过观赏公孙大娘舞剑，体会用笔之道。擅佛道、神鬼、人 物、山水、鸟兽、草木、楼阁等，尤精于佛道、人物，长于 壁画创作。
+</view>
+<view class='content'>
+    <view class='title'>作品介绍</view>
+</view>
+<view class='works-wrap'>
+    <view class='title'>TA的作品</view>
+    <view class='weui-flex' style='flex-wrap:wrap;margin-bottom:50rpx;'>
+        <navigator url='/pages/home/detail?id={{item.id}}' class='works' hover-class='' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/art/art-bg-test.png)' wx:for='{{4}}'></navigator>
+    </view>
+    <view class='more-works'>
+        <navigator url='' hover-class='none' class=''>
+            <text>更多作品</text>
+            <text class='arrow-right'></text>
+        </navigator>
+        <view class='total-works'>共15件作品</view>
+    </view>
+</view>
+<view class='artist-wrap'>
+    <view class='title'>您可能喜欢的艺术家</view>
+    <view wx:for="{{list}}" bindtouchstart='onStart' bindtouchmove='onMove' bindtouchend='onEnd' data-index="{{index}}" style='position:relative;overflow:hidden;'>
+        <view class='art-list bg-white' style='transform:translateX({{item.pos}}vw)'>
+            <view class='art-item weui-flex align' wx:key='{{index}}'>
+                <navigator url='artist-info' hover-class='none' class='art-avatar' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/timg.jpg)'></navigator>
+                <view class='art-info-pd weui-flex__item weui-flex'>
+                    <navigator url='artist-info' hover-class='none' class='pr-10 weui-flex__item'>
+                        <view class='art-name'>安吉丽娜.杨</view>
+                        <view class='art-category mt-5'>国画、山水、书法</view>
+                        <view class='art-works'>48 作品</view>
+                    </navigator>
+                    <view class='end-focus2 tc' wx:if='{{item.is_watch}}'>已关注</view>
+                    <view class='add-focus2' data-index="{{index}}" bindtap='watch' wx:else>关注</view>
+                </view>
+            </view>
+        </view>
+        <view class='action2 weui-flex' style='transform:translateX({{item.pos}}vw)' catchtap='watch' data-index="{{index}}">
+            <view class='weui-flex__item tc'>取消关注</view>
+        </view>
+    </view>
+</view>

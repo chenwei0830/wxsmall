@@ -1,0 +1,8 @@
+/* pages/mine/myFocus.wxss */
+@import '/pages/art/art-list.wxss';
+.art-list{
+  margin-top:0;
+}
+.container:first-child{
+    border-top:1rpx solid #e6e6e6;
+}

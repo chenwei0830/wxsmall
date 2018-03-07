@@ -1,0 +1,45 @@
+
+.navbar{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 9999999;
+  line-height: 100%;
+  border-top:1rpx solid #ccc;
+}
+.navbar .icon{
+  width:60rpx;
+  height:60rpx;
+  margin-top: 14rpx;
+}
+.navbar .icon.fb{
+  /* margin-top: 20rpx; */
+  width:100rpx;
+  height:100rpx;
+  margin-top:8rpx;
+}
+.navbar .nav-txt{
+  font-size: 24rpx;
+  margin-bottom: 5rpx;
+}
+.navbar .navbar-item{
+  position: relative;
+}
+.navbar .navbar-item .bar{
+  position: absolute;
+  background: #ff0000;
+  border-radius: 50%;
+  width: 40rpx;
+  height: 40rpx;
+  color: #fff;
+  z-index: 10;
+  display: inline-block;
+  top: 6rpx;
+  right: 22rpx;
+  font-size: 8pt;
+  text-align: center;
+  line-height: 38rpx;
+  border:1rpx solid #fff;
+}

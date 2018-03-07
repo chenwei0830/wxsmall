@@ -1,0 +1,272 @@
+/* pages/art/artist-info.wxss */
+
+page {
+    background-color: #fff;
+}
+
+.header {
+    height: 300rpx;
+    background-color: blue;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.header:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    content: '';
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.header .avatar {
+    width: 140rpx;
+    height: 140rpx;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -70rpx;
+    margin: 0 auto;
+    border: 1rpx solid #e6e6e6;
+    z-index: 99;
+}
+
+.user-wrap {
+    padding-top: 100rpx;
+}
+
+.user-wrap .user-name {
+    font-size: 36rpx;
+    /* marggin-top:30rpx; */
+    line-height: 100%;
+}
+
+.user-wrap .user-level {
+    line-height: 100%;
+    font-size: 20rpx;
+    margin-top: 14rpx;
+}
+
+.grade {
+    width: 86rpx;
+    height: 28rpx;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 10rpx auto 0;
+}
+
+.grade.province {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-sj.png);
+}
+
+.grade.countries {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-gj.png);
+}
+
+.grade.city {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-szj.png);
+}
+
+.grade.county {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-xqj.png);
+}
+
+.grade.students {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-xy.png);
+}
+
+.btn-wrap {
+    width: 65%;
+    margin: 36rpx auto 0;
+}
+
+.add-focus, .wechat {
+    box-sizing: border-box;
+    width: 150rpx;
+    height: 66rpx;
+    line-height: 66rpx;
+    padding-left: 50rpx;
+    padding-right: 14rpx;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/art-add.png);
+    background-size: 26rpx;
+    background-position: 33rpx center;
+    background-color: #666;
+    background-repeat: no-repeat;
+    border-radius: 16rpx;
+    /* margin-top: 50rpx; */
+}
+
+.wechat {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/art-talk2.png);
+    background-size: 30rpx;
+    background-position: 28rpx center;
+}
+
+.end-focus {
+    width: 120rpx;
+    height: 66rpx;
+    line-height: 70rpx;
+    border-radius: 16rpx;
+    background-color: #efeff4;
+    color: #ccc;
+    margin: 0 auto;
+}
+
+.intro {
+    margin-top: 78rpx;
+    padding: 0 38rpx 30rpx;
+    font-size: 26rpx;
+    border-bottom: 1rpx solid #e6e6e6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* display: -webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:8;  */
+}
+
+.content, .works-wrap {
+    padding: 16rpx 38rpx 30rpx;
+    border-bottom: 1rpx solid #e6e6e6;
+}
+
+.content .title, .works-wrap .title, .artist-wrap .title {
+    font-size: 28rpx;
+    margin-bottom: 30rpx;
+    font-weight: 500;
+    padding: 0 38rpx;
+}
+
+.works-wrap .works {
+    width: 326rpx;
+    height: 326rpx;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 20rpx;
+    display: inline-block;
+}
+
+.works-wrap .works:nth-child(even) {
+    margin-right: 0;
+}
+
+.works-wrap .works:first-child, .works-wrap .works:nth-child(2) {
+    margin-bottom: 20rpx;
+}
+
+.works-wrap .more-works {
+    width: 160rpx;
+    margin: 0 auto;
+}
+
+.works-wrap .more-works text {
+    font-size: 28rpx;
+}
+
+.works-wrap .more-works .total-works {
+    font-size: 20rpx;
+    color: #999;
+}
+
+.artist-wrap {
+    margin-top: 20rpx;
+}
+
+.art-list .art-item {
+    padding-top: 20rpx;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    overflow: hidden;
+    transition: transform 0.2s;
+    padding: 20rpx 38rpx 0;
+}
+
+.art-list .art-item .art-avatar {
+    width: 140rpx;
+    height: 140rpx;
+    border-radius: 50%;
+    border: 1rpx solid #e6e6e6;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.art-info-pd {
+    padding-left: 36rpx;
+    /* padding-right: 30rpx; */
+    border-bottom: 1rpx solid #efeff4;
+}
+
+.art-list .art-item .art-name {
+    font-size: 34rpx;
+}
+
+.art-list .art-item .art-name, .art-list .art-item .art-category,
+.art-list .art-item .art-works {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.art-list .art-item .art-category, .art-list .art-item .art-works {
+    font-size: 24rpx;
+    color: #999;
+    line-height: 100%;
+}
+
+.art-list .art-item .art-works {
+    padding-bottom: 22rpx;
+    padding-top: 40rpx;
+}
+
+.add-focus2 {
+    box-sizing: border-box;
+    width: 130rpx;
+    height: 68rpx;
+    line-height: 70rpx;
+    padding-left: 50rpx;
+    padding-right: 14rpx;
+    text-align: center;
+    color: #fff;
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/art-add.png);
+    background-size: 26rpx;
+    background-position: 14rpx center;
+    background-color: #666;
+    background-repeat: no-repeat;
+    border-radius: 16rpx;
+    margin-top: 50rpx;
+}
+
+.end-focus2 {
+    width: 130rpx;
+    height: 68rpx;
+    line-height: 70rpx;
+    border-radius: 16rpx;
+    background-color: #efeff4;
+    color: #ccc;
+    margin-top: 50rpx;
+}
+
+.action2 {
+    position: absolute;
+    right: -25vw;
+    top: 0;
+    bottom: 0;
+    width: 25vw;
+    align-items: center;
+    background: #03b9bb;
+    color: #fff;
+    transition: all 0.2s;
+    font-size: 26rpx;
+}

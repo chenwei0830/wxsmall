@@ -1,95 +1,48 @@
-<view class="page">
-  <view class="page__bd" style='margin-top:20px;'>
-      <view class="weui-panel-zdy weui-panel_access">
-          <view class="weui-panel__bd">
-              <view class="weui-media-box weui-media-box_appmsg">
-                  <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                      <image class="weui-media-box__thumb" src="{{headImage}}" style='border-radius:50%;'/>
-                  </view>
-                  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                      <view class="weui-cell__bd">
-                        <view style="display: inline-block; vertical-align: middle">{{userName}}</view>
-                        <view wx:if="{{!isArt}}" class="weui-badge" style="margin-left: 5px;">游客</view>
-                      </view>
-                      <view class="weui-media-box__desc">简单的介绍下自己</view>
-                  </view>
-                  <view><image class="weui-media-box__thumb" src="{{artIcon}}" style='width:40px;height:40px;'/></view>
-              </view>
-          </view>
-      </view>
-  </view>
-
-  <!-- 开通会员 艺术家认证-->
-  <view class="weui-panel" style='margin-top:20px;'>
-      <view class="weui-panel__bd">
-          <view class="weui-media-box weui-media-box_small-appmsg">
-              <view class="weui-cells weui-cells_in-small-appmsg">
-                  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
-                      <view class="weui-cell__hd"><image src="../../icons/kthy.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
-                      <view class="weui-cell__bd weui-cell_primary">
-                          <view>开通会员</view>
-                      </view>
-                      <view class="weui-cell__ft" style='font-size:14px;'>已开通</view>
-                  </navigator>
-                  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
-                      <view class="weui-cell__hd"><image src="../../icons/rz.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
-                      <view class="weui-cell__bd weui-cell_primary">
-                          <view>艺术家认证</view>
-                      </view>
-                      <view class="weui-cell__ft" style='font-size:14px;'>省级艺术家</view>
-                  </navigator>
-              </view>
-          </view>
-      </view>
-  </view>
-
-  <!-- 我的作品 收藏关注 艺术门类 认证信息-->
-  <view class="weui-panel" style='margin-top:20px;'>
-      <view class="weui-panel__bd">
-          <view class="weui-media-box weui-media-box_small-appmsg">
-              <view class="weui-cells weui-cells_in-small-appmsg">
-                  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
-                      <view class="weui-cell__hd"><image src="../../icons/zp.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
-                      <view class="weui-cell__bd weui-cell_primary">
-                          <view>我的作品</view>
-                      </view>
-                  </navigator>
-                  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
-                      <view class="weui-cell__hd"><image src="../../icons/sc.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
-                      <view class="weui-cell__bd weui-cell_primary">
-                          <view>收藏关注</view>
-                      </view>
-                  </navigator>
-                  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
-                      <view class="weui-cell__hd"><image src="../../icons/fl.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
-                      <view class="weui-cell__bd weui-cell_primary">
-                          <view>艺术门类</view>
-                      </view>
-                  </navigator>
-              </view>
-          </view>
-      </view>
-  </view>
-
-  <!-- 意见反馈 联系我们-->
-  <view class="weui-panel" style='margin-top:20px;'>
-      <view class="weui-panel__bd">
-          <view class="weui-media-box weui-media-box_small-appmsg">
-              <view class="weui-cells weui-cells_in-small-appmsg">
-                  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
-                      <view class="weui-cell__hd"><image src="../../icons/yjfk.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
-                      <view class="weui-cell__bd weui-cell_primary">
-                          <view>意见反馈</view>
-                      </view>
-                  </navigator>
-                  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" style='padding:15px 15px;'>
-                      <view class="weui-cell__hd"><image src="../../icons/lxwm.png" style="width: 20px;height: 20px;margin-right: 10px;vertical-align:middle;" /></view>
-                      <view class="weui-cell__bd weui-cell_primary">
-                          <view>联系我们</view>
-                      </view>
-                  </navigator>
-              </view>
-          </view>
-      </view>
-  </view>
+<!--pages/mine/mine.wxml-->
+<view class='header bg-white'>
+    <navigator url='set' hover-class='none' class='avatar' style='background-image:url({{user.avatarUrl||"http://oj1itelvn.bkt.clouddn.com/art/icon-avatar4.png"}})'></navigator>
+    <view class='name tc'>{{user.nickName || "游客"}}</view>
+    <view class='level tc' wx:if="{{!user}}">游客</view>
+    <navigator url='auth/index' hover-class='none' class='btn tc'>进行艺术认证</navigator>
 </view>
+
+<view class='wrap bg-white'>
+    <navigator url='myWorks' class='wrap-item weui-flex align'>
+        <view class='icon icon-works'></view>
+        <view class='weui-flex__item title'>我的作品</view>
+        <view class='number'>11</view>
+        <view class='arrow-right'></view>
+    </navigator>
+    <navigator url='myKeep' class='wrap-item weui-flex align'>
+        <view class='icon icon-keep'></view>
+        <view class='weui-flex__item title'>我的收藏</view>
+        <view class='number'></view>
+        <view class='arrow-right'></view>
+    </navigator>
+    <navigator url='myFocus' class='wrap-item weui-flex align'>
+        <view class='icon icon-star'></view>
+        <view class='weui-flex__item title'>我的关注</view>
+        <view class='number'>2</view>
+        <view class='arrow-right'></view>
+    </navigator>
+    <view class='wrap-item weui-flex align' bindtap='adviceClick'>
+        <view class='icon icon-fk'></view>
+        <view class='weui-flex__item title'>意见反馈</view>
+        <view class='arrow-right'></view>
+    </view>
+</view>
+
+<view class='wrap-item weui-flex align contact bg-white' bindtap='call'>
+    <view class='icon icon-contact'></view>
+    <view class='weui-flex__item title'>联系我们</view>
+    <view class='arrow-right'></view>
+</view>
+<view class='c-mask' wx:if='{{advice}}' bindtap='closeClick'></view>
+<view class='advice' wx:if='{{advice}}'>
+    <textarea maxlength='-1' class='textarea' placeholder='说说您的意见吧~' bindinput="onInput"></textarea>
+    <view class='submit' bindtap='submit'>提交</view>
+</view>
+
+<view style='height:112rpx;'></view>
+<import src='/pages/template/tabBar'/>
+<template is='tabbar' data="{{tabbar}}"></template>

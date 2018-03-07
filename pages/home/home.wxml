@@ -1,93 +1,79 @@
-<view class="page">
-  <view class="page__bd">
-    <view class="weui-tab">
-      <view class="weui-navbar" style='background:#ffffff'>
-        <block wx:for="{{tabs}}" wx:key="*this">
-          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on_zdy' : ''}}" bindtap="tabClick">
-            <view class="weui-navbar__title">{{item}}</view>
-          </view>
-        </block>
-        <view class="weui-navbar__slider_zdy" style="width: {{sliderLeft}}px; left: {{sliderLeft/2}}px;transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
-      </view>
-      <!-- 内容 -->
-      <view class="weui-tab__panel">
-        <view class="weui-tab__content_zdy" hidden="{{activeIndex != 0}}">
-          <!-- content-box-->
-          <block wx:for="{{boxList}}" wx:key="id">
-            <view class="content-box" style='margin-bottom:10px;'>
-              <view class="weui-panel weui-panel_access">
-                <view class="weui-panel__bd">
-                  <view class="weui-media-box weui-media-box_appmsg">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                      <image class="weui-media-box__thumb" src="{{item.headImg}}" style='border-radius:50%;'/>
-                    </view>
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                      <view class="weui-cell__bd">
-                        <view style="display: inline-block; vertical-align: middle">{{item.nickName}}<label wx:if="{{item.isArt}}" class="art-level_big">{{item.artLevel}}</label>
-                        </view>
-                      </view>
-                      <view class="weui-media-box__desc">{{item.createTime}}</view>
-                    </view>
-                    <view><view class="weui-media-box__desc">{{item.readNum}} 次阅读</view></view>
-                  </view>
-                </view>
-                <view style='height:400rpx;'>
-                  <image src='{{item.contextImg}}' style='width:100%;height:100%;'></image>
-                </view>
-                <view class="weui-media-box weui-media-box_text">
-                  <view class="weui-media-box__title weui-media-box__title_in-text">{{item.title}}</view>
-                  <view class="weui-media-box__desc">{{item.context}}</view>
-                  <!-- 评论begin -->
-                  <block wx:for="{{item.plList}}" wx:key="id">
-                    <view style='background: #eeeeee;margin-top:10px;'>
-                      <view class="weui-cell">
-                        <view class="weui-cell__hd">
-                          <view class="weui-media-box__hd weui-media-box__samll-appmsg">
-                            <image class="weui-media-box__thumb" src="{{item.headImg}}" style='border-radius:50%;'/>
-                          </view>
-                        </view>
-                        <view class="weui-cell__bd">
-                          <view style='color:#999;font-size:13px;line-height:1.2;'>{{item.nickName}}<label wx:if="{{item.isArt}}" class="art-level_small">{{item.artLevel}}</label>
-                          </view>
-                        </view>
-                        <view class="weui-cell__ft">
-                          <view class="weui-media-box__hd weui-media-box__samll-appmsg">
-                            <image class="weui-media-box__thumb" src="../../icons/dz-0.png" style="width:18px;height:18px;"/>
-                          </view>
-                        </view>
-                        <view class="weui-cell__ft">
-                          <view style='color:#999;font-size:13px;line-height:1.2;'>{{item.dzNum}}</view>
-                        </view>
-                      </view>
-                      <view class="weui-cell__hd" style='padding:0px 15px 10px 15px;'>
-                        <view class="weui-media-box__desc">{{item.context}}</view>
-                      </view>
-                    </view>
-                  </block>
-                  <!-- 评论end -->
-                  <!-- 点赞评论数栏begin -->
-                  <view class="weui-media-box__info detail-list">
-                    <view class="ft bdr-top bdr-bottom">
-                        <view class="btn btn-digg bdr-r">
-                            <text class="btn-text">{{item.dzNum}}</text>
-                        </view>
-                        <view class="btn btn-comment bdr-r">
-                            <text class="btn-text">{{item.plNum}}</text>
-                        </view>
-                        <view class="btn btn-share">
-                            <text class="btn-text">{{item.fxNum}}</text>
-                        </view>
-                    </view>
-                  </view>
-                  <!-- 点赞评论数栏end -->
-                
-
-                </view>
-              </view>
-            </view>
-          </block>
-        </view>
-      </view>
-    </view>
-  </view>
+<!--pages/home/home.wxml-->
+<import src="/utils/tps/empty.wxml" />
+<view class="category">
+    <scroll-view scroll-x="true" class='' bindscroll="onCatScroll" id="cat">
+        <text wx:for="{{category}}" wx:key="item" data-current="{{index}}" data-id='{{item.id}}' id="cat{{index}}" catchtap='clickCategory' class='item {{!hasQuery?"q":""}} {{current==index?"active":""}}'>{{item.name}}</text>
+        <text class='cat-tag' style="left:{{tag.left}}px;width:{{tag.width}}px"></text>
+    </scroll-view>
 </view>
+<view class="classname" style="height:50px;"></view>
+
+<view wx:for="{{category}}" hidden="{{current!=index}}">
+    <navigator url='detail?id={{cell.id}}' hover-class='none' class='main-content bg-white' wx:for="{{item.content}}" wx:for-item="cell" wx:for-index="index2">
+        <view class='main-header weui-flex'>
+            <view class='avatar' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/timg.jpg)'></view>
+            <view class='user-wrap weui-flex__item'>
+                <view class='name'>{{cell.name}}
+                    <text class='s-title'>{{cell.label}}</text>
+                </view>
+                <view class='weui-flex intro align' style='line-height:100%;'>
+                    <view class='grade {{cell.grade==0?"countries mr-5":""}}' wx:if='{{cell.grade==0}}'></view>
+                    <view class='grade {{cell.grade==1?"province":""}}' wx:if='{{cell.grade==1}}'></view>
+                    <view class='grade {{cell.grade==2?"city mr-5":""}}' wx:if='{{cell.grade==2}}'></view>
+                    <view class='grade {{cell.grade==3?"county mr-5":""}}' wx:if='{{cell.grade==3}}'></view>
+                    <view class='grade {{cell.grade==4?"students":""}}' wx:if='{{cell.grade==4}}'></view>
+                    <view class='weui-flex__item address'>{{cell.address}}</view>
+                    <view class='time'>
+                        <text>{{cell.date}}</text>
+                        <text class='ml-5'>{{cell.time}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class='content'>
+            <view class='content-txt'>{{cell.title}}</view>
+            <view class='content-img' wx:if='{{cell.image[0]}}'>
+                <image src='{{cell.image[0]}}' mode='aspectFit' mode='aspectFill'></image>
+            </view>
+            <view class='video' wx:if='{{cell.video}}'></view>
+            <view class='weui-flex icon-wrap align'>
+                <view class='icon-heart {{cell.is_keep?"active":""}}' catchtap='keepClick' data-pos="{{[index,index2]}}"></view>
+                <view class='weui-flex__item'>
+                    <!-- <view class='icon-talk' catchtap='commentClick' data-pos="{{[index,index2]}}">10</view> -->
+                    <view class='icon-talk'>10</view>
+                </view>
+                <view class='icon-like {{cell.is_like?"active":""}}' catchtap='likeClick' data-pos="{{[index,index2]}}">1</view>
+                <!-- <view class='icon-share'><button open-type='share'></button></view> -->
+            </view>
+            <!-- <view class='commentaries' hidden='{{!cell.is_comment}}'> -->
+            <view class='commentaries'>
+                <view class='weui-flex pd-10' wx:for='{{cell.commentList}}' wx:for-item='comment' wx:for-index="index3">
+                    <view class='com-avatar' style='background-image:url({{comment.avatar}})'></view>
+                    <view class='weui-flex__item'>
+                        <view class='com-name'>{{comment.name}}
+                            <view class='grade {{comment.grade==0?"countries mr-5":""}}' wx:if='{{comment.grade==0}}'></view>
+                            <view class='grade {{comment.grade==1?"province":""}}' wx:if='{{comment.grade==1}}'></view>
+                            <view class='grade {{comment.grade==2?"city mr-5":""}}' wx:if='{{comment.grade==2}}'></view>
+                            <view class='grade {{comment.grade==3?"county mr-5":""}}' wx:if='{{comment.grade==3}}'></view>
+                            <view class='grade {{comment.grade==4?"students":""}}' wx:if='{{comment.grade==4}}'></view>
+                            <text>{{comment.label}}</text>
+                        </view>
+                        <view class='com-content'>{{comment.detail}}</view>
+                        <view class='com-time weui-flex align'>
+                            <view class='weui-flex__item'>
+                                <text>{{comment.date}}</text>
+                                <text class='ml-10'>{{comment.time}}</text>
+                            </view>
+                            <view class='com-like {{comment.isLike?"active":""}}' catchtap='likeComment' data-pos='{{[index,index2,index3]}}'>1</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </navigator>
+    <template is="empty" data="{{msg:'暂无数据'}}" wx:if="{{!item.content.length}}"></template>
+</view>
+
+<view style='height:112rpx;'></view>
+<import src='/pages/template/tabBar' />
+<template is='tabbar' data='{{tabbar}}'></template>

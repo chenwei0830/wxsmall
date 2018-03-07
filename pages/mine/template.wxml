@@ -1,0 +1,30 @@
+<template name='list'>
+    <navigator url='/pages/home/detail?id={{item.id}}' hover-class='none' class='keep-list' wx:for='{{category}}' wx:key='{{index}}'>
+        <view class='keep-item' wx:for='{{item.content}}' wx:for-item='cell' wx:key='{{index2}}'>
+            <view class='content weui-flex'>
+                <view class='keep-img' style='background-image:url({{cell.image}})'></view>
+                <view class='keep-info weui-flex__item'>
+                    <view class='title'>{{cell.title}}</view>
+                    <view class='intro'>{{cell.intro}}</view>
+                    <view class='weui-flex icon-wrap align'>
+                        <!-- <view class='icon-like {{cell.is_like?"active":""}}' bindtap='bindLike'>1</view>        
+          <view class='icon-talk' bindtap='commentClick' data-pos="{{[index,index2]}}">10</view> -->
+                        <view class='' style='margin-right:40rpx;'>
+                            <text class='icon-like'></text>
+                            <text class='icon-txt ml-5'>1</text>
+                        </view>
+                        <view class=''>
+                            <text class='icon-talk'></text>
+                            <text class='icon-txt ml-5'>10</text>
+                        </view>
+                        <view class='keep-time weui-flex__item tr'>
+                            <text class='mr-10'>{{cell.date}}</text>
+                            <text>{{cell.time}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class='keep-del' wx:if='{{}}'>删除</view>
+        </view>
+    </navigator>
+</template>

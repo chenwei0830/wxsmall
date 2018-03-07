@@ -1,0 +1,27 @@
+<!--pages/art/search.wxml-->
+<view class='search bg-white'>
+    <navigator url='search' open-type='redirect' hover-class='none' class='search-wrap'>
+        <view class='search-input'>艺术家名称/关键词</view>
+    </navigator>
+</view>
+
+<view wx:for="{{list}}" bindtouchstart='onStart' bindtouchmove='onMove' bindtouchend='onEnd' data-index="{{index}}" style='position:relative;overflow:hidden;'>
+    <view class='art-list bg-white' style='transform:translateX({{item.pos}}vw)'>
+        <view class='art-item weui-flex align' wx:key='{{index}}' >
+            <navigator url='artist-info' hover-class='none' class='art-avatar' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/timg.jpg)'></navigator>
+            <view class='art-info-pd weui-flex__item weui-flex align'>
+                <navigator url='artist-info' hover-class='none' class='pr-10 weui-flex__item'>
+                    <view class='art-name'>安吉丽娜.杨</view>
+                    <view class='art-category mt-5'>国画、山水、书法</view>
+                    <view class='art-works'>48 作品</view>
+                </navigator>
+                <view class='end-focus tc' wx:if='{{item.is_watch}}'>已关注</view>
+                <view class='add-focus' data-index="{{index}}" bindtap='watch' wx:else>关注</view>
+            </view>
+        </view>
+    </view>
+    <view class='action weui-flex' style='transform:translateX({{item.pos}}vw)' catchtap='watch' data-index="{{index}}">
+        <view class='weui-flex__item tc'>取消关注</view>
+    </view>
+</view>
+<view class='touch-bottom'>到底了</view>

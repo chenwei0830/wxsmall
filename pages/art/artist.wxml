@@ -1,0 +1,26 @@
+<!--pages/art/artist.wxml-->
+<navigator url='/pages/home/detail' class='header' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/art/art-bg.png)'>
+    <view class='author-wrap'>
+        <view class='author-txt'>
+            <view class='title'>
+                <text class='title-txt pr-10' style='border-right:1rpx solid #fff'>燕十三</text>
+                <text class='title-txt pl-5'>水墨山水</text>
+            </view>
+            <view class='category'>画家，xx系列作者</view>
+        </view>
+    </view>
+</navigator>
+<view class='search bg-white'>
+    <navigator url='search' hover-class='none' class='search-wrap'>
+        <view class='search-input'>艺术家名称/关键词</view>
+    </navigator>
+</view>
+<view class='container weui-flex bg-white'>
+    <navigator url='art-list' hover-class='none' class='cate-wrap' wx:for='{{list}}' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/art/art-bg-test.png)'>
+        <view class='nav-mask tc'>画家</view>
+    </navigator>
+</view>
+
+<view style='height:112rpx;'></view>
+<import src='/pages/template/tabBar'/>
+<template is='tabbar' data='{{tabbar}}'></template>
