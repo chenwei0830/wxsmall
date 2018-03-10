@@ -1,6 +1,5 @@
 //app.js
 const wxToast = require("./utils/wx-toast");
-
 const tabbar = {
   color: "#353535",
   selectedColor: "#03b9bb",
@@ -48,7 +47,36 @@ const tabbar = {
 }
 App({
   onLaunch: function () {
-    
+    var openid = wx.getStorageInfoSync("openid") || []
+    var that = this
+    if (openid){
+      //缓存中未获取到openId,则重新获取
+      wx.login({
+        success: function(res){
+          console.log("登录时得到的code----" + res.code)
+          if(res.code){
+            //根据code获取openId
+            wx.request({
+              url: that.apiUrl + '/api/getOpenId',
+              data: {
+                jsCode: res.code
+              },
+              success: function (res) {
+
+                console.log("获取openId----" + JSON.stringify(res.data.data));
+                that.openId = res.data.data.openid //赋值全局
+                wx.setStorageSync('openid', res.data.data.openid) //放入缓存
+              },
+              fail: function (error) {
+                console.error('获取openId失败...: ' + error);
+              }
+            })
+          }
+        }
+      })    
+    }else{
+      this.openid = openid
+    }
   },
   wxToast,
   editTabBar: function () {
@@ -62,8 +90,9 @@ App({
       tabbar
     })
   },
-
-
+  apiUrl: 'http://localhost:8080/sourthArtSys',//接口地址
+  user: null,//用户信息
+  openId: null,//用户唯一标识
   requireHttp() {
     const ps = getCurrentPages()
     const current = ps[ps.length - 1]

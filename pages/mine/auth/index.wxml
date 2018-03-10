@@ -22,8 +22,8 @@
 <view class='cell weui-flex border_bottom1 mt-10'>
     <view>您的专业分类</view>
     <view class='weui-flex__item tr'>
-        <picker data-key="selectedType" range="{{type}}" range-key="name" bindchange='typeChange' style='display:inline-block;'>
-            {{type[post.selectedType].name||"请选择"}}
+        <picker data-key="artType" range="{{typeList}}" range-key="v" bindchange='typeChange' style='display:inline-block;'>
+            {{typeList[post.artType].v||"请选择"}}
         </picker>
         <text class='arrow-right'></text>
     </view>
@@ -31,21 +31,15 @@
 <view class='cell weui-flex border_bottom1'>
     <view>您的真实艺术级别</view>
     <view class='weui-flex__item tr'>
-        <picker data-key="selectedLevel" range="{{type}}" range-key="name" bindchange='typeChange' style='display:inline-block;'>
-            {{level[post.selectedLevel].name||"请选择"}}
+        <picker data-key="artLevel" range="{{levelList}}" range-key="v" bindchange='levelChange' style='display:inline-block;'>
+            {{levelList[post.artLevel].v||"请选择"}}
         </picker>
         <text class='arrow-right'></text>
     </view>
 </view>
-<!-- <view class='ssl-list'>
-    <view class='ssl' wx:for="{{sslList}}" style='background-image:url({{item}})'></view>
-    <view class='ssl add' bindtap='addSSL'>
-        <view>添加证书</view>
-    </view>
-</view> -->
 <view class='img-list bg-white'>
-    <image data-src="{{item}}" data-index="{{index}}" bindtap='imgClick' mode='aspectFill' wx:for="{{imgList}}" style='width:{{imgSize}}px;height:{{imgSize-5}}px' src='{{item}}' class='img'></image>
-    <view class='add img' style='width:{{imgSize}}px;height:{{imgSize-5}}px;background-size:{{imgSize/3+10}}px' bindtap='chooseImg'>
+    <image data-src="{{item}}" data-index="{{index}}" bindtap='imgClick' mode='aspectFill' wx:for="{{sslList}}" style='width:{{imgSize}}px;height:{{imgSize-5}}px' src='{{item}}' class='img'></image>
+    <view class='add img' style='width:{{imgSize}}px;height:{{imgSize-5}}px;background-size:{{imgSize/3+10}}px' bindtap='addSSL'>
         <image src='http://oj1itelvn.bkt.clouddn.com/art/sczs.png'></image>
         <text>上传证书</text>
     </view>

@@ -17,10 +17,12 @@ Page({
             success: res => {
                 wx.getUserInfo({
                     success: info => {
-                        this.setData({
-                            user: info.userInfo
-                        })
-                        app.user = this.data.user
+                      console.log(JSON.stringify(info));
+                      this.setData({
+                          user: info.userInfo
+                      })
+                      //将用户信息全局保存
+                      app.user = this.data.user
                     }
                 })
             }

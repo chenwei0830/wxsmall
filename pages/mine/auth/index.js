@@ -1,4 +1,5 @@
-// pages/auth/index.js
+
+const qiniuUploader = require("../../../utils/qiniu/qiniuUploader");
 const app = getApp()
 const time = 60
 Page({
@@ -9,54 +10,71 @@ Page({
     data: {
         codeTime: time,
         waitTime: time,
-        type: [
-            { name: '分类1' },
-            { name: '分类2' },
-            { name: '分类3' },
-        ],//艺术分类
-        level: [
-            { name: '分类1' },
-            { name: '分类2' },
-            { name: '分类3' },
-        ],//艺术级别
-        post: {},
+        typeList: [],//艺术分类
+        levelList: [],//艺术级别
+        post: {},//表单
         checked:true,
         sslList:[]
     },
     onLoad(){
-        // 请求接口，获取价格
-
-        wx.getSystemInfo({
-            success: res => {
-                this.setData({
-                    imgSize: Math.floor((res.windowWidth - 40) / 3)
-                })
-            },
-        })
+      //计算图片展示大小
+      var that = this;
+      wx.getSystemInfo({
+        success: res => {
+            this.setData({
+                imgSize: Math.floor((res.windowWidth - 40) / 3)
+            })
+        },
+      }),
+      wx.request({
+        url: app.apiUrl + '/api/getArtTypeAndLevelList',
+        success: function (res) {
+          that.setData({
+            typeList: res.data.data.typeList,
+            levelList: res.data.data.levelList,
+          });
+        },
+        fail: function (error) {
+          console.error('获取艺术类别和艺术等级失败...: ' + error);
+        }
+      })
     },
+
     onInput: function (evt) {
         var key = evt.currentTarget.dataset.key;
         var val = evt.detail.value;
         this.setData({
-            [`post.${key}`]:val
+          [`post.${key}`]:val
         })
     },
     typeChange(evt) {
-        const { key } = evt.currentTarget.dataset
-        this.setData({
-            [`post.${key}`]: evt.detail.value,
-        })
+      const { key } = evt.currentTarget.dataset
+      this.setData({
+        [`post.${key}`]: evt.detail.value,
+      })
+    },
+    levelChange(evt) {
+      const { key } = evt.currentTarget.dataset
+      this.setData({
+        [`post.${key}`]: evt.detail.value,
+      })
     },
     addSSL() {
-        wx.chooseImage({
-            success: res => {
-                const { sslList = [] } = this.data
-                sslList.push(...res.tempFilePaths)
-                this.setData({ sslList })
-            },
-        })
+      initQiniu();
+      wx.chooseImage({
+          success: res => {
+            var filePath = res.tempFilePaths[0];
+            // 交给七牛上传
+            qiniuUploader.upload(filePath, (res) => {
+              const { sslList = [] } = this.data
+              sslList.push(res.imageURL)
+              this.setData({ sslList })
+            }, (error) => {
+              console.error('error: ' + JSON.stringify(error));
+            });
+          },
+      })
     },
-
     getCode() {
         if (!this.data.post.phone){
             app.wxToast.warn('请输入手机号码');
@@ -91,17 +109,6 @@ Page({
             checked:!this.data.checked
         })
     },
-
-    // 选择图片
-    chooseImg() {
-        wx.chooseImage({
-            success: res => {
-                const { imgList=[] } = this.data
-                imgList.push(...res.tempFilePaths)
-                this.setData({ imgList })
-            },
-        })
-    },
     imgClick(evt) {
         wx.showActionSheet({
             itemList: ['预览', '删除'],
@@ -123,56 +130,80 @@ Page({
     },
 
     submit: function () {
-        const { post } = this.data
-        
-        if (!post.name) {
-            app.wxToast.warn('请输入姓名');
-            return;
-        }
-        if (!post.card) {
-            app.wxToast.warn('请输入身份证号码');
-            return;
-        }
-        if (!post.card.match(/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i)) {
-            app.wxToast.warn('请输入正确的身份证号码');
-            return;
-        }
-        if (!post.phone) {
-            app.wxToast.warn('请输入联系电话');
-            return;
-        }
-        if (!post.phone.match(/^1[3|4|5|7|8][0-9]\d{4,8}$/)) {
-            app.wxToast.warn('请输入正确手机号');
-            return;
-        }
-        if (!post.code) {
-            app.wxToast.warn('请输入短信验证码');
-            return;
-        }
-        if (post.selectedType === undefined) {
-            app.wxToast.warn('请选择您的专业分类');
-            return;
-        }
-        if (post.selectedLevel === undefined) {
-            app.wxToast.warn('请选择您的艺术级别');
-            return;
-        }
-        if (!this.data.sslList.length){
-            app.wxToast.warn('请添加证书');
-            return;
-        }
-        if (this.data.checked==false) {
-            app.wxToast.warn('请查看合约条款');
-            return;
-        }
-        // 请求支付,接口
-        wx.requestPayment({
-            timeStamp: '',
-            nonceStr: '',
-            package: '',
-            signType: '',
-            paySign: '',
-        })
+      const { post } = this.data
+      console.log(JSON.stringify(app.user));
+      if (!post.name) {
+          app.wxToast.warn('请输入姓名');
+          return;
+      }
+      if (!post.card) {
+          app.wxToast.warn('请输入身份证号码');
+          return;
+      }
+      if (!post.card.match(/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i)) {
+          app.wxToast.warn('请输入正确的身份证号码');
+          return;
+      }
+      if (!post.phone) {
+          app.wxToast.warn('请输入联系电话');
+          return;
+      }
+      if (!post.phone.match(/^1[3|4|5|7|8][0-9]\d{4,8}$/)) {
+          app.wxToast.warn('请输入正确手机号');
+          return;
+      }
+      if (!post.code) {
+          app.wxToast.warn('请输入短信验证码');
+          return;
+      }
+      if (post.artType === undefined) {
+          app.wxToast.warn('请选择您的专业分类');
+          return;
+      }
+      if (post.artLevel === undefined) {
+          app.wxToast.warn('请选择您的艺术级别');
+          return;
+      }
+      if (!this.data.sslList.length){
+          app.wxToast.warn('请添加证书');
+          return;
+      }
+      if (this.data.checked==false) {
+          app.wxToast.warn('请查看合约条款');
+          return;
+      }
+      //提交认证表单
+      // wx.request({
+      //   url: app.apiUrl + '/api/getArtTypeAndLevelList',
+      //   success: function (res) {
+      //     that.setData({
+      //       typeList: res.data.data.typeList,
+      //       levelList: res.data.data.levelList,
+      //     });
+      //   },
+      //   fail: function (error) {
+      //     console.error('qiniu UploadToken is null, please check the init config or networking: ' + error);
+      //   }
+      // })
+      // 请求支付,接口
+      // wx.requestPayment({
+      //     timeStamp: '',
+      //     nonceStr: '',
+      //     package: '',
+      //     signType: '',
+      //     paySign: '',
+      // })
     },
 
 })
+// 初始化七牛相关参数
+function initQiniu() {
+  var options = {
+    region: 'ECN', // 华区
+    uptokenURL: app.apiUrl +'/api/getUploadToken',
+    //uptoken: 'ZB5LeFm0VbqTWGNLoV6YGSqRGq0ljk38wRsTevT7:dpBDZ3lch7lmSfMED1dCkhObjs4=:eyJzY29wZSI6InNvdXJ0aGFydHN5cyIsImRlYWRsaW5lIjoxNTIwNjU5OTkyfQ==',
+    domain: 'http://p3mjvv81y.bkt.clouddn.com',
+    shouldUseQiniuFileName: false
+  };
+  qiniuUploader.init(options);
+}

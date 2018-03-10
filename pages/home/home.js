@@ -23,19 +23,7 @@ Page({
             {
                 id: 4,
                 name: "书法"
-            },
-            {
-                id: 5,
-                name: "文学"
-            },
-            {
-                id: 6,
-                name: "文学"
-            },
-            {
-                id: 7,
-                name: "文学"
-            },
+            }
         ],
     },
     onLoad: function (options) {
