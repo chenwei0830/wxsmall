@@ -26,18 +26,18 @@ Page({
         })
       },
     }),
-      wx.request({
-        url: app.apiUrl + '/api/getArtTypeAndLevelList',
-        success: function (res) {
-          that.setData({
-            typeList: res.data.data.typeList,
-            levelList: res.data.data.levelList,
-          });
-        },
-        fail: function (error) {
-          console.error('获取艺术类别和艺术等级失败...: ' + error);
-        }
-      })
+    wx.request({
+      url: app.apiUrl + '/api/getArtTypeAndLevelList',
+      success: function (res) {
+        that.setData({
+          typeList: res.data.data.typeList,
+          levelList: res.data.data.levelList,
+        });
+      },
+      fail: function (error) {
+        console.error('获取艺术类别和艺术等级失败...: ' + error);
+      }
+    })
   },
 
   onInput: function (evt) {

@@ -1,124 +1,120 @@
-<!-- <navigator url='/pages/home/home' hover-class='none' class='returnHome'></navigator> -->
 <view class='wrap'>
-<!-- <view style='height:120rpx;'></view> -->
-<view style='height:80rpx;'></view>
-    <view class="tab">
-        <view class='tab-item {{current==1?"active":""}}' data-current="1" bindtap='setCurrent'>
-            <text>图片</text> </view>
-        <view class='tab-item {{current==2?"active":""}}' data-current="2" bindtap='setCurrent'>
-            <text>视频</text>
-        </view>
-        <view class='tab-item {{current==3?"active":""}}' data-current="3" bindtap='setCurrent'>
-            <text>文字</text>
-        </view>
-        <view class='tab-item {{current==4?"active":""}}' data-current="4" bindtap='setCurrent'>
-            <text>电脑编辑</text>
-        </view>
+  <view style='height:80rpx;'></view>
+  <view class="tab">
+    <view class='tab-item {{current==1?"active":""}}' data-current="1" bindtap='setCurrent'>
+      <text>图片</text> </view>
+    <view class='tab-item {{current==2?"active":""}}' data-current="2" bindtap='setCurrent'>
+      <text>视频</text>
     </view>
-    <view class='content' wx:if='{{current!=4}}'>
-        <view class='form'>
-            <block wx:if="{{current==1}}">
-                <view class='img-list'>
-                    <image data-src="{{item}}" data-index="{{index}}" bindtap='imgClick' mode='aspectFill' wx:for="{{imgList}}" style='width:{{imgSize}}px;height:{{imgSize-5}}px' src='{{item}}' class='img'></image>
-                    <view class='add img' style='width:{{imgSize}}px;height:{{imgSize-5}}px;background-size:{{imgSize/3+10}}px' bindtap='chooseImg'>
-                        <image src='http://oj1itelvn.bkt.clouddn.com/art/tjtp@2x.png'></image>
-                        <text>继续添加</text>
-                    </view>
-                </view>
-            </block>
-            <block wx:if="{{current==2}}">
-                <view class='video' bindtap='{{post.video?"":"chooseVideo"}}'>
-                    <video wx:if="{{post.video}}" style='width:100%;height:180px;' src='{{post.video}}'></video>
-                </view>
-                <view class='tr re-choose' bindtap='chooseVideo' wx:if="{{post.video}}">重新选择</view>
-            </block>
-            <view class='weui-flex cell border_top1 border_bottom1'>
-                <view class='label mr-20'>标题</view>
-                <view class='weui-flex__item tr'>
-                    <input bindinput='onInput' value='{{post[current].title}}'></input>
-                </view>
-            </view>
-
-            <view class='weui-flex cell border_bottom1'>
-                <view class='label'>艺术分类</view>
-                <view class='weui-flex__item tr'>
-                    <picker range="{{type}}" range-key="name" bindchange='typeChange' value="{{post[current].selectedType}}">
-                        {{type[post[current].selectedType].name||"请选择"}}
-                    </picker>
-                </view>
-                <text class='arrow-right'></text>
-            </view>
-
-            <view class='weui-flex cell border_bottom1'>
-                <view class='label'>添加发布位置</view>
-                <view class='weui-flex__item tr address' bindtap='openMap'>
-                    {{post[current].address||"请选择"}}
-                </view>
-                <text class='arrow-right'></text>
-            </view>
-            <view class='edit-content'>
-                <textarea hidden='{{isModal||isAudio}}' placeholder='撰写你的大作吧~' class='textarea' maxlength='-1' bindinput='onText' value='{{post[current].text}}' bindblur='saveCache'></textarea>
-                <view class='music' hidden="{{current==2}}" bindtap='chooseAudio'>
-                    <text class='sound'></text>
-                    <text class='music-txt'>音乐</text>
-                </view>
-            </view>
-
-            <view wx:if='{{dataUrl&&(current==1||current==3)}}' class='cell tip border_top1' style='line-height:70rpx;'>当前播放：{{dataUrl.name}}
-                <audio id='myAudio' loop name='{{dataUrl.name}}' src='{{dataUrl.src}}'></audio>
-            </view>
-        </view>
+    <view class='tab-item {{current==3?"active":""}}' data-current="3" bindtap='setCurrent'>
+      <text>文字</text>
     </view>
-    <view style='height:100rpx;' wx:if='{{current!=4}}'></view>
-    <view class='submit' wx:if='{{current!=4}}' bindtap='submit'>发 布</view>
-    <view wx:if='{{current==4}}' class='computer bg-white mt-10'>
-        <view style='margin-bottom:50rpx;'>电脑端编辑器主要是方便大家对图片文字以及视频进行自由的排版类似于公众号文章的编辑。可以通过以下流程来进行编辑</view>
-        <view class='column-wrap'>
-            <view class='column-item'>1、电脑端登陆
-                <text>www.xxx.com。</text>
-            </view>
-            <view class='column-item'>2、微信扫二维码进行登陆。</view>
-            <view class='column-item'>3、进入编辑界面。</view>
-            <view class='column-item'>4、可以自行编辑。</view>
-            <view class='column-item'>5、也可以运用第三方编辑器（秀米等编辑器）编辑好后复制到本编辑框内。</view>
-            <view class='column-item'>6、贴好分类等标签。</view>
-            <view class='column-item'>7、点击发布。</view>
-            <view class='column-item'>8、手机端我的作品便可以查看了。</view>
-        </view>
+    <view class='tab-item {{current==4?"active":""}}' data-current="4" bindtap='setCurrent'>
+      <text>电脑编辑</text>
     </view>
+  </view>
+  <view class='content' wx:if='{{current!=4}}'>
+    <view class='form'>
+      <block wx:if="{{current==1}}">
+        <view class='img-list'>
+          <image data-src="{{item}}" data-index="{{index}}" bindtap='imgClick' mode='aspectFill' wx:for="{{imgObj.imgList}}" style='width:{{imgSize}}px;height:{{imgSize-5}}px' src='{{item}}' class='img'></image>
+          <view class='add img' style='width:{{imgSize}}px;height:{{imgSize-5}}px;background-size:{{imgSize/3+10}}px' bindtap='chooseImg'>
+            <image src='/assets/icon/btn-add-img.png'></image>
+          </view>
+        </view>
+        <view class='weui-flex cell border_top1 border_bottom1'>
+          <view class='label mr-20'>标题</view>
+          <view class='weui-flex__item tr'>
+            <input bindinput='onInput' value='{{post.title}}'></input>
+          </view>
+        </view>
+        <view class='weui-flex cell border_bottom1'>
+          <view class='label'>艺术分类</view>
+          <view class='weui-flex__item tr'>
+            <picker range="{{imgObj.typeList}}" range-key="v" value='{{index}}' bindchange='typeChange' data-model='0'>
+              {{imgObj.typeList[index].v||"请选择"}}
+            </picker>
+          </view>
+          <text class='arrow-right'></text>
+        </view>
+        <view class='weui-flex cell border_bottom1'>
+          <view class='label'>添加发布位置</view>
+          <view class='weui-flex__item tr address' bindtap='openMap'>
+            {{post.address||"请选择"}}
+          </view>
+          <text class='arrow-right'></text>
+        </view>
+        <view class='edit-content'>
+          <textarea hidden='{{isModal||isAudio}}' placeholder='撰写你的大作吧~' class='textarea' maxlength='-1' bindinput='onText' value='{{post.text}}' bindblur='saveCache'></textarea>
+          <view class='music' hidden="{{current==2}}" bindtap='chooseAudio'>
+            <text class='sound'></text>
+            <text class='music-txt'>音乐</text>
+          </view>
+        </view>
+      </block>
+      <block wx:if="{{current==2}}">
+        <view class='video' bindtap='{{post.video?"":"chooseVideo"}}'>
+          <video wx:if="{{post.video}}" style='width:100%;height:180px;' src='{{post.video}}'></video>
+        </view>
+        <view class='tr re-choose' bindtap='chooseVideo' wx:if="{{post.video}}">重新选择</view>
+      </block>
+
+
+      <view wx:if='{{dataUrl&&(current==1||current==3)}}' class='cell tip border_top1' style='line-height:70rpx;'>当前播放：{{dataUrl.name}}
+        <audio id='myAudio' loop name='{{dataUrl.name}}' src='{{dataUrl.src}}'></audio>
+      </view>
+    </view>
+  </view>
+  <view style='height:100rpx;' wx:if='{{current!=4}}'></view>
+  <view class='submit' wx:if='{{current!=4}}' bindtap='submit'>发 布</view>
+  <view wx:if='{{current==4}}' class='computer bg-white mt-10'>
+    <view style='margin-bottom:50rpx;'>电脑端编辑器主要是方便大家对图片文字以及视频进行自由的排版类似于公众号文章的编辑。可以通过以下流程来进行编辑</view>
+    <view class='column-wrap'>
+      <view class='column-item'>1、电脑端登陆
+        <text>www.xxx.com。</text>
+      </view>
+      <view class='column-item'>2、微信扫二维码进行登陆。</view>
+      <view class='column-item'>3、进入编辑界面。</view>
+      <view class='column-item'>4、可以自行编辑。</view>
+      <view class='column-item'>5、也可以运用第三方编辑器（秀米等编辑器）编辑好后复制到本编辑框内。</view>
+      <view class='column-item'>6、贴好分类等标签。</view>
+      <view class='column-item'>7、点击发布。</view>
+      <view class='column-item'>8、手机端我的作品便可以查看了。</view>
+    </view>
+  </view>
 </view>
 
 
 <view class='c-mask modal' hidden='{{!isAudio}}'>
-    <view class='modal-content'>
-        <view class='weui-flex title mb-10'>
-            <view class='weui-flex__item tc'>选择背景音乐</view>
-            <view class='close' bindtap='closeModal'></view>
-        </view>
-        <view class='audo-list pd-10 mb-20'>
-            <view bindtap='clickAudio' data-index='{{index}}' wx:for="{{audioList}}" class='weui-flex audio border_bottom1 pd-5 mb-5'>
-                <view class='weui-flex__item'>{{item.name}}</view>
-                <view wx:if="{{post.audio==index}}">
-                    <icon type='success_no_circle'></icon>
-                </view>
-            </view>
-        </view>
+  <view class='modal-content'>
+    <view class='weui-flex title mb-10'>
+      <view class='weui-flex__item tc'>选择背景音乐</view>
+      <view class='close' bindtap='closeModal'></view>
     </view>
+    <view class='audo-list pd-10 mb-20'>
+      <view bindtap='clickAudio' data-index='{{index}}' wx:for="{{audioList}}" class='weui-flex audio border_bottom1 pd-5 mb-5'>
+        <view class='weui-flex__item'>{{item.name}}</view>
+        <view wx:if="{{post.audio==index}}">
+          <icon type='success_no_circle'></icon>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>
 
 <view class='c-mask modal' hidden='{{!isModal}}'>
-    <view class='modal-content'>
-        <view class='weui-flex title mb-10'>
-            <view class='weui-flex__item tc'>是否继续编辑未完成文章</view>
-            <view class='close' bindtap='closeModal'></view>
-        </view>
-        <view class='border1 pd-10 mb-20' style='border-radius:2px;'>
-            <view class='continue'>{{modalContent}}</view>
-        </view>
-        <view class='confirm' bindtap='continueEdit'>继续编辑</view>
+  <view class='modal-content'>
+    <view class='weui-flex title mb-10'>
+      <view class='weui-flex__item tc'>是否继续编辑未完成文章</view>
+      <view class='close' bindtap='closeModal'></view>
     </view>
+    <view class='border1 pd-10 mb-20' style='border-radius:2px;'>
+      <view class='continue'>{{modalContent}}</view>
+    </view>
+    <view class='confirm' bindtap='continueEdit'>继续编辑</view>
+  </view>
 </view>
 
 <navigator url='/pages/home/home' hover-class='none' class='return tc'>
-    <view>返回</view>
+  <view>返回</view>
 </navigator>
