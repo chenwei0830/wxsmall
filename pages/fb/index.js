@@ -17,7 +17,8 @@ Page({
       artType:'',
       typeList: null,
       location: '',
-      content: ''
+      textContent: '',
+      modelType:'0'
     },//图片表单数据
     videoObj: {
       videoList: [],
@@ -25,34 +26,37 @@ Page({
       artType: '',
       typeList: null,
       location: '',
-      content: ''
+      textContent: '',
+      modelType: '1'
     },//视频表单数据
     textObj: {
       title: '',
       artType: '',
       typeList: null,
       location: '',
-      content: ''
+      textContent: '',
+      modelType: '2'
     },//文字表单数据
     post: {}//最终提交的表单数据
   },
   typeChange(evt) {
     const { model } = evt.currentTarget.dataset
-    if(model=='0'){//图片
+    if(model == '1'){//图片
       var typeKey = this.data.imgObj.typeList[evt.detail.value].k
+      this.setData({
+        'imgObj.artType': typeKey,
+      })
     }
-    this.setData({
-      'imgObj.artType': typeKey,
-    })
-
-    console.log(this.data.imgObj);
   },
-  openMap() {
+  openMap(evt) {
     wx.chooseLocation({
       success: res => {
-        this.setData({
-          [`post[${this.data.current}].address`]: res.address
-        })
+        const { model } = evt.currentTarget.dataset
+        if (model == '1') {//图片
+          this.setData({
+            'imgObj.location': res.address
+          })
+        }
       },
     })
   },
@@ -204,27 +208,42 @@ Page({
     })
     !src && wx.stopBackgroundAudio()
   },
-
-
-  // pcClick() {
-  //     this.setData({
-  //         current: 4
-  //     })
-
-  // },
-
   onInput(evt) {
-    this.setData({
-      [`post[${this.data.current}].title`]: evt.detail.value
-    })
+    const { model } = evt.currentTarget.dataset
+    if (model == '1') {//图片
+      this.setData({
+        'imgObj.title': evt.detail.value,
+      })
+    }
   },
   onText(evt) {
-    this.setData({
-      [`post[${this.data.current}].text`]: evt.detail.value
-    })
+    const { model } = evt.currentTarget.dataset
+    if (model == '1') {//图片
+      this.setData({
+        'imgObj.textContent': evt.detail.value,
+      })
+    }
   },
   submit() {
-    const postData = this.data.post[this.data.current]
+    var currentPage = this.data.current
+    var postData = null
+    if (currentPage==1){//图片
+      postData = this.data.imgObj
+      if (postData.imgList===undefined || postData.imgList.length==0) {
+        getApp().wxToast.warn("请选择图片")
+        return
+      }
+    } else if (currentPage == 2){//视频
+      postData = this.data.videoObj
+      if (postData.videoList === undefined || postData.videoList.length == 0) {
+        getApp().wxToast.warn("请选择视频")
+        return
+      }
+    } else if (currentPage == 3) {//文字
+      postData = this.data.textObj
+    }else{
+      return
+    }
     if (!postData) {
       getApp().wxToast.warn("请输入标题")
       return
@@ -233,25 +252,56 @@ Page({
       getApp().wxToast.warn("请输入标题")
       return
     }
-    if (!postData.selectedType) {
+    if (!postData.artType) {
       getApp().wxToast.warn("请选择艺术分类")
       return
     }
-    if (!postData.address) {
+    if (!postData.location) {
       getApp().wxToast.warn("请选择位置")
       return
     }
+    wx.showLoading({
+      title: '正在提交.....',
+    })
+    postData.openId = app.openId
+    postData.orgId = app.orgId
+    //提交认证表单
+    wx.request({
+      url: app.apiUrl + '/api/saveArtworks',
+      data: JSON.stringify(postData),
+      dataType: 'json',
+      method: 'POST',
+      success: function (res) {
+        if (res.data.code == '0') {
+          //发布完成后清除缓存
+          try {
+            wx.removeStorageSync('lastText_' + currentPage)
+          } catch (e) {
+            console.log("清除缓存lastText_" + currentPage + "异常")
+          }
+          //跳转到 tabBar个人中心页
+          wx.reLaunch({
+            url: '../../mine/mine'
+          })
 
+        } else {
+          app.wxToast.error(res.data.msg);
+        }
 
-    //发布完成后清除缓存
-    wx.removeStorage({
-      key: 'lastText',
+      },
+      fail: function (error) {
+        console.error('qiniu UploadToken is null, please check the init config or networking: ' + error);
+      },
+      complete: function () {
+        wx.hideLoading()
+      }
     })
   },
 
   saveCache(evt) {
+    const { model } = evt.currentTarget.dataset
     wx.setStorage({
-      key: 'lastText',
+      key: 'lastText_' + model,
       data: evt.detail.value,
     })
   },
