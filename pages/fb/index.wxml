@@ -49,10 +49,35 @@
         </view>
       </block>
       <block wx:if="{{current==2}}">
-        <view class='video' bindtap='{{post.video?"":"chooseVideo"}}'>
-          <video wx:if="{{post.video}}" style='width:100%;height:180px;' src='{{post.video}}'></video>
+        <view class='video' bindtap='{{videoObj.videoList[0]?"":"chooseVideo"}}'>
+          <video wx:if="{{videoObj.videoList[0]}}" style='width:100%;height:180px;' src='{{videoObj.videoList[0]}}'></video>
         </view>
-        <view class='tr re-choose' bindtap='chooseVideo' wx:if="{{post.video}}">重新选择</view>
+        <view class='tr re-choose' bindtap='chooseVideo' wx:if="{{videoObj.videoList}}">重新选择</view>
+        <view class='weui-flex cell border_top1 border_bottom1'>
+          <view class='label mr-20'>标题</view>
+          <view class='weui-flex__item tr'>
+            <input bindinput='onInput' value='{{videoObj.title}}' data-model='2'></input>
+          </view>
+        </view>
+        <view class='weui-flex cell border_bottom1'>
+          <view class='label'>艺术分类</view>
+          <view class='weui-flex__item tr'>
+            <picker range="{{videoObj.typeList}}" range-key="v" value='{{index}}' bindchange='typeChange' data-model='2'>
+              {{videoObj.typeList[videoObj.artType].v||"请选择"}}
+            </picker>
+          </view>
+          <text class='arrow-right'></text>
+        </view>
+        <view class='weui-flex cell border_bottom1'>
+          <view class='label'>添加发布位置</view>
+          <view class='weui-flex__item tr address' bindtap='openMap' data-model='2'>
+            {{videoObj.location||"请选择"}}
+          </view>
+          <text class='arrow-right'></text>
+        </view>
+        <view class='edit-content'>
+          <textarea placeholder='撰写你的大作吧~' class='textarea' maxlength='-1' bindinput='onText' value='{{videoObj.textContent}}' bindblur='saveCache' data-model='2'></textarea>
+        </view>
       </block>
       <view wx:if='{{dataUrl&&(current==1||current==3)}}' class='cell tip border_top1' style='line-height:70rpx;'>当前播放：{{dataUrl.name}}
         <audio id='myAudio' loop name='{{dataUrl.name}}' src='{{dataUrl.src}}'></audio>

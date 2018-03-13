@@ -46,6 +46,16 @@ Page({
       this.setData({
         'imgObj.artType': typeKey,
       })
+    } else if (model == '2'){//视频
+      var typeKey = this.data.videoObj.typeList[evt.detail.value].k
+      this.setData({
+        'videoObj.artType': typeKey,
+      })
+    }else{
+      var typeKey = this.data.videoObj.typeList[evt.detail.value].k
+      this.setData({
+        'textObj.artType': typeKey,
+      })
     }
   },
   openMap(evt) {
@@ -55,6 +65,14 @@ Page({
         if (model == '1') {//图片
           this.setData({
             'imgObj.location': res.address
+          })
+        } else if (model == '2'){//视频
+          this.setData({
+            'videoObj.location': res.address
+          })
+        }else{
+          this.setData({
+            'textObj.location': res.address
           })
         }
       },
@@ -180,15 +198,27 @@ Page({
     })
   },
   chooseVideo() {
+    initQiniu();
     wx.chooseVideo({
       success: res => {
-        this.setData({
-          "post.video": res.tempFilePath
+        wx.showLoading({
+          title: '上传中...',
+        })
+        var filePath = res.tempFilePath;
+        qiniuUploader.upload(filePath, (res) => {
+          var videoList = this.data.videoObj.videoList
+          videoList.push(res.imageURL)
+          this.setData({
+            'videoObj.videoList': videoList,
+          })
+          wx.hideLoading()
+        }, (error) => {
+          console.error('error: ' + JSON.stringify(error));
+          wx.hideLoading()
         })
       }
     })
   },
-
   chooseAudio() {
     this.setData({
       isAudio: true
@@ -214,6 +244,14 @@ Page({
       this.setData({
         'imgObj.title': evt.detail.value,
       })
+    } else if (model == '2') {//视频
+      this.setData({
+        'videoObj.title': evt.detail.value,
+      })
+    }else{
+      this.setData({
+        'textObj.title': evt.detail.value,
+      })
     }
   },
   onText(evt) {
@@ -221,6 +259,14 @@ Page({
     if (model == '1') {//图片
       this.setData({
         'imgObj.textContent': evt.detail.value,
+      })
+    } else if (model == '2') {//视频
+      this.setData({
+        'videoObj.textContent': evt.detail.value,
+      })
+    }else{
+      this.setData({
+        'textObj.textContent': evt.detail.value,
       })
     }
   },
@@ -241,6 +287,10 @@ Page({
       }
     } else if (currentPage == 3) {//文字
       postData = this.data.textObj
+      if (postData.textContent === undefined || postData.textContent.length == 0) {
+        getApp().wxToast.warn("随便写点什么吧")
+        return
+      }
     }else{
       return
     }
@@ -281,7 +331,7 @@ Page({
           }
           //跳转到 tabBar个人中心页
           wx.reLaunch({
-            url: '../../mine/mine'
+            url: '../mine/mine'
           })
 
         } else {
