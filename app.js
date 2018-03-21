@@ -53,7 +53,6 @@ App({
       //缓存中未获取到openId,则重新获取
       wx.login({
         success: function (res) {
-          console.log("登录时得到的code----" + res.code)
           if (res.code) {
             //根据code获取openId
             wx.request({
@@ -62,13 +61,51 @@ App({
                 jsCode: res.code
               },
               success: function (res) {
-
-                console.log("获取openId----" + JSON.stringify(res.data.data));
                 if (res.data.data.openid === undefined) {
                   console.log("获取openId失败");
                 } else {
                   that.openId = res.data.data.openid //赋值全局
                   wx.setStorageSync('openid', res.data.data.openid) //放入缓存
+                  wx.showLoading({
+                    title: '加载中...',
+                  })
+                  wx.getUserInfo({
+                    success: info => {
+                      //将用户信息全局保存
+                      that.user = info.userInfo
+                      //登录注册
+                      var userObj = {}
+                      userObj.openId = that.openId
+                      userObj.orgId = that.orgId
+                      userObj.nickName = info.userInfo.nickName
+                      userObj.photo = info.userInfo.avatarUrl
+                      userObj.gender = info.userInfo.gender
+                      userObj.city = info.userInfo.city
+                      userObj.province = info.userInfo.province
+                      userObj.country = info.userInfo.country
+                      userObj.language = info.userInfo.language
+                      wx.request({
+                        url: that.apiUrl + '/api/login',
+                        data: JSON.stringify(userObj),
+                        dataType: 'json',
+                        method: 'POST',
+                        success: function (res) {
+                          if (res.data.code == '0') {
+                            console.log('登录成功')
+                          } else {
+                            console.log('登录失败')
+                          }
+
+                        },
+                        fail: function (error) {
+                          console.error(' 登录异常: ' + error);
+                        },
+                        complete: function () {
+                          wx.hideLoading()
+                        }
+                      })
+                    }
+                  })
                 }
 
               },
@@ -95,7 +132,7 @@ App({
       tabbar
     })
   },
-  apiUrl: 'http://localhost:8080/sourthArtSys',//接口地址
+  apiUrl: 'https://www.chenqimao.com/sourthArtSys',//接口地址
   user: null,//用户信息
   openId: 'openId_xxxxxxx',//用户唯一标识
   orgId: '2',//组织机构ID

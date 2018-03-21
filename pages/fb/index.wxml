@@ -50,9 +50,9 @@
       </block>
       <block wx:if="{{current==2}}">
         <view class='video' bindtap='{{videoObj.videoList[0]?"":"chooseVideo"}}'>
-          <video wx:if="{{videoObj.videoList[0]}}" style='width:100%;height:180px;' src='{{videoObj.videoList[0]}}'></video>
+          <video wx:if="{{videoObj.videoList[0]}}" style='width:100%;height:180px;' src='{{videoObj.videoList}}'></video>
         </view>
-        <view class='tr re-choose' bindtap='chooseVideo' wx:if="{{videoObj.videoList}}">重新选择</view>
+        <view class='tr re-choose' bindtap='chooseVideo' wx:if="{{videoObj.videoList[0]}}">重新选择</view>
         <view class='weui-flex cell border_top1 border_bottom1'>
           <view class='label mr-20'>标题</view>
           <view class='weui-flex__item tr'>
@@ -79,13 +79,41 @@
           <textarea placeholder='撰写你的大作吧~' class='textarea' maxlength='-1' bindinput='onText' value='{{videoObj.textContent}}' bindblur='saveCache' data-model='2'></textarea>
         </view>
       </block>
-      <view wx:if='{{dataUrl&&(current==1||current==3)}}' class='cell tip border_top1' style='line-height:70rpx;'>当前播放：{{dataUrl.name}}
-        <audio id='myAudio' loop name='{{dataUrl.name}}' src='{{dataUrl.src}}'></audio>
-      </view>
-      <view class='music' hidden="{{current==2}}" bindtap='chooseAudio'>
-        <text class='sound'></text>
-        <text class='music-txt'>音乐</text>
-      </view>
+      <block wx:if="{{current==3}}">
+        <view class='weui-flex cell border_top1 border_bottom1'>
+          <view class='label mr-20'>标题</view>
+          <view class='weui-flex__item tr'>
+            <input bindinput='onInput' value='{{textObj.title}}' data-model='3'></input>
+          </view>
+        </view>
+        <view class='weui-flex cell border_bottom1'>
+          <view class='label'>艺术分类</view>
+          <view class='weui-flex__item tr'>
+            <picker range="{{textObj.typeList}}" range-key="v" value='{{index}}' bindchange='typeChange' data-model='3'>
+              {{textObj.typeList[textObj.artType].v||"请选择"}}
+            </picker>
+          </view>
+          <text class='arrow-right'></text>
+        </view>
+        <view class='weui-flex cell border_bottom1'>
+          <view class='label'>添加发布位置</view>
+          <view class='weui-flex__item tr address' bindtap='openMap' data-model='3'>
+            {{textObj.location||"请选择"}}
+          </view>
+          <text class='arrow-right'></text>
+        </view>
+        <view class='edit-content' style='height:426rpx;'>
+          <textarea placeholder='撰写你的大作吧~' class='textarea' maxlength='-1' bindinput='onText' value='{{textObj.textContent}}' bindblur='saveCache' data-model='3'>
+          </textarea>
+          <view class='music' bindtap='chooseAudio'>
+            <text class='sound'></text>
+            <text class='music-txt'>音乐</text>
+          </view>
+        </view>
+        <view  class='cell tip border_top1' style='line-height:70rpx;'>当前背景音乐：{{dataUrl.name||"未选择"}}
+        </view>
+        <audio name='{{dataUrl.name}}' src='{{dataUrl.src}}'></audio>
+      </block>
     </view>
   </view>
   <view style='height:100rpx;' wx:if='{{current!=4}}'></view>
@@ -106,8 +134,6 @@
     </view>
   </view>
 </view>
-
-
 <view class='c-mask modal' hidden='{{!isAudio}}'>
   <view class='modal-content'>
     <view class='weui-flex title mb-10'>
@@ -117,7 +143,7 @@
     <view class='audo-list pd-10 mb-20'>
       <view bindtap='clickAudio' data-index='{{index}}' wx:for="{{audioList}}" class='weui-flex audio border_bottom1 pd-5 mb-5'>
         <view class='weui-flex__item'>{{item.name}}</view>
-        <view wx:if="{{post.audio==index}}">
+        <view wx:if="{{audioNum==index}}">
           <icon type='success_no_circle'></icon>
         </view>
       </view>

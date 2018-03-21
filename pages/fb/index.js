@@ -6,10 +6,10 @@ Page({
   data: {
     current: 1,
     audioList: [
-      { name: "无" },
-      { name: "你好", src: "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46" },
-      { name: "你好", src: "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46" }
+      { name: "歌曲1", src: "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46" },
+      { name: "歌曲2", src: "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46" }
     ],
+    audioNum:null,
     isModal: false,
     imgObj: {
       imgList:[],
@@ -35,7 +35,8 @@ Page({
       typeList: null,
       location: '',
       textContent: '',
-      modelType: '2'
+      modelType: '2',
+      backMusic:null
     },//文字表单数据
     post: {}//最终提交的表单数据
   },
@@ -226,8 +227,10 @@ Page({
   },
   clickAudio(evt) {
     const { index } = evt.currentTarget.dataset
+    var that = this
     this.setData({
-      "post.audio": index
+      "textObj.backMusic": that.data.audioList[index].src,
+      "audioNum": index
     })
     const { src } = this.data.audioList[index]
     src && wx.playBackgroundAudio({
@@ -237,6 +240,8 @@ Page({
       dataUrl: this.data.audioList[index]
     })
     !src && wx.stopBackgroundAudio()
+
+    console.log(this.data.textObj);
   },
   onInput(evt) {
     const { model } = evt.currentTarget.dataset
@@ -315,9 +320,13 @@ Page({
     })
     postData.openId = app.openId
     postData.orgId = app.orgId
+    console.log(JSON.stringify(postData))
     //提交认证表单
     wx.request({
       url: app.apiUrl + '/api/saveArtworks',
+      header:{
+        'content-type': 'application/json'
+      },
       data: JSON.stringify(postData),
       dataType: 'json',
       method: 'POST',
@@ -384,7 +393,6 @@ function initQiniu() {
   var options = {
     region: 'ECN', // 华区
     uptokenURL: app.apiUrl + '/api/getUploadToken',
-    //uptoken: 'ZB5LeFm0VbqTWGNLoV6YGSqRGq0ljk38wRsTevT7:dpBDZ3lch7lmSfMED1dCkhObjs4=:eyJzY29wZSI6InNvdXJ0aGFydHN5cyIsImRlYWRsaW5lIjoxNTIwNjU5OTkyfQ==',
     domain: 'http://p3mjvv81y.bkt.clouddn.com',
     shouldUseQiniuFileName: false
   };
