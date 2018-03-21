@@ -8,9 +8,9 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.6.6",
-	"appid": "wx81cfb6b3dcba2164",
-	"projectname": "githubXCX",
+	"libVersion": "1.9.91",
+	"appid": "touristappid",
+	"projectname": "ART_TEST",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -20,110 +20,9 @@
 			"current": -1,
 			"list": []
 		},
-		"game": {
-			"current": -1,
-			"list": []
-		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "我的收藏",
-					"pathName": "pages/mine/myWorks",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "个人中心",
-					"pathName": "pages/mine/mine",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "发布",
-					"pathName": "pages/fb/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "消息",
-					"pathName": "pages/msg/msg",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "消息详情",
-					"pathName": "pages/msg/detail",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "作品详情页",
-					"pathName": "pages/home/detail",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "搜索",
-					"pathName": "pages/art/search",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "艺术家",
-					"pathName": "pages/mine/auth/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "艺术家详情",
-					"pathName": "pages/art/artist-info",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "艺术认证",
-					"pathName": "pages/mine/auth/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "艺术认证",
-					"pathName": "pages/mine/auth/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "艺术认证",
-					"pathName": "pages/mine/auth/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "我的作品",
-					"pathName": "pages/mine/myWorks",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "设置",
-					"pathName": "pages/mine/set",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "设置",
-					"pathName": "pages/mine/set",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "回复详情",
-					"pathName": "pages/home/reply-detail",
-					"query": ""
-				}
-			]
+			"list": []
 		}
 	}
 }

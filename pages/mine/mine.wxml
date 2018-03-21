@@ -3,27 +3,27 @@
     <navigator url='set' hover-class='none' class='avatar' style='background-image:url({{user.avatarUrl||"http://oj1itelvn.bkt.clouddn.com/art/icon-avatar4.png"}})'></navigator>
     <view class='name tc'>{{user.nickName || "未知"}}</view>
     <view class='level tc' wx:if="{{!user}}">游客</view>
-    <navigator url='auth/index' hover-class='none' class='btn tc' wx:if="{{!isAuthing}}" >进行艺术认证</navigator>
+    <navigator url='auth/index' hover-class='none' class='btn tc' wx:if="{{mineObj.authCount==0}}" >进行艺术认证</navigator>
     <view hover-class='none' class='btn tc' wx:else >认证申请审核中</view>
 </view>
 
 <view class='wrap bg-white'>
     <navigator url='myWorks' class='wrap-item weui-flex align'>
         <view class='icon icon-works'></view>
-        <view class='weui-flex__item title'>我的作品</view>
-        <view class='number'>11</view>
+        <view class='weui-flex__item title'>我的作品<view class="weui-badge" style="margin-left: 5px;"  wx:if="{{mineObj.newArtWorkCount>0}}">new</view></view>
+        <view class='number'>{{mineObj.artWorksCount>0?mineObj.artWorksCount:''}}</view>
         <view class='arrow-right'></view>
     </navigator>
     <navigator url='myKeep' class='wrap-item weui-flex align'>
         <view class='icon icon-keep'></view>
         <view class='weui-flex__item title'>我的收藏</view>
-        <view class='number'></view>
+        <view class='number'>{{mineObj.collectCount>0?mineObj.collectCount:''}}</view>
         <view class='arrow-right'></view>
     </navigator>
     <navigator url='myFocus' class='wrap-item weui-flex align'>
         <view class='icon icon-star'></view>
         <view class='weui-flex__item title'>我的关注</view>
-        <view class='number'>2</view>
+        <view class='number'>{{mineObj.interestArtCount>0?mineObj.interestArtCount:''}}</view>
         <view class='arrow-right'></view>
     </navigator>
     <view class='wrap-item weui-flex align' bindtap='adviceClick'>

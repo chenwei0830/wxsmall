@@ -7,7 +7,13 @@ Page({
    */
   data: {
     advice: false,
-    isAuthing: false,//是否等待认证审核
+    mineObj:{
+      authCount:0,                //认证数
+      artWorksCount: 0,           //作品总数
+      newArtWorkCount:0,          //新作品数
+      collectCount: 0,            //收藏作品数
+      interestArtCount: 0         //关注艺术家数
+    }
   },
 
   /**
@@ -33,18 +39,17 @@ Page({
         user: app.user
       })
     }
-    //接口获取认证状态
+    //接口获取初始信息
     var that = this
     wx.request({
-      url: app.apiUrl + '/api/authStatus?openId='+app.openId,
+      url: app.apiUrl + '/api/mine?openId='+app.openId,
       success: function(e){
         if(e.data.code=='0'){
-          if (e.data.data>0){//审核认证条数大于0，表明正在审核
             that.setData({
-              isAuthing: true
+              mineObj: e.data.data
             })
-          }
         }
+        console.log(that.data.mineObj)
       }
     })
 

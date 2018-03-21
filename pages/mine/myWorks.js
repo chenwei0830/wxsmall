@@ -8,6 +8,7 @@ Page({
    */
   data: {
     loading: false,
+    list:[],
     cid: -1,
     category: [
       {
@@ -38,31 +39,6 @@ Page({
           is_like: 1
         }]
       },
-      {
-        id: 2,
-        name: "摄影"
-      },
-      {
-        id: 3,
-        name: "美术"
-      },
-      {
-        id: 4,
-        name: "书法"
-      },
-      {
-        id: 5,
-        name: "文学"
-      },
-      {
-        id: 6,
-        name: "文学"
-      },
-      {
-        id: 7,
-        name: "文学"
-      },
-
     ],
     hot:0,
     time:1

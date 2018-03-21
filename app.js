@@ -132,9 +132,9 @@ App({
       tabbar
     })
   },
-  apiUrl: 'https://www.chenqimao.com/sourthArtSys',//接口地址
+  apiUrl: 'http://localhost:8080/sourthArtSys',//接口地址 https://www.chenqimao.com/sourthArtSys
   user: null,//用户信息
-  openId: 'openId_xxxxxxx',//用户唯一标识
+  openId: 'o7tbx0EouVhlljZ6sOGNz1Xx3PkY',//用户唯一标识
   orgId: '2',//组织机构ID
 
   requireHttp() {
