@@ -1,7 +1,7 @@
 <!--pages/home/home.wxml-->
 <import src="/utils/tps/empty.wxml" />
 <view class="category">
-    <scroll-view scroll-x="true" class='' bindscroll="onCatScroll" id="cat">
+    <scroll-view scroll-x class='' bindscroll="onCatScroll" id="cat">
         <text wx:for="{{category}}" wx:key="item" data-current="{{index}}" data-id='{{item.id}}' id="cat{{index}}" catchtap='clickCategory' class='item {{!hasQuery?"q":""}} {{current==index?"active":""}}'>{{item.name}}</text>
         <text class='cat-tag' style="left:{{tag.left}}px;width:{{tag.width}}px"></text>
     </scroll-view>

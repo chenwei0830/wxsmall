@@ -47,7 +47,7 @@ const tabbar = {
 }
 App({
   onLaunch: function () {
-    var openid = wx.getStorageInfoSync("openid") || []
+    var openid = wx.getStorageInfoSync("openid") || ''
     var that = this
     if (openid) {
       //缓存中未获取到openId,则重新获取
@@ -132,9 +132,9 @@ App({
       tabbar
     })
   },
-  apiUrl: 'http://localhost:8080/sourthArtSys',//接口地址 https://www.chenqimao.com/sourthArtSys
+  apiUrl: 'https://www.chenqimao.com/sourthArtSys',//接口地址 http://localhost:8080/sourthArtSys
   user: null,//用户信息
-  openId: 'o7tbx0EouVhlljZ6sOGNz1Xx3PkY',//用户唯一标识
+  openId: '',//用户唯一标识
   orgId: '2',//组织机构ID
 
   requireHttp() {
