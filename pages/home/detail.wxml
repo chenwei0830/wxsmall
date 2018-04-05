@@ -58,33 +58,37 @@
   <view class="pl-title">
     <text class="pl-title-t"></text>热门评论</view>
 </view>
-<view class='commentaries weui-flex' wx:for='{{detailObj.commentList}}' wx:key='{{index}}'>
-  <view class='com-avatar' style='background-image:url({{item.photo}})'></view>
-  <view class='weui-flex__item pl-box'>
-    <view class='com-name'>
-      <text>{{item.nickName}}</text>
-      <text class='ml-10'>{{item.createDate}}</text>
-      <!-- <text class='com-label'>{{item.artType}}</text> -->
-    </view>
-    <view class='com-time weui-flex align'>
-      <view class='weui-flex__item'>
-        <view class='grade countries mr-5' wx:if='{{item.artLevel=="1"}}'></view>
-        <view class='grade province' wx:if='{{item.artLevel=="2"}}'></view>
-        <view class='grade city mr-5' wx:if='{{item.artLevel=="3"}}'></view>
-        <view class='grade county mr-5' wx:if='{{item.artLevel=="4"}}'></view>
-        <view class='grade students' wx:if='{{!item.artLevel}}'></view>
+<navigator url='reply-detail?parent={{item.id}}' hover-class='none' wx:for='{{detailObj.commentList}}' wx:key='{{index}}'>
+  <view class='commentaries weui-flex'>
+    <view class='com-avatar' style='background-image:url({{item.photo}})'></view>
+    <view class='weui-flex__item pl-box'>
+      <view class='com-name'>
+        <text>{{item.nickName}}</text>
+        <text class='ml-10'>{{item.createDate}}</text>
+        <!-- <text class='com-label'>{{item.artType}}</text> -->
       </view>
-      <view class='com-like {{item.is_like?"active":""}}' data-index="{{index}}" bindtap='likeComment1'>{{item.dzNum}}</view>
+      <view class='com-time weui-flex align'>
+        <view class='weui-flex__item'>
+          <view class='grade countries mr-5' wx:if='{{item.artLevel=="1"}}'></view>
+          <view class='grade province' wx:if='{{item.artLevel=="2"}}'></view>
+          <view class='grade city mr-5' wx:if='{{item.artLevel=="3"}}'></view>
+          <view class='grade county mr-5' wx:if='{{item.artLevel=="4"}}'></view>
+          <view class='grade students' wx:if='{{!item.artLevel}}'></view>
+        </view>
+        <view class='com-like {{item.is_like?"active":""}}' data-index="{{index}}" bindtap='likeComment1'>{{item.dzNum}}</view>
+      </view>
+      <view class='com-content'>{{item.content}}</view>
+      <view class='reply mt-5' wx:if="{{item.msgNum>0}}">查看{{item.msgNum}}条回复:</view>
     </view>
-    <view class='com-content'>{{item.content}}</view>
-    <navigator url='reply-detail' hover-class='none' class='reply mt-5'>查看24条回复：</navigator>
   </view>
-</view>
+</navigator>
 <template is="empty" data="{{msg:'暂无评论'}}" wx:if="{{!detailObj.commentList}}"></template>
-<view style='height:130rpx;'></view>
-<view class='edit weui-flex align'>
-  <view class='weui-flex__item edit-input'>
-    <input type='text' placeholder='写评论~' placeholder-class='comment-edit' data-key='content' bindinput="onInput"></input>
+<block wx:if="{{detailObj.status=='1'}}">
+  <view style='height:130rpx;'></view>
+  <view class='edit weui-flex align'>
+    <view class='weui-flex__item edit-input'>
+      <input type='text' placeholder='说的什么吧~' placeholder-class='comment-edit' data-key='content' bindinput="onInput" value="{{contentInput}}"></input>
+    </view>
+    <view class='edit-smile' bindtap='submitBtn'>发送</view>
   </view>
-  <view class='edit-smile' bindtap='submitBtn'>提交</view>
-</view>
+</block>

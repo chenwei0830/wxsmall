@@ -12,7 +12,8 @@ Page({
         parent:null,
         openId:'',
         orgId:''
-      }
+      },
+      contentInput:'' //评论输入框默认为空
     },
     onLoad: function (option) {
       //获取作品详情
@@ -30,7 +31,7 @@ Page({
       })
       //初始化评论作品ID
       that.setData({
-        'commentOj.artWorkId': option.id,
+        'commentOj.artWorksId': option.id,
         'commentOj.openId': app.openId,
         'commentOj.orgId': app.orgId
       })
@@ -145,13 +146,17 @@ Page({
           if (res.data.code == '0') {
             console.log('评论成功')
           } else {
-            console.log('评论失败')
+            app.wxToast.warn('评论失败');
           }
         },
         fail: function (error) {
-          console.error(' 评论异常: ' + error);
+          app.wxToast.warn('网络异常');
         },
         complete: function () {}
+      })
+      //清除评论内容
+      this.setData({
+        contentInput:''
       })
     }
 })
