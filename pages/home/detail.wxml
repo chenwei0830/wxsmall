@@ -1,6 +1,5 @@
 <!--pages/home/detail.wxml-->
 <import src="/utils/tps/empty.wxml" />
-
 <view class='main-content bg-white'>
   <view class='main-header weui-flex align'>
     <view class='avatar' style='background-image:url({{detailObj.user.photo}})'></view>
@@ -10,10 +9,10 @@
       </view>
       <view class='weui-flex intro align' style='line-height:100%;'>
         <view class='grade countries mr-5' wx:if='{{detailObj.user.artLevel=="1"}}'></view>
-        <view class='grade province' wx:if='{{detailObj.user.artLevle=="2"}}'></view>
-        <view class='grade city mr-5' wx:if='{{detailObj.user.artLevle=="3"}}'></view>
-        <view class='grade county mr-5' wx:if='{{detailObj.user.artLevle=="4"}}'></view>
-        <view class='grade students' wx:if='{{detailObj.user.artLevle=="5"}}'></view>
+        <view class='grade province' wx:if='{{detailObj.user.artLevel=="2"}}'></view>
+        <view class='grade city mr-5' wx:if='{{detailObj.user.artLevel=="3"}}'></view>
+        <view class='grade county mr-5' wx:if='{{detailObj.user.artLevel=="4"}}'></view>
+        <view class='grade students' wx:if='{{!detailObj.user.artLevel}}'></view>
         <view class='weui-flex__item address'>{{detailObj.location}}</view>
       </view>
     </view>
@@ -31,7 +30,6 @@
             <image src='http://oj1itelvn.bkt.clouddn.com/test.jpg' mode='aspectFit' mode='aspectFill'></image>
             <view class='click'></view>
         </view> -->
-
     <swiper duration='800' circular='true' class='content-img' wx:if='{{detailObj.imgList}}'>
       <block wx:for="{{detailObj.imgList}}" wx:key='{{index}}'>
         <swiper-item style='position:relative'>
@@ -41,13 +39,13 @@
       </block>
     </swiper>
     <block wx:for="{{detailObj.videoList}}" wx:key='{{index}}'>
-      <video id="myVideo" src="{{item}}" controls poster="{{item+'?vframe/jpg/offset/0'}}" objectFit="cover">
-        <cover-view class='total-times'>5万次播放</cover-view>
+      <video id="myVideo" src="{{item}}" controls poster="{{item+'?vframe/jpg/offset/0'}}" objectFit="cover" show-play-btn show-center-play-btn="false">
+        <!-- <cover-view class='total-times'>5万次播放</cover-view> -->
       </video>
     </block>
     <view class='content-txt'>{{detailObj.textContent}}</view>
     <view class='weui-flex icon-wrap align'>
-      <view class='icon-heart {{content.is_keep?"active":""}}' bindtap='keep'></view>
+      <view class='icon-heart {{content.is_keep?"active":""}}' bindtap='keep' data-id='idxxxxxxxx'></view>
       <view class='weui-flex__item'>
         <view class='icon-talk'>{{detailObj.plNum}}</view>
       </view>
@@ -57,38 +55,24 @@
   </view>
 </view>
 <view class='comments-wrap'>
-  <view class='tab-wrap weui-flex'>
-    <view class='tab-item weui-flex__item tc {{current==1?"active":""}}' bindtap='currentClick' data-current='1'>艺术家评论({{detailObj.artCommmentList.length||0}})</view>
-    <view class='tab-item weui-flex__item tc {{current==2?"active":""}}' bindtap='currentClick' data-current='2'>普通评论({{detailObj.commonCommmentList.length||0}})</view>
-  </view>
-  <view class='commentaries weui-flex' wx:for='{{detailObj.artCommmentList}}' wx:key='{{index}}' wx:if='{{current==1}}'>
-    <view class='com-avatar' style='background-image:url({{item.photo}})'></view>
-    <view class='weui-flex__item'>
-      <view class='com-name'>
-        <text>{{item.nickName}}</text>
-        <text class='com-label'>{{item.artType}}</text>
-      </view>
-      <view class='com-time weui-flex align'>
-        <view class='weui-flex__item'>
-          <text>{{item.createDate}}</text>
-        </view>
-        <view class='com-like {{item.is_like?"active":""}}' data-index="{{index}}" bindtap='likeComment2'>{{item.dzNum}}</view>
-      </view>
-      <view class='com-content'>{{item.content}}</view>
-      <navigator url='reply-detail' hover-class='none' class='reply mt-5'>查看2条回复：</navigator>
-    </view>
-  </view>
+  <view class="pl-title">
+    <text class="pl-title-t"></text>热门评论</view>
 </view>
-<view class='commentaries weui-flex' wx:for='{{detailObj.commonCommmentList}}' wx:key='{{index}}' wx:if='{{current==2}}'>
+<view class='commentaries weui-flex' wx:for='{{detailObj.commentList}}' wx:key='{{index}}'>
   <view class='com-avatar' style='background-image:url({{item.photo}})'></view>
-  <view class='weui-flex__item'>
+  <view class='weui-flex__item pl-box'>
     <view class='com-name'>
       <text>{{item.nickName}}</text>
-      <text class='com-label'>{{item.artType}}</text>
+      <text class='ml-10'>{{item.createDate}}</text>
+      <!-- <text class='com-label'>{{item.artType}}</text> -->
     </view>
     <view class='com-time weui-flex align'>
       <view class='weui-flex__item'>
-        <text>{{item.createDate}}</text>
+        <view class='grade countries mr-5' wx:if='{{item.artLevel=="1"}}'></view>
+        <view class='grade province' wx:if='{{item.artLevel=="2"}}'></view>
+        <view class='grade city mr-5' wx:if='{{item.artLevel=="3"}}'></view>
+        <view class='grade county mr-5' wx:if='{{item.artLevel=="4"}}'></view>
+        <view class='grade students' wx:if='{{!item.artLevel}}'></view>
       </view>
       <view class='com-like {{item.is_like?"active":""}}' data-index="{{index}}" bindtap='likeComment1'>{{item.dzNum}}</view>
     </view>
@@ -96,12 +80,11 @@
     <navigator url='reply-detail' hover-class='none' class='reply mt-5'>查看24条回复：</navigator>
   </view>
 </view>
-<template is="empty" data="{{msg:'暂无数据'}}" wx:if="{{(!detailObj.artCommmentList && current==1)|| (!detailObj.commonCommmentList && current==2)}}"></template>
-
+<template is="empty" data="{{msg:'暂无评论'}}" wx:if="{{!detailObj.commentList}}"></template>
 <view style='height:130rpx;'></view>
 <view class='edit weui-flex align'>
   <view class='weui-flex__item edit-input'>
-    <input type='text' placeholder='写评论~' placeholder-class='comment-edit'></input>
+    <input type='text' placeholder='写评论~' placeholder-class='comment-edit' data-key='content' bindinput="onInput"></input>
   </view>
-  <view class='edit-smile'>提交</view>
+  <view class='edit-smile' bindtap='submitBtn'>提交</view>
 </view>

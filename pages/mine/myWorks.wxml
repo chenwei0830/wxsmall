@@ -26,7 +26,6 @@
             <view class="weui-uploader__file-content">
               <image src='http://p3mjvv81y.bkt.clouddn.com/icon_play.png' style='width:2.5rem;height:2.5rem;'></image>
             </view>
-
           </view>
         </block>
         <view class='keep-info weui-flex__item'>

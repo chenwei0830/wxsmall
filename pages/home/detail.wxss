@@ -266,7 +266,7 @@
 
 .commentaries {
     transform-origin: 0 0;
-    background: #fff;
+    background: #efefef;
     /* margin-top: 30rpx; */
     padding: 20rpx;
     /* position: relative; */
@@ -363,4 +363,16 @@
     width: 80rpx;
     color:#03b9bb;
     font-size:32rpx;
+}
+
+.pl-title{
+  padding:14px 15px 10px;color:#999;
+}
+
+.pl-title-t{
+  border-left:4px solid #03b9bb;padding-right:6px;
+}
+
+.pl-box{
+  border-bottom:1px solid #e2e9ec;
 }

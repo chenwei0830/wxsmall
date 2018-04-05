@@ -5,7 +5,14 @@ Page({
      */
     data: {
       detailObj:null,
-      current: 1
+      current: 1,
+      commentOj:{   //评论
+        artWorksId:'',
+        content:'',
+        parent:null,
+        openId:'',
+        orgId:''
+      }
     },
     onLoad: function (option) {
       //获取作品详情
@@ -21,11 +28,12 @@ Page({
           console.log(that.data.detailObj)
         }
       })
-    },
-    currentClick(evt){
-        this.setData({
-            current: evt.currentTarget.dataset.current
-        })
+      //初始化评论作品ID
+      that.setData({
+        'commentOj.artWorkId': option.id,
+        'commentOj.openId': app.openId,
+        'commentOj.orgId': app.orgId
+      })
     },
 
     watch(evt){
@@ -49,8 +57,34 @@ Page({
         })
     },
     keep(evt){
-        this.setData({
-            "content.is_keep": !this.data.content.is_keep
+        console.log(evt)
+        console.log(evt.currentTarget.dataset)
+        console.log(evt.currentTarget.dataset.id)
+        // this.setData({
+        //     "content.is_keep": !this.data.content.is_keep
+        // })
+        var obj = {}
+        obj.openId = ''
+        id = ''
+        wx.request({
+          url: that.apiUrl + '/api/login',
+          data: JSON.stringify(userObj),
+          dataType: 'json',
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == '0') {
+              console.log('登录成功')
+            } else {
+              console.log('登录失败')
+            }
+
+          },
+          fail: function (error) {
+            console.error(' 登录异常: ' + error);
+          },
+          complete: function () {
+            wx.hideLoading()
+          }
         })
     },
     likeComment1(evt){
@@ -75,4 +109,49 @@ Page({
             current
         })
     },
+    //评论
+    onInput: function (evt) {
+      var val = evt.detail.value;
+      this.setData({
+        'commentOj.content': val
+      })
+
+    },
+    //提交
+    submitBtn(){
+      console.log(this.data.detailObj.commentList)
+      var commentList = this.data.detailObj.commentList || []
+      var newComment = {}
+      newComment.photo = app.user.avatarUrl
+      newComment.nickName = app.user.nickName
+      newComment.artType = app.user.artType
+      newComment.artLevel = app.user.artLevel
+      newComment.dzNum = 1
+      newComment.content = this.data.commentOj.content
+      newComment.createDate = '刚刚'
+      commentList.push(newComment)
+
+      this.setData({
+        'detailObj.commentList': commentList
+      })
+      //保存评论
+      var that = this
+      wx.request({
+        url: app.apiUrl + '/api/saveComment',
+        data: JSON.stringify(that.data.commentOj),
+        dataType: 'json',
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == '0') {
+            console.log('评论成功')
+          } else {
+            console.log('评论失败')
+          }
+        },
+        fail: function (error) {
+          console.error(' 评论异常: ' + error);
+        },
+        complete: function () {}
+      })
+    }
 })
