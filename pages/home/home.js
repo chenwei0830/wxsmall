@@ -1,5 +1,6 @@
 // pages/home/home.js
 let catScrollLeft = 0
+const app = getApp()
 Page({
   data: {
     current: -1,
@@ -224,6 +225,56 @@ Page({
     //此处请求接口
     const { pos } = evt.currentTarget.dataset
     const { is_keep } = this.data.category[pos[0]].content[pos[1]]
+
+    var collectObj = {}
+    collectObj.openId = 'o7tbx0KPXyVui_VUg9YgK4UauIWc'
+    collectObj.artWorksId = '0960b514154d48c491c5711d2f944a7a'
+    collectObj.orgId = app.orgId
+    if (is_keep === 0 || !is_keep){//收藏
+      collectObj.type = 1
+      wx.request({
+        url: app.apiUrl + '/api/collectArtworks',
+        data: JSON.stringify(collectObj),
+        dataType: 'json',
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == '0') {
+            console.log('收藏成功')
+          } else {
+            console.log('收藏失败')
+          }
+
+        },
+        fail: function (error) {
+          console.error(' 收藏异常: ' + error);
+        },
+        complete: function () {
+          wx.hideLoading()
+        }
+      })
+    } else {//取消收藏
+      collectObj.type = 0
+      wx.request({
+        url: app.apiUrl + '/api/collectArtworks',
+        data: JSON.stringify(collectObj),
+        dataType: 'json',
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == '0') {
+            console.log('取消收藏成功')
+          } else {
+            console.log('取消收藏失败')
+          }
+
+        },
+        fail: function (error) {
+          console.error('取消收藏异常: ' + error);
+        },
+        complete: function () {
+          wx.hideLoading()
+        }
+      })
+    }
     this.setData({
       [`category[${pos[0]}].content[${pos[1]}].is_keep`]: !is_keep
     })
