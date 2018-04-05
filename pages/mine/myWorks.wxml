@@ -13,7 +13,6 @@
     </view>
   </view>
 </view>
-
 <view class='mt-10 bg-white'>
   <navigator url='/pages/home/detail?id={{item.id}}' hover-class='none' class='keep-list' wx:for='{{list}}' wx:key='{{index}}'>
     <view class='keep-item'>

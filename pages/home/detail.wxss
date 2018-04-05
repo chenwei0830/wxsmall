@@ -56,23 +56,23 @@
 }
 
 .grade.province {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-sj.png);
+    background-image: url(http://p3mjvv81y.bkt.clouddn.com/artlevel/icon-sj.png);
 }
 
 .grade.countries {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-gj.png);
+    background-image: url(http://p3mjvv81y.bkt.clouddn.com/artlevel/icon-gj.png);
 }
 
 .grade.city {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-szj.png);
+    background-image: url(http://p3mjvv81y.bkt.clouddn.com/artlevel/icon-szj.png);
 }
 
 .grade.county {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-xqj.png);
+    background-image: url(http://p3mjvv81y.bkt.clouddn.com/artlevel/icon-xqj.png);
 }
 
 .grade.students {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-xy.png);
+    background-image: url(http://p3mjvv81y.bkt.clouddn.com/artlevel/icon-xy.png);
 }
 
 .user-wrap {
@@ -221,6 +221,20 @@
     line-height: 40rpx;
     text-align: center;
 }
+
+.total-times {
+    position: absolute;
+    bottom: 14rpx;
+    color: #fff;
+    width: 220rpx;
+    min-width: 200rpx;
+    height: 40rpx;
+    border-radius: 35rpx;
+    font-size: 26rpx;
+    line-height: 40rpx;
+    text-align: center;
+}
+
 
 .comments-wrap {
     background: #fff;

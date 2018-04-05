@@ -14,7 +14,8 @@ Page({
     levelList: [],//艺术级别
     post: {},//表单
     checked: true,
-    sslList: []
+    sslList: [],
+    authCode:null //验证码
   },
   onLoad() {
     //计算图片展示大小
@@ -93,7 +94,27 @@ Page({
     codeTime--
     this.setData({ codeTime })
     //获取验证码接口
-    console.log("get-code")
+    var that = this
+    // wx.request({
+    //   url: app.apiUrl + '/api/getAuthCode',
+    //   data: { 'phone': that.data.post.phone},
+    //   dataType: 'json',
+    //   method: 'GET',
+    //   success: function (res) {
+    //     if (res.data.code != '-1') {
+    //       that.setData({
+    //         'authCode': res.data.code
+    //       })
+    //     } else {
+    //       app.wxToast.error('服务器开小差了..');
+    //     }
+    //   },
+    //   fail: function (error) {
+    //     console.error('获取短信验证码失败: ' + error);
+    //   },
+    //   complete: function () {
+    //   }
+    // })
     //倒计时
     var tid = setInterval(() => {
       codeTime--
@@ -156,6 +177,11 @@ Page({
     if (!post.code) {
       app.wxToast.warn('请输入短信验证码');
       return;
+    }else{
+      // if (post.code != this.data.authCode){
+      //   app.wxToast.warn('验证码输入有误');
+      //   return;
+      // }
     }
     if (post.artType === undefined) {
       app.wxToast.warn('请选择您的专业分类');
