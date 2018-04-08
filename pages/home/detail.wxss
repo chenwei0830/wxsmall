@@ -375,4 +375,5 @@
 
 .pl-box{
   border-bottom:1px solid #e2e9ec;
+  padding-bottom:10px;
 }

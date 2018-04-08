@@ -47,10 +47,10 @@ const tabbar = {
 }
 App({
   onLaunch: function () {
-    var openid = wx.getStorageInfoSync("openid") || ''
+    var openid = wx.getStorageSync("openid") || ''
     var that = this
-
-    if (openid) {
+    console.log(openid+"--------openid")
+    if (openid=='') {
       //缓存中未获取到openId,则重新获取
       wx.login({
         success: function (res) {
@@ -67,46 +67,6 @@ App({
                 } else {
                   that.openId = res.data.data.openid //赋值全局
                   wx.setStorageSync('openid', res.data.data.openid) //放入缓存
-                  wx.showLoading({
-                    title: '加载中...',
-                  })
-                  wx.getUserInfo({
-                    success: info => {
-                      //将用户信息全局保存
-                      that.user = info.userInfo
-                      //登录注册
-                      var userObj = {}
-                      userObj.openId = that.openId
-                      userObj.orgId = that.orgId
-                      userObj.nickName = info.userInfo.nickName
-                      userObj.photo = info.userInfo.avatarUrl
-                      userObj.gender = info.userInfo.gender
-                      userObj.city = info.userInfo.city
-                      userObj.province = info.userInfo.province
-                      userObj.country = info.userInfo.country
-                      userObj.language = info.userInfo.language
-                      wx.request({
-                        url: that.apiUrl + '/api/login',
-                        data: JSON.stringify(userObj),
-                        dataType: 'json',
-                        method: 'POST',
-                        success: function (res) {
-                          if (res.data.code == '0') {
-                            console.log('登录成功')
-                          } else {
-                            console.log('登录失败')
-                          }
-
-                        },
-                        fail: function (error) {
-                          console.error(' 登录异常: ' + error);
-                        },
-                        complete: function () {
-                          wx.hideLoading()
-                        }
-                      })
-                    }
-                  })
                 }
 
               },
@@ -118,8 +78,53 @@ App({
         }
       })
     } else {
-      this.openid = openid
+      this.openId = openid
     }
+    ////登录注册
+    wx.showLoading({
+      title: '加载中...',
+    })
+    wx.getUserInfo({
+      success: info => {
+        //将用户信息全局保存
+        that.user = info.userInfo
+        var userObj = {}
+        userObj.openId = that.openId
+        userObj.orgId = that.orgId
+        userObj.nickName = info.userInfo.nickName
+        userObj.photo = info.userInfo.avatarUrl
+        userObj.gender = info.userInfo.gender
+        userObj.city = info.userInfo.city
+        userObj.province = info.userInfo.province
+        userObj.country = info.userInfo.country
+        userObj.language = info.userInfo.language
+
+        wx.request({
+          url: that.apiUrl + '/api/login',
+          data: JSON.stringify(userObj),
+          dataType: 'json',
+          method: 'POST',
+          success: function (res) {
+            console.log(res.data)
+            if (res.data.code == '0') {
+              //登录后覆盖原用户信息
+              that.user.artType = res.data.data.artType
+              that.user.artLevel = res.data.data.artLevel
+              console.log('登录成功')
+            } else {
+              console.log('登录失败')
+            }
+          },
+          fail: function (error) {
+            console.error(' 登录异常: ' + error);
+          },
+          complete: function () {
+            wx.hideLoading()
+            console.log(that.user)
+          }
+        })
+      }
+    })
   },
   wxToast,
   editTabBar: function () {
@@ -133,9 +138,9 @@ App({
       tabbar
     })
   },
-  apiUrl: 'http://localhost:8080/sourthArtSys',//接口地址 https://www.chenqimao.com/sourthArtSys
+  apiUrl: 'https://www.chenqimao.com/sourthArtSys',//接口地址 http://localhost:8080/sourthArtSys
   user: null,//用户信息
-  openId: 'o7tbx0EouVhlljZ6sOGNz1Xx3PkY',//用户唯一标识  o7tbx0EouVhlljZ6sOGNz1Xx3PkY
+  openId: '',//用户唯一标识  
   orgId: '2',//组织机构ID
 
   requireHttp() {

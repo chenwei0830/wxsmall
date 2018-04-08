@@ -124,3 +124,32 @@
     text-align: center;
     font-size: 32rpx;
 }
+.grade {
+    width: 86rpx;
+    height: 28rpx;
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* margin-right:10rpx; */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.grade.province {
+    background-image: url(http://p3mjvv81y.bkt.clouddn.com/artlevel/icon-sj.png);
+}
+
+.grade.countries {
+    background-image: url(http://p3mjvv81y.bkt.clouddn.com/artlevel/icon-gj.png);
+}
+
+.grade.city {
+    background-image: url(http://p3mjvv81y.bkt.clouddn.com/artlevel/icon-szj.png);
+}
+
+.grade.county {
+    background-image: url(http://p3mjvv81y.bkt.clouddn.com/artlevel/icon-xqj.png);
+}
+
+.grade.students {
+    background-image: url(http://p3mjvv81y.bkt.clouddn.com/artlevel/icon-xy.png);
+}

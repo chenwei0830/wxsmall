@@ -8,10 +8,10 @@
         <text class='s-title'>{{detailObj.user.artType}}</text>
       </view>
       <view class='weui-flex intro align' style='line-height:100%;'>
-        <view class='grade countries mr-5' wx:if='{{detailObj.user.artLevel=="1"}}'></view>
-        <view class='grade province' wx:if='{{detailObj.user.artLevel=="2"}}'></view>
-        <view class='grade city mr-5' wx:if='{{detailObj.user.artLevel=="3"}}'></view>
-        <view class='grade county mr-5' wx:if='{{detailObj.user.artLevel=="4"}}'></view>
+        <view class='grade countries mr-5' wx:if='{{detailObj.user.artLevel=="0"}}'></view>
+        <view class='grade province' wx:if='{{detailObj.user.artLevel=="1"}}'></view>
+        <view class='grade city mr-5' wx:if='{{detailObj.user.artLevel=="2"}}'></view>
+        <view class='grade county mr-5' wx:if='{{detailObj.user.artLevel=="3"}}'></view>
         <view class='grade students' wx:if='{{!detailObj.user.artLevel}}'></view>
         <view class='weui-flex__item address'>{{detailObj.location}}</view>
       </view>
@@ -45,11 +45,11 @@
     </block>
     <view class='content-txt'>{{detailObj.textContent}}</view>
     <view class='weui-flex icon-wrap align'>
-      <view class='icon-heart {{content.is_keep?"active":""}}' bindtap='keep' data-id='idxxxxxxxx'></view>
+      <view class='icon-heart {{detailObj.hasCollected>0?"active":""}}' bindtap='collectBtn' data-id='idxxxxxxxx'></view>
       <view class='weui-flex__item'>
         <view class='icon-talk'>{{detailObj.plNum}}</view>
       </view>
-      <view class='icon-like {{content.is_like?"active":""}}' bindtap='like'>{{detailObj.dzNum}}</view>
+      <view class='icon-like {{detailObj.hasDz>0?"active":""}}' bindtap='like'>{{detailObj.dzNum}}</view>
       <view class='icon-share'></view>
     </view>
   </view>
@@ -69,13 +69,13 @@
       </view>
       <view class='com-time weui-flex align'>
         <view class='weui-flex__item'>
-          <view class='grade countries mr-5' wx:if='{{item.artLevel=="1"}}'></view>
-          <view class='grade province' wx:if='{{item.artLevel=="2"}}'></view>
-          <view class='grade city mr-5' wx:if='{{item.artLevel=="3"}}'></view>
-          <view class='grade county mr-5' wx:if='{{item.artLevel=="4"}}'></view>
+          <view class='grade countries mr-5' wx:if='{{item.artLevel=="0"}}'></view>
+          <view class='grade province' wx:if='{{item.artLevel=="1"}}'></view>
+          <view class='grade city mr-5' wx:if='{{item.artLevel=="2"}}'></view>
+          <view class='grade county mr-5' wx:if='{{item.artLevel=="3"}}'></view>
           <view class='grade students' wx:if='{{!item.artLevel}}'></view>
         </view>
-        <view class='com-like {{item.is_like?"active":""}}' data-index="{{index}}" bindtap='likeComment1'>{{item.dzNum}}</view>
+        <view class='com-like {{item.hasDz>0?"active":""}}' catchtap='likeComment' data-index="{{index}}">{{item.dzNum}}</view>
       </view>
       <view class='com-content'>{{item.content}}</view>
       <view class='reply mt-5' wx:if="{{item.msgNum>0}}">查看{{item.msgNum}}条回复:</view>
@@ -87,7 +87,7 @@
   <view style='height:130rpx;'></view>
   <view class='edit weui-flex align'>
     <view class='weui-flex__item edit-input'>
-      <input type='text' placeholder='说的什么吧~' placeholder-class='comment-edit' data-key='content' bindinput="onInput" value="{{contentInput}}"></input>
+      <input type='text' placeholder='说点什么吧~' placeholder-class='comment-edit' data-key='content' bindinput="onInput" value="{{contentInput}}"></input>
     </view>
     <view class='edit-smile' bindtap='submitBtn'>发送</view>
   </view>

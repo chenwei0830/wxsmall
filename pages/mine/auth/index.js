@@ -95,26 +95,26 @@ Page({
     this.setData({ codeTime })
     //获取验证码接口
     var that = this
-    // wx.request({
-    //   url: app.apiUrl + '/api/getAuthCode',
-    //   data: { 'phone': that.data.post.phone},
-    //   dataType: 'json',
-    //   method: 'GET',
-    //   success: function (res) {
-    //     if (res.data.code != '-1') {
-    //       that.setData({
-    //         'authCode': res.data.code
-    //       })
-    //     } else {
-    //       app.wxToast.error('服务器开小差了..');
-    //     }
-    //   },
-    //   fail: function (error) {
-    //     console.error('获取短信验证码失败: ' + error);
-    //   },
-    //   complete: function () {
-    //   }
-    // })
+    wx.request({
+      url: app.apiUrl + '/api/getAuthCode',
+      data: { 'phone': that.data.post.phone},
+      dataType: 'json',
+      method: 'GET',
+      success: function (res) {
+        if (res.data.code != '-1') {
+          that.setData({
+            'authCode': res.data.code
+          })
+        } else {
+          app.wxToast.error('服务器开小差了..');
+        }
+      },
+      fail: function (error) {
+        console.error('获取短信验证码失败: ' + error);
+      },
+      complete: function () {
+      }
+    })
     //倒计时
     var tid = setInterval(() => {
       codeTime--
@@ -178,10 +178,10 @@ Page({
       app.wxToast.warn('请输入短信验证码');
       return;
     }else{
-      // if (post.code != this.data.authCode){
-      //   app.wxToast.warn('验证码输入有误');
-      //   return;
-      // }
+      if (post.code != this.data.authCode){
+        app.wxToast.warn('验证码输入有误');
+        return;
+      }
     }
     if (post.artType === undefined) {
       app.wxToast.warn('请选择您的专业分类');
@@ -223,17 +223,21 @@ Page({
       method: 'POST',
       success: function (res) {
         if (res.data.code == '0') {
+          //修改全局user信息
+          app.user.artLevel = obj.artLevel
+          app.user.artType = obj.artType
           //跳转到 tabBar个人中心页
           wx.reLaunch({
             url: '../../mine/mine'
           })
         } else {
-          app.wxToast.error(res.data.msg);
+          // app.wxToast.error(res.data.msg);
+          app.wxToast.warn('信息填写有误');
         }
 
       },
       fail: function (error) {
-        console.error('qiniu UploadToken is null, please check the init config or networking: ' + error);
+        console.error('系统异常： ' + error);
       },
       complete: function () {
         wx.hideLoading()

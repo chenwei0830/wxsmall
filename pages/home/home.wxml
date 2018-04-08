@@ -8,8 +8,8 @@
 </view>
 <view class="classname" style="height:50px;"></view>
 
-<view wx:for="{{category}}" hidden="{{current!=index}}">
-    <navigator url='detail?id={{cell.id}}' hover-class='none' class='main-content bg-white' wx:for="{{item.content}}" wx:for-item="cell" wx:for-index="index2">
+<view wx:for="{{category}}" hidden="{{current!=index}}" wx:key="{{i-k}}">
+    <navigator url='detail?id={{cell.id}}' hover-class='none' class='main-content bg-white' wx:for="{{item.content}}" wx:for-item="cell" wx:for-index="index2" wx:key="{{i-k}}">
         <view class='main-header weui-flex'>
             <view class='avatar' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/timg.jpg)'></view>
             <view class='user-wrap weui-flex__item'>
@@ -47,7 +47,7 @@
             </view>
             <!-- <view class='commentaries' hidden='{{!cell.is_comment}}'> -->
             <view class='commentaries'>
-                <view class='weui-flex pd-10' wx:for='{{cell.commentList}}' wx:for-item='comment' wx:for-index="index3">
+                <view class='weui-flex pd-10' wx:for='{{cell.commentList}}' wx:for-item='comment' wx:for-index="index3" wx:key="{{i-k}}">
                     <view class='com-avatar' style='background-image:url({{comment.avatar}})'></view>
                     <view class='weui-flex__item'>
                         <view class='com-name'>{{comment.name}}

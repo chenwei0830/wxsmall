@@ -9,8 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.91",
-	"appid": "",
-	"projectname": "ART_TEST",
+	"appid": "wx81cfb6b3dcba2164",
+	"projectname": "ART_GITHUB",
 	"condition": {
 		"search": {
 			"current": -1,

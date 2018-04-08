@@ -1,9 +1,18 @@
 <!--pages/mine/mine.wxml-->
 <view class='header bg-white'>
     <navigator url='set' hover-class='none' class='avatar' style='background-image:url({{user.avatarUrl||"http://oj1itelvn.bkt.clouddn.com/art/icon-avatar4.png"}})'></navigator>
-    <view class='name tc'>{{user.nickName || "未知"}}</view>
+    <view class='name tc'>{{user.nickName || "未知"}} 
+      <block wx:if="{{user.artLevel}}">
+        <view class='grade countries mr-5' wx:if='{{user.artLevel=="0"}}'></view>
+        <view class='grade province' wx:if='{{user.artLevel=="1"}}'></view>
+        <view class='grade city mr-5' wx:if='{{user.artLevel=="2"}}'></view>
+        <view class='grade county mr-5' wx:if='{{user.artLevel=="3"}}'></view>
+        <view class='grade students' wx:if='{{!user.artLevel}}'></view>
+      </block> 
+    </view>
     <view class='level tc' wx:if="{{!user}}">游客</view>
-    <navigator url='auth/index' hover-class='none' class='btn tc' wx:if="{{mineObj.authCount==0}}" >进行艺术认证</navigator>
+    <navigator url='auth/index' hover-class='none' class='btn tc' wx:if="{{mineObj.authCount==0}}">
+    {{user.artLevel?'再次认证':'进行艺术认证'}}</navigator>
     <view hover-class='none' class='btn tc' wx:else >认证申请审核中</view>
 </view>
 

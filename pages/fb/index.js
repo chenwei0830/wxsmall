@@ -146,6 +146,28 @@ Page({
         console.error('获取艺术类别和艺术等级失败...: ' + error);
       }
     })
+    //判断是否已认证
+    if (app.user.artLevel === undefined || app.user.artLevel==null || app.user.artLevel==''){
+      wx.showModal({
+        title: '温馨提示',
+        content: '只有通过认证的艺术家才能发布作品',
+        confirmText: '立即认证',
+        cancelText: '返回',
+        success: function (res) {
+          if (res.confirm) {
+            //跳转到 tabBar个人中心页
+            wx.reLaunch({
+              url: '../mine/mine'
+            })
+          } else if (res.cancel) {
+            wx.reLaunch({
+              url: '../home/home'
+            })
+          }
+        }
+      })
+
+    }
   },
   setCurrent(evt) {
     const { current } = evt.currentTarget.dataset
@@ -311,10 +333,10 @@ Page({
       getApp().wxToast.warn("请选择艺术分类")
       return
     }
-    if (!postData.location) {
-      getApp().wxToast.warn("请选择位置")
-      return
-    }
+    // if (!postData.location) {
+    //   getApp().wxToast.warn("请选择位置")
+    //   return
+    // }
     wx.showLoading({
       title: '正在提交.....',
     })
