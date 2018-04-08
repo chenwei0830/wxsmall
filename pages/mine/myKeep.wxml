@@ -1,14 +1,14 @@
 <!--pages/mine/myKeep.wxml-->
 <import src="/utils/tps/empty.wxml" />
 
-<view class="category">
+<!-- <view class="category">
     <scroll-view scroll-x="true" class='' bindscroll="onCatScroll" id="cat">
         <text wx:for="{{category}}" wx:key="item" data-id='{{item.id}}' id="cat{{item.id}}" bindtap='clickCategory' class='item {{!hasQuery?"q":""}} {{cid==item.id?"active":""}}'>{{item.name}}</text>
         <text class='cat-tag' style="left:{{tag.left}}px;width:{{tag.width}}px"></text>
     </scroll-view>
-</view>
+</view> -->
 
-<view style='height:100rpx;'></view>
+<!-- <view style='height:100rpx;'></view>
 <view wx:for="{{category}}" bindtouchstart='onStart' bindtouchmove='onMove' bindtouchend='onEnd' data-index="{{index}}" style='position:relative;overflow:hidden;' class='container'>
     <view class='art-list bg-white' style='transform:translateX({{item.pos}}vw)'>
         <navigator url='/pages/home/detail?id={{item.id}}' hover-class='none' class='keep-item border_top1' wx:for='{{item.content}}' wx:for-item='cell' wx:key='{{index2}}'>
@@ -17,10 +17,10 @@
                 <view class='keep-info weui-flex__item'>
                     <view class='title'>{{cell.title}}</view>
                     <view class='intro'>{{cell.intro}}</view>
-                    <view class='weui-flex icon-wrap align'>
+                    <view class='weui-flex icon-wrap align'> -->
                         <!-- <view class='icon-like {{cell.is_like?"active":""}}' bindtap='bindLike'>1</view>        
           <view class='icon-talk' bindtap='commentClick' data-pos="{{[index,index2]}}">10</view> -->
-                        <view class='' style='margin-right:40rpx;'>
+                        <!-- <view class='' style='margin-right:40rpx;'>
                             <text class='icon-like'></text>
                             <text class='icon-txt ml-5'>1</text>
                         </view>
@@ -40,4 +40,48 @@
     <view class='action weui-flex' style='transform:translateX({{item.pos}}vw)' catchtap='watch' data-index="{{index}}">
         <view class='weui-flex__item tc' bindtap='delClick'>删除</view>
     </view>
+</view> -->
+
+<view class='mt-10 bg-white'>
+  <navigator url='/pages/home/detail?id={{item.id}}' hover-class='none' class='keep-list' wx:for='{{list}}' wx:key='{{index}}'>
+    <view class='keep-item'>
+      <view class='content weui-flex'>
+        <block wx:if="{{item.modelType==0 || item.modelType==2}}">
+          <view class='keep-img' style='background-image:url({{item.mediaUrl || "http://p3mjvv81y.bkt.clouddn.com/wx.jpg" }})'></view>
+        </block>
+        <block wx:if="{{item.modelType==1}}">
+          <!-- 视频第一帧 -->
+          <view class='keep-img' style='position: relative;background-image:url({{item.mediaUrl+"?vframe/jpg/offset/0"}})'>
+            <view class="weui-uploader__file-content">
+              <image src='http://p3mjvv81y.bkt.clouddn.com/icon_play.png' style='width:2.5rem;height:2.5rem;'></image>
+            </view>
+          </view>
+        </block>
+        <view class='keep-info weui-flex__item'>
+          <view class='title'>{{item.title}}</view>
+          <view class='intro'>{{item.content}}</view>
+          <view class='weui-flex icon-wrap align'>
+            <block wx:if="{{item.status=='1'}}">
+              <view class='' style='margin-right:40rpx;'>
+                <text class='icon-like'></text>
+                <text class='icon-txt ml-5'>{{item.dzNum}}</text>
+              </view>
+              <view class=''>
+                <text class='icon-talk'></text>
+                <text class='icon-txt ml-5'>{{item.plNum}}</text>
+              </view>
+            </block>
+            <block wx:if="{{item.status=='0'}}">
+              <view class='' style='margin-right:40rpx;'>
+                <text style='color:red;'>待审核</text>
+              </view>
+            </block>
+            <view class='keep-time weui-flex__item tr'>
+              <text>{{item.createDate}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </navigator>
 </view>
