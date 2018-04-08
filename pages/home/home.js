@@ -228,7 +228,7 @@ Page({
 
     var collectObj = {}
     collectObj.openId = 'o7tbx0KPXyVui_VUg9YgK4UauIWc'
-    collectObj.artWorksId = '0960b514154d48c491c5711d2f944a7a'
+    collectObj.artWorksId = '828d882ea22347c6801c375c0d6b1509'
     collectObj.orgId = app.orgId
     if (is_keep === 0 || !is_keep){//收藏
       collectObj.type = 1
