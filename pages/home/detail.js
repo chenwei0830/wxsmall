@@ -9,10 +9,33 @@ Page({
     contentInput: '', //评论输入框默认为空
     contentPL:'',     //评论内容
     parentPLId:null,  //父类评论ID（针对回复评论使用）
+    imgheights:[],
+    scrollWidth: 0,
+    current:0,
+    musicObj:{
+      musicSrc:'http://p3mjvv81y.bkt.clouddn.com/music/%E4%B8%A2%E7%81%AB%E8%BD%A6%E4%B9%90%E9%98%9F%20-%20%E6%99%9A%E5%AE%89.mp3',
+      musicName:'晚安',
+      musicAuthor:'丢火车乐队',
+      musicPoster:'http://p3mjvv81y.bkt.clouddn.com/music/image/music.jpg'
+    }
   },
   onLoad: function (option) {
     //获取作品详情
     var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        //获取屏幕的宽度并保存
+        that.setData({
+          scrollWidth: res.windowWidth
+        })
+
+        console.log(res.model)
+        console.log(res.pixelRatio)
+        console.log(res.windowWidth +"---可使用窗口宽度")
+        console.log(res.windowHeight + "---可使用窗口高度")
+        console.log(res.statusBarHeight + "---状态栏的高度")
+      }
+    })
     wx.request({
       url: app.apiUrl + '/api/getArtWorksDetail',
       data: { id: option.id, openId: app.openId },
@@ -29,6 +52,12 @@ Page({
     that.setData({
       'currentArtWorksId': option.id
     })
+    //初始化背景音乐
+    // wx.playBackgroundAudio({
+    //   dataUrl: 'http://p3mjvv81y.bkt.clouddn.com/music/%E4%B8%A2%E7%81%AB%E8%BD%A6%E4%B9%90%E9%98%9F%20-%20%E6%99%9A%E5%AE%89.mp3',
+    //   title: '',
+    //   coverImgUrl: ''
+    // })
   },
 
   /**
@@ -191,5 +220,30 @@ Page({
     this.setData({
       contentInput: ''
     })
+  },
+  //图片高度自适应  等比缩放图片并保存
+  imageLoad: function (e) {
+    //获取图片真实宽度  
+    var imgwidth = e.detail.width
+    var imgheight = e.detail.height
+      //宽高比  
+    var ratio = imgwidth / imgheight;
+    console.log(ratio);
+    //计算的高度值  
+
+    var viewHeight = parseInt(this.data.scrollWidth) / ratio;
+    var imgheight = viewHeight.toFixed(0);
+    var imgheightarray = this.data.imgheights;
+    //把每一张图片的高度记录到数组里
+    imgheightarray.push(imgheight);
+    
+    this.setData({
+      imgheights: imgheightarray,
+    });
+    console.log(this.data.imgheights)
+  },
+  bindchange: function (e) {
+    // console.log(e.detail.current)
+    this.setData({ current: e.detail.current })
   }
 })

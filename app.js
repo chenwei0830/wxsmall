@@ -15,7 +15,7 @@ const tabbar = {
     },
     {
       pagePath: "/pages/art/artist",
-      text: "艺术家",
+      text: "艺术名片",
       iconPath: "/assets/icon/nav-art.png",
       selectedIconPath: "/assets/icon/nav-art2.png",
       selected: false
@@ -29,7 +29,7 @@ const tabbar = {
     },
     {
       pagePath: "/pages/msg/msg",
-      text: "消息",
+      text: "本馆资讯",
       iconPath: "/assets/icon/nav-talk.png",
       selectedIconPath: "/assets/icon/nav-talk2.png",
       selected: false,
@@ -49,7 +49,6 @@ App({
   onLaunch: function () {
     var openid = wx.getStorageSync("openid") || ''
     var that = this
-    console.log(openid+"--------openid")
     if (openid=='') {
       //缓存中未获取到openId,则重新获取
       wx.login({

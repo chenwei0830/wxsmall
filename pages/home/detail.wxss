@@ -107,7 +107,7 @@
 
 .main-content .content .content-img {
     width: 100%;
-    height: 420rpx;
+    /* height: 420rpx; */
     margin-top: 20rpx;
     position: relative
 }
@@ -202,7 +202,7 @@
 }
 
 #myVideo {
-    height: 420rpx;
+    height: 560rpx;
     width: 100%;
 }
 
@@ -282,7 +282,15 @@
     background-repeat: no-repeat;
     margin-right: 26rpx;
 }
-
+.com-header-avatar {
+    width:60rpx;
+    height:60rpx;
+    border-radius:50%;
+    border:1rpx solid #fff;
+    background-size:cover;
+    background-repeat:no-repeat;
+    margin-right:-8rpx;
+}
 .commentaries .com-name {
     color: #999;
     font-size: 28rpx;
@@ -366,7 +374,7 @@
 }
 
 .pl-title{
-  padding:14px 15px 10px;color:#999;
+  padding:24rpx;color:#999;
 }
 
 .pl-title-t{
@@ -376,4 +384,9 @@
 .pl-box{
   border-bottom:1px solid #e2e9ec;
   padding-bottom:10px;
+}
+
+.swiper image {
+  width: 100%;
+  height: auto;
 }

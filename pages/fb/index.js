@@ -202,22 +202,25 @@ Page({
         wx.showLoading({
           title: '上传中...',
         })
-        var filePath = res.tempFilePaths[0];
-        // 交给七牛上传
-        qiniuUploader.upload(filePath, (res) => {
-          var imgList = this.data.imgObj.imgList
-          imgList.push(res.imageURL)
-          this.setData({
-            'imgObj.imgList': imgList,
-          })
-          wx.hideLoading()
-        }, (error) => {
-          console.error('error: ' + JSON.stringify(error));
-          wx.hideLoading()
-        });
-         
+        console.log(res.tempFilePaths)
+       
+        for (var i = 0; i < res.tempFilePaths.length;i++){
+          var filePath = res.tempFilePaths[i];
+          // 交给七牛上传
+          qiniuUploader.upload(filePath, (res) => {
+            var imgList = this.data.imgObj.imgList
+            imgList.push(res.imageURL)
+            this.setData({
+              'imgObj.imgList': imgList,
+            })
+          }, (error) => {
+            console.error('error: ' + JSON.stringify(error));
+          });
+        }
       },
-      complete: function(){}
+      complete: function(){
+        wx.hideLoading()
+      }
     })
   },
   chooseVideo() {

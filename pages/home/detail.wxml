@@ -22,24 +22,24 @@
   </view>
   <view class='content'>
     <!-- 背景音乐 -->
-    <!-- <view class='music mt-5 tc'>
-          <audio poster="{{content.music.image}}" name="{{content.music.name}}" author="{{content.music.author}}" src="{{content.music.src}}" id="myAudio" controls loop='true' class='tl'></audio>
-      </view> -->
+     <!-- <view class='music mt-5 tc'>
+          <audio poster="{{musicObj.musicPoster}}" name="{{musicObj.musicName}}" author="{{musicObj.musicAuthor}}" src="{{musicObj.musicSrc}}" id="myAudio" loop controls class='tl'></audio>
+      </view>  -->
     <view class='content-txt'>{{detailObj.title}}</view>
     <!-- <view class='content-img' wx:if='{{content.image}}'>
             <image src='http://oj1itelvn.bkt.clouddn.com/test.jpg' mode='aspectFit' mode='aspectFill'></image>
             <view class='click'></view>
         </view> -->
-    <swiper duration='800' circular='true' class='content-img' wx:if='{{detailObj.imgList}}'>
-      <block wx:for="{{detailObj.imgList}}" wx:key='{{index}}'>
-        <swiper-item style='position:relative'>
-          <image src="{{item}}" class="slide-image" width="100%" height="100%" bindtap="preImg" data-imgs="{{detailObj.imgList}}" data-current="{{item}}" />
+    <swiper duration='800' circular='true' class='content-img' wx:if='{{detailObj.imgList}}' style='height:{{imgheights[current]}}px;' bindchange="bindchange" autoplay >
+      <block wx:for='{{detailObj.imgList}}' wx:key='{{index}}'>
+        <swiper-item >
+          <image src="{{item}}" class="slide-image" width="100%" height="100%" bindtap="preImg" data-imgs="{{detailObj.imgList}}" data-current="{{item}}"  bindload="imageLoad"/>
           <view class='click'>{{index+1}}/{{detailObj.imgList.length}}</view>
         </swiper-item>
       </block>
     </swiper>
     <block wx:for="{{detailObj.videoList}}" wx:key='{{index}}'>
-      <video id="myVideo" src="{{item}}" controls poster="{{item+'?vframe/jpg/offset/0'}}" objectFit="cover" show-play-btn show-center-play-btn="false">
+      <video id="myVideo" src="{{item}}" controls poster="{{item+'?vframe/jpg/offset/0'}}">
         <!-- <cover-view class='total-times'>5万次播放</cover-view> -->
       </video>
     </block>
@@ -54,9 +54,20 @@
     </view>
   </view>
 </view>
-<view class='comments-wrap'>
-  <view class="pl-title">
-    <text class="pl-title-t"></text>热门评论</view>
+<view class='weui-flex comments-wrap'>
+  <view class="pl-title weui-flex__item"><text class="pl-title-t"></text>热门评论</view>
+  <!-- <view class='weui-flex' style='padding:16rpx;'>
+    <view class='com-header-avatar' style='background-image:url({{detailObj.user.photo}})'></view>
+    <view class='com-header-avatar' style='background-image:url({{detailObj.user.photo}})'></view>
+    <view class='com-header-avatar' style='background-image:url({{detailObj.user.photo}})'></view>
+    <view class='com-header-avatar' style='background-image:url({{detailObj.user.photo}})'></view>
+  </view> -->
+   <view class='weui-flex' style='padding:16rpx;'>
+    <block wx:for='{{detailObj.commentList}}' wx:key='{{index}}'>
+      <view class='com-header-avatar' wx:if='{{index<7}}' style='background-image:url({{item.photo}});position: relative;' >
+      </view>
+    </block>
+  </view>
 </view>
 <navigator url='reply-detail?parent={{item.id}}' hover-class='none' wx:for='{{detailObj.commentList}}' wx:key='{{index}}'>
   <view class='commentaries weui-flex'>
