@@ -45,7 +45,7 @@
     </block>
     <view class='content-txt'>{{detailObj.textContent}}</view>
     <view class='weui-flex icon-wrap align'>
-      <view class='icon-heart {{detailObj.hasCollected>0?"active":""}}' bindtap='collectBtn' data-id='idxxxxxxxx'></view>
+      <view class='icon-heart {{detailObj.hasCollected>0?"active":""}}' bindtap='collectBtn'></view>
       <view class='weui-flex__item'>
         <view class='icon-talk'>{{detailObj.plNum}}</view>
       </view>

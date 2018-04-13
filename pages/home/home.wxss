@@ -11,7 +11,10 @@
     position: fixed;
     z-index: 10000;
 }
-
+.myVideo {
+    height: 560rpx;
+    width: 100%;
+}
 .category scroll-view {
     background-color: #fff;
     line-height: 50px;
@@ -328,4 +331,26 @@
     background-size: 100rpx;
     background-repeat: no-repeat;
     background-position: center center;
+}
+.click {
+    position: absolute;
+    bottom: 14rpx;
+    left: 30rpx;
+    right: 0;
+    color: #fff;
+    background-color: rgba(0,0,0,.5);
+    width: 70rpx;
+    min-width: 70rpx;
+    height: 40rpx;
+    border-radius: 35rpx;
+    font-size: 26rpx;
+    line-height: 40rpx;
+    text-align: center;
+}
+.commentaries .reply {
+    font-size: 28rpx;
+    color: #03b9bb;
+    padding: 6rpx 20rpx;
+    background-color: #eee;
+    margin-right: 40rpx;
 }

@@ -14,7 +14,7 @@ const tabbar = {
       selected: true
     },
     {
-      pagePath: "/pages/art/artist",
+      pagePath: "/pages/art/art-list",
       text: "艺术名片",
       iconPath: "/assets/icon/nav-art.png",
       selectedIconPath: "/assets/icon/nav-art2.png",

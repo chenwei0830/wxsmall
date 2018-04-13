@@ -123,15 +123,14 @@ page {
 }
 
 .intro {
-    margin-top: 78rpx;
+    margin-top: 40rpx;
     padding: 0 38rpx 30rpx;
-    font-size: 26rpx;
+    font-size: 30rpx;
     border-bottom: 1rpx solid #e6e6e6;
     overflow: hidden;
     text-overflow: ellipsis;
-    /* display: -webkit-box;
-  -webkit-box-orient:vertical;
-  -webkit-line-clamp:8;  */
+    text-indent: 56rpx;
+    text-align: left;
 }
 
 .content, .works-wrap {

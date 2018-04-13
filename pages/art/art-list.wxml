@@ -1,11 +1,43 @@
 <!--pages/art/search.wxml-->
 <view class='search bg-white'>
-    <navigator url='search' open-type='redirect' hover-class='none' class='search-wrap'>
-        <view class='search-input'>艺术家名称/关键词</view>
-    </navigator>
+  <!-- <navigator url='search' open-type='redirect' hover-class='none' class='search-wrap'>
+    <view class='search-input'>艺术家名称/关键词</view>
+  </navigator> -->
+  <navigator url='' open-type='redirect' hover-class='none' class='search-wrap'>
+    <view class='search-input'>艺术家名称/关键词</view>
+  </navigator>
 </view>
+<block wx:if='{{artList}}'>
+<view class="weui-panel weui-panel_access">
+  <view class="weui-panel__bd" wx:for='{{artList}}' wx:key='{{index}}'>
+    <navigator url="artist-info?id={{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+      <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+        <image class="weui-media-box__thumb" src='{{item.photo}}' />
+      </view>
+      <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+        <!-- <view class="weui-media-box__title">{{item.nickName}}</view>
+         -->
+        <view class='user-wrap weui-flex__item'>
+          <view class='name'>{{item.nickName}}
+            <text class='s-title'>{{item.artType}}</text>
+          </view>
+          <view class='weui-flex intro align' style='line-height:100%;'>
+            <view class='grade countries mr-5' wx:if='{{item.artLevel=="0"}}'></view>
+            <view class='grade province' wx:if='{{item.artLevel=="1"}}'></view>
+            <view class='grade city mr-5' wx:if='{{item.artLevel=="2"}}'></view>
+            <view class='grade county mr-5' wx:if='{{item.artLevel=="3"}}'></view>
+            <view class='grade students' wx:if='{{!item.artLevel}}'></view>
+          </view>
+        </view>
 
-<view wx:for="{{list}}" bindtouchstart='onStart' bindtouchmove='onMove' bindtouchend='onEnd' data-index="{{index}}" style='position:relative;overflow:hidden;'>
+        <view class="weui-media-box__desc">{{item.remarks}}</view>
+      </view>
+    </navigator>
+  </view>
+</view>
+</block>
+
+<!-- <view wx:for="{{list}}" bindtouchstart='onStart' bindtouchmove='onMove' bindtouchend='onEnd' data-index="{{index}}" style='position:relative;overflow:hidden;'>
     <view class='art-list bg-white' style='transform:translateX({{item.pos}}vw)'>
         <view class='art-item weui-flex align' wx:key='{{index}}' >
             <navigator url='artist-info' hover-class='none' class='art-avatar' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/timg.jpg)'></navigator>
@@ -23,5 +55,10 @@
     <view class='action weui-flex' style='transform:translateX({{item.pos}}vw)' catchtap='watch' data-index="{{index}}">
         <view class='weui-flex__item tc'>取消关注</view>
     </view>
-</view>
-<view class='touch-bottom'>到底了</view>
+</view> -->
+<!-- <view class='touch-bottom'>到底了</view> -->
+
+
+<view style='height:112rpx;'></view>
+<import src='/pages/template/tabBar' />
+<template is='tabbar' data='{{tabbar}}'></template>

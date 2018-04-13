@@ -71,11 +71,6 @@
                 <text class='icon-txt ml-5'>{{item.plNum}}</text>
               </view>
             </block>
-            <block wx:if="{{item.status=='0'}}">
-              <view class='' style='margin-right:40rpx;'>
-                <text style='color:red;'>待审核</text>
-              </view>
-            </block>
             <view class='keep-time weui-flex__item tr'>
               <text>{{item.createDate}}</text>
             </view>
@@ -84,4 +79,5 @@
       </view>
     </view>
   </navigator>
+  <template is="empty" data="{{msg:'暂无收藏'}}" wx:if="{{!list || list.length==0}}"></template>
 </view>

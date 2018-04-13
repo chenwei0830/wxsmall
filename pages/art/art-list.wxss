@@ -46,7 +46,7 @@
 .art-list .art-item .art-avatar {
     width: 140rpx;
     height: 140rpx;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     border: 1rpx solid #e6e6e6;
     background-size: cover;
     background-repeat: no-repeat;
@@ -118,4 +118,45 @@
     color: #fff;
     transition: all 0.2s;
     font-size: 26rpx;
+}
+.grade {
+    width: 86rpx;
+    height: 28rpx;
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* margin-right:10rpx; */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.grade.province {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-sj.png);
+}
+
+.grade.countries {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-gj.png);
+}
+
+.grade.city {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-szj.png);
+}
+
+.grade.county {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-xqj.png);
+}
+
+.grade.students {
+    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-xy.png);
+}
+.s-title{
+  font-size:24rpx;
+  color:#999;
+  background:#efefef;
+  padding:6rpx 16rpx;
+  line-height:100%;
+  border-radius:10rpx;
+  display:inline-block;
+  transform-origin:center;
+  transform:scale(0.9);
+
 }

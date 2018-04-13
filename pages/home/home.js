@@ -1,46 +1,38 @@
-// pages/home/home.js
+var util = require('../../utils/util.js');  
 let catScrollLeft = 0
 const app = getApp()
 Page({
   data: {
     current: -1,
-    category: [
-      {
-        id: 0,
-        name: "推荐",
-      },
-      {
-        id: 1,
-        name: "关注",
-      },
-      {
-        id: 2,
-        name: "摄影"
-      },
-      {
-        id: 3,
-        name: "美术"
-      },
-      {
-        id: 4,
-        name: "书法"
-      },
-      {
-        id: 5,
-        name: "文学"
-      },
-      {
-        id: 6,
-        name: "文学"
-      },
-      {
-        id: 7,
-        name: "文学"
-      },
-    ],
+    categoryList:[],
+    contentObj:[]   //已加载内容
   },
   onLoad: function (options) {
-    getApp().editTabBar();
+    getApp().editTabBar()
+    wx.showLoading({
+      title: '正在加载.....',
+    })
+    var that = this
+    wx.request({
+      url: app.apiUrl + '/api/getCategoryList',
+      success: function (res) {
+        that.setData({
+          categoryList: res.data.data
+        })
+        that.clickCategory({
+          currentTarget: {
+            dataset: {
+              current: 0
+            }
+          }
+        })
+      },
+      fail: function (error) {
+        console.error('获取分类失败...: ' + error);
+      }, complete: function () {
+        wx.hideLoading()
+      }
+    })
   },
   clickCategory(evt) {
     const { current } = evt.currentTarget.dataset
@@ -50,14 +42,12 @@ Page({
     this.setData({
       current,
     })
-    const { content = [] } = this.data.category[current]
-    content.length == 0 && this.loadData()
+    this.loadData()
     if (wx.createSelectorQuery) {
       const query = wx.createSelectorQuery()
-      //query.select("#cat" + this.data.current).boundingClientRect()
+      // query.select("#cat" + this.data.current).boundingClientRect()
       query.selectViewport().scrollOffset
       query.exec(res => {
-        console.log(res[0].scrollLeft)
         let scrollX = res[0].scrollLeft
         this.setData({
           tag: {
@@ -72,126 +62,60 @@ Page({
   onCatScroll(e) {
     catScrollLeft = e.detail.scrollLeft
   },
-
+  //加载数据
   loadData() {
     const { current } = this.data
-    console.log('current--'+current)
-    let { page = 1, total = 2, loading = false, content = [], id } = this.data.category[current]
-
-    if (page > total || loading) {
+    var category = this.data.categoryList[current]
+    var curentObj = this.data.contentObj[current]
+    if (curentObj === undefined){
+      var obj = {}
+      obj.loading = false
+      obj.date = util.formatTime(new Date());
+      obj.artTypeParam = category.id
+      obj.beenBottom = false
+      obj.beenTop = false
+      obj.artWorksList = []
+      this.setData({
+        [`contentObj[${current}]`]: obj
+      })
+    }
+    if (this.data.contentObj[current].loading) {
       return
     }
-    this.setData({
-      [`category[${current}].loading`]: true
-    })
     //分页加载
-    //此处请求接口
     wx.showLoading({
-      title: '加载中...',
+      title: '正在加载.....',
     })
-    console.log(content.length)
-    page++
-    total = 10
-    const arr = []
-    for (let i = 0; i < 10; i++) {
-      arr.push({
-        id: 1,
-        avatar: 'http://oj1itelvn.bkt.clouddn.com/timg.jpg',
-        name: 'SHERRY & MOLLY',
-        label: '摄影',
-        grade: 2,
-        address: '四川省成都市高新区腾讯大厦哈哈哈哈或',
-        date: '09-13',
-        time: '09:42',
-        title: '简约而不简单',
-        image: [
-          'http://oj1itelvn.bkt.clouddn.com/hhh.jpg',
-          'http://oj1itelvn.bkt.clouddn.com/art/artist-bg.png'
-        ],
-        is_keep: 0,
-        commentList: [
-          {
-            avatar: 'http://oj1itelvn.bkt.clouddn.com/timg.jpg',
-            name: '像个杂货铺',
-            label: '画家',
-            detail: '索拉卡的叫法思考四大件发生考虑到，桑德菲杰sd卡家乐福圣诞节放假撒快递放假。',
-            date: '01/05',
-            time: '10:55',
-            is_like: 0,
-            grade: 0
-          }
-        ],
-        is_comment: 0,
-        is_like: 0
-      },
-        {
-          id: 2,
-          avatar: 'http://oj1itelvn.bkt.clouddn.com/timg.jpg',
-          name: 'SHERRY & MOLLY',
-          label: '摄影',
-          grade: 1,
-          address: '四川省成都市高新区腾讯大厦哈哈哈哈或',
-          date: '09-13',
-          time: '09:42',
-          title: '阿道夫洒洒地发生地方',
-          image: '',
-          video: 'http://oj1itelvn.bkt.clouddn.com/art/test-mp4.mp4',
-          is_keep: 0,
-          commentList: [
-            {
-              avatar: 'http://oj1itelvn.bkt.clouddn.com/timg.jpg',
-              name: '像个杂货铺',
-              label: '画家',
-              detail: '索拉卡的叫法思考四大件发生考虑到，桑德菲杰sd卡家乐福圣诞节放假撒快递放假。',
-              date: '01/05',
-              time: '10:55',
-              is_like: 0,
-              grade: 1
-            }
-          ],
-          is_comment: 0,
-          is_like: 0
-        },
-        {
-          id: 3,
-          avatar: 'http://oj1itelvn.bkt.clouddn.com/timg.jpg',
-          name: 'SHERRY & MOLLY',
-          label: '哈哈哈',
-          grade: 3,
-          address: '撒的发生地方撒旦',
-          date: '09-13',
-          time: '09:42',
-          title: '阿道夫洒洒地发生地方阿拉克圣诞节发送快递费啊刷卡机地方哈撒娇快递发货，阿克苏鹿鼎记发送旅客的撒抵抗力房间阿斯利康地方。的减肥哈温和复苏的护发素的角度看健康撒地方和圣诞节，阿斯顿空间粉红色的尽快发哈萨克的减肥。',
-          image: '',
-          video: '',
-          is_keep: 0,
-          commentList: [
-            {
-              avatar: 'http://oj1itelvn.bkt.clouddn.com/timg.jpg',
-              name: '像个杂货铺',
-              label: '画家',
-              detail: '索拉卡的叫法思考四大件发生考虑到，桑德菲杰sd卡家乐福圣诞节放假撒快递放假。',
-              date: '01/05',
-              time: '10:55',
-              is_like: 0,
-              grade: 1
-            }
-          ],
-          is_comment: 0,
-          is_like: 0
+    var that = this
+    wx.request({
+      url: app.apiUrl + '/api/v1/listHome/' + category.id,
+      // header: {
+      //   'content-type': 'application/json'
+      // },
+      // data: JSON.stringify(that.data.contentObj[current]),
+      // dataType: 'json',
+      // method: 'POST',
+      success: function (res) {
+        if(res.data.code=='0'){
+          var artWorksList = res.data.data
+          if (artWorksList!=undefined && artWorksList.length>0){
+            var currentArwWorksList = that.data.contentObj[current].artWorksList.concat(artWorksList)
+            that.setData({
+              [`contentObj[${current}].artWorksList`]: currentArwWorksList,
+              [`contentObj[${current}].date`]: artWorksList[artWorksList.length-1].createDate
+            })
+          } 
         }
-      )
-    }
-    content.push(...arr)
-    console.log(content.length)
-    loading = false
+      },
+      fail: function (error) {
+        console.error('获取数据失败...: ' + error);
+      }, complete: function () {
+        wx.hideLoading()
+      }
+    })
+
     wx.stopPullDownRefresh()
     wx.hideLoading()
-    this.setData({
-      [`category[${current}]`]: Object.assign(this.data.category[current], {
-        page, total, loading, content
-      })
-    })
   },
 
   onReachBottom() {
@@ -211,15 +135,11 @@ Page({
     this.loadData()
   },
 
-  onReady() {
-    this.clickCategory({
-      currentTarget: {
-        dataset: {
-          current: 0
-        }
-      }
-    })
-  },
+  // onReady() {
+  //   console.log(this.data.categoryList)
+
+    
+  // },
   //收藏
   keepClick(evt) {
     //此处请求接口
@@ -306,7 +226,7 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: "成都xx公司",//分享名称
+      title: "西南艺术馆",//分享名称
     }
   }
 })

@@ -1,78 +1,82 @@
 <!--pages/home/home.wxml-->
 <import src="/utils/tps/empty.wxml" />
 <view class="category">
-    <scroll-view scroll-x class='' bindscroll="onCatScroll" id="cat">
-        <text wx:for="{{category}}" wx:key="item" data-current="{{index}}" data-id='{{item.id}}' id="cat{{index}}" catchtap='clickCategory' class='item {{!hasQuery?"q":""}} {{current==index?"active":""}}'>{{item.name}}</text>
-        <text class='cat-tag' style="left:{{tag.left}}px;width:{{tag.width}}px"></text>
-    </scroll-view>
+  <scroll-view scroll-x class='' bindscroll="onCatScroll" id="cat">
+    <text wx:for="{{categoryList}}" wx:key="item" data-current="{{index}}" data-id='{{item.id}}' id="cat{{index}}" catchtap='clickCategory' class='item {{!hasQuery?"q":""}} {{current==index?"active":""}}'>{{item.name}}</text>
+    <text class='cat-tag' style="left:{{tag.left}}px;width:{{tag.width}}px"></text>
+  </scroll-view>
 </view>
 <view class="classname" style="height:50px;"></view>
-
-<view wx:for="{{category}}" hidden="{{current!=index}}" wx:key="{{i-k}}">
-    <navigator url='detail?id={{cell.id}}' hover-class='none' class='main-content bg-white' wx:for="{{item.content}}" wx:for-item="cell" wx:for-index="index2" wx:key="{{i-k}}">
-        <view class='main-header weui-flex'>
-            <view class='avatar' style='background-image:url(http://oj1itelvn.bkt.clouddn.com/timg.jpg)'></view>
-            <view class='user-wrap weui-flex__item'>
-                <view class='name'>{{cell.name}}
-                    <text class='s-title'>{{cell.label}}</text>
-                </view>
-                <view class='weui-flex intro align' style='line-height:100%;'>
-                    <view class='grade {{cell.grade==0?"countries mr-5":""}}' wx:if='{{cell.grade==0}}'></view>
-                    <view class='grade {{cell.grade==1?"province":""}}' wx:if='{{cell.grade==1}}'></view>
-                    <view class='grade {{cell.grade==2?"city mr-5":""}}' wx:if='{{cell.grade==2}}'></view>
-                    <view class='grade {{cell.grade==3?"county mr-5":""}}' wx:if='{{cell.grade==3}}'></view>
-                    <view class='grade {{cell.grade==4?"students":""}}' wx:if='{{cell.grade==4}}'></view>
-                    <view class='weui-flex__item address'>{{cell.address}}</view>
-                    <view class='time'>
-                        <text>{{cell.date}}</text>
-                        <text class='ml-5'>{{cell.time}}</text>
-                    </view>
-                </view>
-            </view>
+<block wx:if="{{contentObj[current].artWorksList}}">
+  <navigator url='detail?id={{item.id}}' hover-class='none' class='main-content bg-white' wx:for="{{contentObj[current].artWorksList}}" wx:key='{{index}}'>
+    <view class='main-header weui-flex'>
+      <view class='avatar' style='background-image:url({{item.photo}})'></view>
+      <view class='user-wrap weui-flex__item'>
+        <view class='name'>{{item.nickName}}
+          <text class='s-title'>{{item.artType}}</text>
         </view>
-        <view class='content'>
-            <view class='content-txt'>{{cell.title}}</view>
-            <view class='content-img' wx:if='{{cell.image[0]}}'>
-                <image src='{{cell.image[0]}}' mode='aspectFit' mode='aspectFill'></image>
-            </view>
-            <view class='video' wx:if='{{cell.video}}'></view>
-            <view class='weui-flex icon-wrap align'>
-                <view class='icon-heart {{cell.is_keep?"active":""}}' catchtap='keepClick' data-pos="{{[index,index2]}}"></view>
+        <view class='weui-flex intro align' style='line-height:100%;'>
+          <view class='grade countries mr-5' wx:if='{{item.artLevel=="0"}}'></view>
+          <view class='grade province' wx:if='{{item.artLevel=="1"}}'></view>
+          <view class='grade city mr-5' wx:if='{{item.artLevel=="2"}}'></view>
+          <view class='grade county mr-5' wx:if='{{item.artLevel=="3"}}'></view>
+          <view class='grade students' wx:if='{{!item.artLevel}}'></view>
+          <view class='weui-flex__item address'>{{item.location}}</view>
+          <view class='time'>
+            <text>{{item.createDate}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='content'>
+      <view class='content-txt'>{{item.title}}</view>
+      <view class='content-img' wx:if='{{item.content && (item.modelType=="0" || item.modelType=="1")}}'>
+        <image src='{{item.content}}' mode='aspectFill'>
+        </image>
+      </view>
+      <!-- <video class="myVideo" src="{{item.content}}" controls poster="{{item.content+'?vframe/jpg/offset/0'}}" wx:if='{{item.content && item.modelType=="1"}}'>
+         <cover-view class='total-times'>5万次播放</cover-view> 
+      </video> -->
+      <view class='weui-flex icon-wrap align'>
+        <view class='icon-heart' catchtap='keepClick' data-pos="{{[index,index2]}}"></view>
+        <view class='weui-flex__item'>
+          <!-- <view class='icon-talk' catchtap='commentClick' data-pos="{{[index,index2]}}">10</view> -->
+          <view class='icon-talk'>{{item.plNum}}</view>
+        </view>
+        <view class='icon-like' catchtap='likeClick'>{{item.dzNum}}</view>
+        <!-- <view class='icon-share'><button open-type='share'></button></view> -->
+      </view>
+      <block wx:for='{{item.hotCommentList}}' wx:for-item='comment' wx:for-index="index3" wx:key="{{i-k}}" wx:if='{{comment.id}}'>
+        <view class='commentaries'>
+          <view class='weui-flex pd-10'>
+            <view class='com-avatar' style='background-image:url({{comment.photo}})'></view>
+            <view class='weui-flex__item'>
+              <view class='com-name'>{{comment.nickName}}
+                <view class='grade countries mr-5' wx:if='{{comment.artLevel=="0"}}'></view>
+                <view class='grade province' wx:if='{{comment.artLevel=="1"}}'></view>
+                <view class='grade city mr-5' wx:if='{{comment.artLevel=="2"}}'></view>
+                <view class='grade county mr-5' wx:if='{{comment.artLevel=="3"}}'></view>
+                <view class='grade students' wx:if='{{!comment.artLevel}}'></view>
+                <text>{{comment.artType}}</text>
+              </view>
+              <view class='com-content'>{{comment.content}}</view>
+              <view class='reply mt-5' wx:if="{{comment.msgNum>0}}">查看{{comment.msgNum}}条回复:</view>
+              <view class='com-time weui-flex align'>
                 <view class='weui-flex__item'>
-                    <!-- <view class='icon-talk' catchtap='commentClick' data-pos="{{[index,index2]}}">10</view> -->
-                    <view class='icon-talk'>10</view>
+                  <text>{{comment.createDate}}</text>
                 </view>
-                <view class='icon-like {{cell.is_like?"active":""}}' catchtap='likeClick' data-pos="{{[index,index2]}}">1</view>
-                <!-- <view class='icon-share'><button open-type='share'></button></view> -->
+                <view class='com-like' catchtap='likeComment'>{{comment.dzNum}}</view>
+              </view>
             </view>
-            <!-- <view class='commentaries' hidden='{{!cell.is_comment}}'> -->
-            <view class='commentaries'>
-                <view class='weui-flex pd-10' wx:for='{{cell.commentList}}' wx:for-item='comment' wx:for-index="index3" wx:key="{{i-k}}">
-                    <view class='com-avatar' style='background-image:url({{comment.avatar}})'></view>
-                    <view class='weui-flex__item'>
-                        <view class='com-name'>{{comment.name}}
-                            <view class='grade {{comment.grade==0?"countries mr-5":""}}' wx:if='{{comment.grade==0}}'></view>
-                            <view class='grade {{comment.grade==1?"province":""}}' wx:if='{{comment.grade==1}}'></view>
-                            <view class='grade {{comment.grade==2?"city mr-5":""}}' wx:if='{{comment.grade==2}}'></view>
-                            <view class='grade {{comment.grade==3?"county mr-5":""}}' wx:if='{{comment.grade==3}}'></view>
-                            <view class='grade {{comment.grade==4?"students":""}}' wx:if='{{comment.grade==4}}'></view>
-                            <text>{{comment.label}}</text>
-                        </view>
-                        <view class='com-content'>{{comment.detail}}</view>
-                        <view class='com-time weui-flex align'>
-                            <view class='weui-flex__item'>
-                                <text>{{comment.date}}</text>
-                                <text class='ml-10'>{{comment.time}}</text>
-                            </view>
-                            <view class='com-like {{comment.isLike?"active":""}}' catchtap='likeComment' data-pos='{{[index,index2,index3]}}'>1</view>
-                        </view>
-                    </view>
-                </view>
-            </view>
+          </view>
         </view>
-    </navigator>
-    <template is="empty" data="{{msg:'暂无数据'}}" wx:if="{{!item.content.length}}"></template>
-</view>
+      </block>
+    </view>
+  </navigator>
+</block>
+
+  <template is="empty" data="{{msg:'暂无数据'}}" wx:if="{{!contentObj[current].artWorksList || contentObj[current].artWorksList.length==0}}"></template>
+
 
 <view style='height:112rpx;'></view>
 <import src='/pages/template/tabBar' />

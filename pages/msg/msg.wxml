@@ -1,28 +1,25 @@
-<!--pages/msg/msg.wxml-->
-<import src="/utils/tps/empty.wxml" />
-<view class='msg-wrap' wx:for="{{list}}" bindtouchstart='onStart' bindtouchmove='onMove' bindtouchend='onEnd' data-index="{{index}}">
-    <view class='weui-flex border_top1 msg' style='transform:translateX({{item.pos}}vw)'>
-        <view class='avatar-wrap'>
-            <image class='avatar' src='https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3321327869,1925632019&fm=27&gp=0.jpg' mode='aspectFill'></image>
-            <text class='number' wx:if='{{item.msg>0}}'>{{item.msg}}</text>
-        </view>
-        <navigator class='weui-flex__item' hover-class='none' url='detail?id={{item.id}}'>
-            <view class='name'>洗擦速度速度</view>
-            <view class='desc'>在方案二中，我们利用百分比数值的 padding-bottom 属性撑开容器内部空间，但是这样做会导致在元素上设置的 max-height 属性失效：</view>
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <navigator url="detail?id={{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for='{{newsList}}' wx:key='{{index}}'>
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg-zdy">
+            <image class="weui-media-box__thumb" src="{{item.backImg}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">{{item.title}}</view>
+            <view class="weui-media-box__desc">{{item.intro}}</view>
+            <view class="weui-media-box__info">
+              <view class="weui-media-box__info__meta">{{item.author}}</view>
+              <view class="weui-media-box__info__meta">{{item.createDate}}</view>
+            </view>
+          </view>
         </navigator>
+      </view>
     </view>
+  </view>
+</view>
 
-    <view class='action weui-flex' style='transform:translateX({{item.pos}}vw)'>
-        <view class='weui-flex__item tc' bindtap='delClick' data-index='{{index}}'>删除</view>
-        <view class='weui-flex__item tc' bindtap='noClick' data-index='{{index}}'>屏蔽</view>
-        <view class='weui-flex__item tc' bindtap='reportClick' data-index='{{index}}'>举报</view>
-    </view>
-</view>
-<view class='c-mask' wx:if='{{advice}}' bindtap='closeClick'></view>
-<view class='advice' wx:if='{{advice}}'>
-    <textarea maxlength='-1' class='textarea' placeholder='请输入您要举报的内容~' bindinput="onInput"></textarea>
-    <view class='submit' bindtap='submit'>提交</view>
-</view>
-<template is="empty" data="{{msg:'暂无数据'}}" wx:if="{{!list.length}}"></template>
+<view style='height:112rpx;'></view>
 <import src='/pages/template/tabBar' />
 <template is='tabbar' data='{{tabbar}}'></template>
