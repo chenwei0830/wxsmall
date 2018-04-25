@@ -400,14 +400,14 @@ Page({
           })
         }
         if (res.tapIndex == 1) {
-          const { imgList } = this.data
+          const { imgList } = this.data.imgObj
           imgList.unshift(imgList.splice(index, 1));
-          this.setData({ imgList })
+          this.setData({ 'imgObj.imgList': imgList })
         }
         if (res.tapIndex == 2) {
-          const { imgList } = this.data
+          const { imgList } = this.data.imgObj
           imgList.splice(index, 1)
-          this.setData({ imgList })
+          this.setData({ 'imgObj.imgList': imgList })
         }
       }
     })

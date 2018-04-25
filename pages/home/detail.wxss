@@ -160,10 +160,11 @@
 .main-content .content .icon-like {
     background-image: url(http://oj1itelvn.bkt.clouddn.com/like1.png);
     padding-left: 50rpx;
-    background-position: left center;
+    /* background-position: left center; */
     background-size: 38rpx;
     padding-right: 20rpx;
     color: #999;
+    line-height: 36rpx;
 }
 
 .main-content .content .icon-share {
@@ -389,4 +390,12 @@
 .swiper image {
   width: 100%;
   height: auto;
+}
+
+.view-num {
+  padding-left: 50rpx;
+  background-position: left center;
+  background-size: 38rpx;
+  color: #999;
+  margin-right: 20rpx;
 }

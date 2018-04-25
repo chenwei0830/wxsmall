@@ -1,17 +1,31 @@
-var util = require('../../utils/util.js');  
+var util = require('../../utils/util.js');
 let catScrollLeft = 0
 const app = getApp()
 Page({
   data: {
-    current: -1,
-    categoryList:[],
-    contentObj:[]   //已加载内容
+    current: 0,
+    categoryList: [],
+    contentObj: []  //已加载内容
   },
   onLoad: function (options) {
     getApp().editTabBar()
+    //获取分类
+    this.initCategoryList()
+  },
+  onReady: function () {
+    var that = this
     wx.showLoading({
-      title: '正在加载.....',
+      title: '',
     })
+    that.loadData(that)
+    wx.hideLoading()
+  },
+  onShow: function () {
+    this.setData({
+      'tabbar.list[3].msg': 2
+    })
+  },
+  initCategoryList: function () {
     var that = this
     wx.request({
       url: app.apiUrl + '/api/getCategoryList',
@@ -19,22 +33,73 @@ Page({
         that.setData({
           categoryList: res.data.data
         })
-        that.clickCategory({
-          currentTarget: {
-            dataset: {
-              current: 0
-            }
-          }
-        })
       },
-      fail: function (error) {
-        console.error('获取分类失败...: ' + error);
-      }, complete: function () {
-        wx.hideLoading()
-      }
+      fail: function (error) { },
+      complete: function () { }
     })
   },
-  clickCategory(evt) {
+  //加载数据
+  loadData: function (that) {
+    const { current } = that.data
+    var curentObj = that.data.contentObj[current]
+    if (curentObj == undefined) {
+      curentObj = {}
+      curentObj.hasMoreData = true
+      curentObj.searchDate = util.formatTime(new Date());
+      curentObj.artTypeParam = that.data.categoryList[current].id
+      curentObj.pageNo = 1
+      curentObj.pageSize = 5
+      curentObj.artWorksList = []
+      that.setData({
+        [`contentObj[${current}]`]: curentObj
+      })
+    }else{
+      if (curentObj.hasMoreData) {
+        that.setData({
+          [`contentObj[${current}].pageNo`]: curentObj.pageNo + 1
+        })
+      }
+    }
+    if (!curentObj.hasMoreData) {
+      return
+    }
+    var searchObj = {}
+    searchObj.searchDateStr = that.data.searchDate;
+    searchObj.artTypeParam = that.data.categoryList[current].id
+    searchObj.pageNo = that.data.contentObj[current].pageNo
+    searchObj.pageSize = that.data.contentObj[current].pageSize
+    wx.request({
+      url: app.apiUrl + '/api/listHome',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: JSON.stringify(searchObj),
+      dataType: 'json',
+      method: 'POST',
+      success: function (res) {
+        if (res.data.code == '0') {
+          var artWorksList = res.data.data
+          if (artWorksList != undefined && artWorksList.length > 0) {
+            var currentArwWorksList = that.data.contentObj[current].artWorksList.concat(artWorksList)
+            that.setData({
+              [`contentObj[${current}].artWorksList`]: currentArwWorksList,
+              [`contentObj[${current}].pageNo`]: that.data.contentObj[current].pageNo + 1,
+              [`contentObj[${current}].hasMoreData`]: artWorksList.length < that.data.contentObj[current].pageSize ? false : true
+            })
+          } else {
+            that.setData({
+              [`contentObj[${current}].hasMoreData`]: false
+            })
+          }
+        }
+      },
+      fail: function (error) {
+        console.error('获取数据失败...: ' + error);
+      }, complete: function () { }
+    })
+  },
+  //分类点击事件
+  clickCategory: function (evt) {
     const { current } = evt.currentTarget.dataset
     if (this.data.current == current) {
       return
@@ -42,7 +107,7 @@ Page({
     this.setData({
       current,
     })
-    this.loadData()
+    this.loadData(this)
     if (wx.createSelectorQuery) {
       const query = wx.createSelectorQuery()
       // query.select("#cat" + this.data.current).boundingClientRect()
@@ -59,87 +124,31 @@ Page({
       })
     }
   },
-  onCatScroll(e) {
+  onCatScroll: function (e) {
     catScrollLeft = e.detail.scrollLeft
   },
-  //加载数据
-  loadData() {
-    const { current } = this.data
-    var category = this.data.categoryList[current]
-    var curentObj = this.data.contentObj[current]
-    if (curentObj === undefined){
-      var obj = {}
-      obj.loading = false
-      obj.date = util.formatTime(new Date());
-      obj.artTypeParam = category.id
-      obj.beenBottom = false
-      obj.beenTop = false
-      obj.artWorksList = []
-      this.setData({
-        [`contentObj[${current}]`]: obj
-      })
-    }
-    if (this.data.contentObj[current].loading) {
-      return
-    }
-    //分页加载
-    wx.showLoading({
-      title: '正在加载.....',
-    })
-    var that = this
-    wx.request({
-      url: app.apiUrl + '/api/v1/listHome/' + category.id,
-      // header: {
-      //   'content-type': 'application/json'
-      // },
-      // data: JSON.stringify(that.data.contentObj[current]),
-      // dataType: 'json',
-      // method: 'POST',
-      success: function (res) {
-        if(res.data.code=='0'){
-          var artWorksList = res.data.data
-          if (artWorksList!=undefined && artWorksList.length>0){
-            var currentArwWorksList = that.data.contentObj[current].artWorksList.concat(artWorksList)
-            that.setData({
-              [`contentObj[${current}].artWorksList`]: currentArwWorksList,
-              [`contentObj[${current}].date`]: artWorksList[artWorksList.length-1].createDate
-            })
-          } 
-        }
-      },
-      fail: function (error) {
-        console.error('获取数据失败...: ' + error);
-      }, complete: function () {
-        wx.hideLoading()
-      }
-    })
 
-    wx.stopPullDownRefresh()
-    wx.hideLoading()
-  },
 
-  onReachBottom() {
+  onReachBottom: function () {
     //上拉加载
-    this.loadData()
+    this.loadData(this)
   },
-  onPullDownRefresh() {
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading()
     //下拉刷新
     const { current } = this.data
-    const cate = this.data.category[current]
-    cate.total = 2
-    cate.page = 1
-    cate.content = []
-    this.setData({
-      [`category[${current}]`]: cate
-    })
-    this.loadData()
+    const id = this.data.category[current]
+    
+    // cate.total = 2
+    // cate.page = 1
+    // cate.content = []
+    // this.setData({
+    //   [`category[${current}]`]: cate
+    // })
+    // this.loadData()
   },
 
-  // onReady() {
-  //   console.log(this.data.categoryList)
 
-    
-  // },
   //收藏
   keepClick(evt) {
     //此处请求接口
@@ -150,7 +159,7 @@ Page({
     collectObj.openId = 'o7tbx0KPXyVui_VUg9YgK4UauIWc'
     collectObj.artWorksId = '828d882ea22347c6801c375c0d6b1509'
     collectObj.orgId = app.orgId
-    if (is_keep === 0 || !is_keep){//收藏
+    if (is_keep === 0 || !is_keep) {//收藏
       collectObj.type = 1
       wx.request({
         url: app.apiUrl + '/api/collectArtworks',

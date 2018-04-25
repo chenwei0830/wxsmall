@@ -5,19 +5,14 @@ Page({
    */
   data: {
     detailObj: null,
-    currentArtWorksId:'',  //当前作品ID
+    currentArtWorksId: '',  //当前作品ID
     contentInput: '', //评论输入框默认为空
-    contentPL:'',     //评论内容
-    parentPLId:null,  //父类评论ID（针对回复评论使用）
-    imgheights:[],
+    contentPL: '',     //评论内容
+    parentPLId: null,  //父类评论ID（针对回复评论使用）
+    imgheights: [],
     scrollWidth: 0,
-    current:0,
-    musicObj:{
-      musicSrc:'http://p3mjvv81y.bkt.clouddn.com/music/%E4%B8%A2%E7%81%AB%E8%BD%A6%E4%B9%90%E9%98%9F%20-%20%E6%99%9A%E5%AE%89.mp3',
-      musicName:'晚安',
-      musicAuthor:'丢火车乐队',
-      musicPoster:'http://p3mjvv81y.bkt.clouddn.com/music/image/music.jpg'
-    }
+    current: 0,
+    showPalyIcon:true
   },
   onLoad: function (option) {
     //获取作品详情
@@ -28,38 +23,40 @@ Page({
         that.setData({
           scrollWidth: res.windowWidth
         })
-
-        console.log(res.model)
-        console.log(res.pixelRatio)
-        console.log(res.windowWidth +"---可使用窗口宽度")
-        console.log(res.windowHeight + "---可使用窗口高度")
-        console.log(res.statusBarHeight + "---状态栏的高度")
-      }
-    })
-    wx.request({
-      url: app.apiUrl + '/api/getArtWorksDetail',
-      data: { id: option.id, openId: app.openId },
-      success: function (e) {
-        if (e.data.code == '0') {
-          that.setData({
-            detailObj: e.data.data
-          })
-        }
-        console.log(that.data.detailObj)
       }
     })
     //初始化评论作品ID
     that.setData({
       'currentArtWorksId': option.id
     })
-    //初始化背景音乐
-    // wx.playBackgroundAudio({
-    //   dataUrl: 'http://p3mjvv81y.bkt.clouddn.com/music/%E4%B8%A2%E7%81%AB%E8%BD%A6%E4%B9%90%E9%98%9F%20-%20%E6%99%9A%E5%AE%89.mp3',
-    //   title: '',
-    //   coverImgUrl: ''
-    // })
-  },
 
+  },
+  onReady:function(){
+    this.videoCtx = wx.createVideoContext('myVideo')
+  },
+  onShow: function () {
+    wx.showLoading({
+      title: '',
+    })
+    var that = this
+    wx.request({
+      url: app.apiUrl + '/api/getArtWorksDetail',
+      data: { id: that.data.currentArtWorksId, openId: app.openId },
+      success: function (e) {
+        if (e.data.code == '0') {
+          that.setData({
+            detailObj: e.data.data
+          })
+        }
+      }, 
+      fail: function (error) {
+        console.error(' 系统异常: ' + error);
+      },
+      complete: function () {
+        wx.hideLoading()
+      }
+    })
+  },
   /**
    * 用户点击右上角分享
    */
@@ -79,7 +76,7 @@ Page({
     dzObj.orgId = app.orgId
     dzObj.targetId = this.data.currentArtWorksId
     dzObj.type = '0' //0-作品 1-评论
-    dzObj.delFlag = this.data.detailObj.hasDz > 0 ?'0':'1'
+    dzObj.delFlag = this.data.detailObj.hasDz > 0 ? '0' : '1'
     wx.request({
       url: app.apiUrl + '/api/targetDz',
       data: JSON.stringify(dzObj),
@@ -124,7 +121,7 @@ Page({
       fail: function (error) {
         console.error(' 系统异常: ' + error);
       },
-      complete: function () {}
+      complete: function () { }
     })
   },
   likeComment(evt) {
@@ -134,13 +131,12 @@ Page({
       [`detailObj.commentList[${index}].dzNum`]: this.data.detailObj.commentList[index].hasDz > 0 ? this.data.detailObj.commentList[index].dzNum - 1 : this.data.detailObj.commentList[index].dzNum + 1
     })
     //保存或取消点赞
-    //保存或取消点赞
     var dzObj = {}
     dzObj.openId = app.openId
     dzObj.orgId = app.orgId
     dzObj.targetId = this.data.detailObj.commentList[index].id
     dzObj.type = '1' //0-作品 1-评论
-    dzObj.delFlag = this.data.detailObj.commentList[index].hasDz>0 ? '0' : '1'
+    dzObj.delFlag = this.data.detailObj.commentList[index].hasDz > 0 ? '0' : '1'
     wx.request({
       url: app.apiUrl + '/api/targetDz',
       data: JSON.stringify(dzObj),
@@ -226,7 +222,7 @@ Page({
     //获取图片真实宽度  
     var imgwidth = e.detail.width
     var imgheight = e.detail.height
-      //宽高比  
+    //宽高比  
     var ratio = imgwidth / imgheight;
     console.log(ratio);
     //计算的高度值  
@@ -236,7 +232,7 @@ Page({
     var imgheightarray = this.data.imgheights;
     //把每一张图片的高度记录到数组里
     imgheightarray.push(imgheight);
-    
+
     this.setData({
       imgheights: imgheightarray,
     });
@@ -245,5 +241,26 @@ Page({
   bindchange: function (e) {
     // console.log(e.detail.current)
     this.setData({ current: e.detail.current })
+  },
+  videoPlay:function(){
+    this.videoCtx.play()
+    this.setData({
+      showPalyIcon:false
+    })
+  },
+  videoPause:function(){
+    console.log('视频暂停')
+    this.setData({
+      showPalyIcon: true
+    })
+  },
+  videoEnded: function () {
+    console.log('视频结束')
+    this.setData({
+      showPalyIcon: true
+    })
+  },
+  bindFullScreenChange: function (event){
+    event.detail = { fullScreen: true, direction:'horizontal'}
   }
 })

@@ -1,4 +1,3 @@
-<!--pages/home/home.wxml-->
 <import src="/utils/tps/empty.wxml" />
 <view class="category">
   <scroll-view scroll-x class='' bindscroll="onCatScroll" id="cat">
@@ -34,15 +33,12 @@
         <image src='{{item.content}}' mode='aspectFill'>
         </image>
       </view>
-      <!-- <video class="myVideo" src="{{item.content}}" controls poster="{{item.content+'?vframe/jpg/offset/0'}}" wx:if='{{item.content && item.modelType=="1"}}'>
-         <cover-view class='total-times'>5万次播放</cover-view> 
-      </video> -->
       <view class='weui-flex icon-wrap align'>
         <view class='icon-heart' catchtap='keepClick' data-pos="{{[index,index2]}}"></view>
         <view class='weui-flex__item'>
-          <!-- <view class='icon-talk' catchtap='commentClick' data-pos="{{[index,index2]}}">10</view> -->
           <view class='icon-talk'>{{item.plNum}}</view>
         </view>
+        <view class='view-num'>3856次浏览</view>
         <view class='icon-like' catchtap='likeClick'>{{item.dzNum}}</view>
         <!-- <view class='icon-share'><button open-type='share'></button></view> -->
       </view>
@@ -74,9 +70,20 @@
     </view>
   </navigator>
 </block>
-
-  <template is="empty" data="{{msg:'暂无数据'}}" wx:if="{{!contentObj[current].artWorksList || contentObj[current].artWorksList.length==0}}"></template>
-
+<block wx:if="{{!contentObj[current].artWorksList || contentObj[current].artWorksList.length==0}}">
+  <template is="empty" data="{{msg:'暂无数据'}}"></template>
+</block>
+<block wx:else>
+  <block wx:if='{{contentObj[current].hasMoreData}}'>
+    <view class="weui-loadmore">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载...</view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class='touch-bottom'>我是有底线的</view>
+  </block>
+</block>
 
 <view style='height:112rpx;'></view>
 <import src='/pages/template/tabBar' />

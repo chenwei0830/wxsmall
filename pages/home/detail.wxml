@@ -39,8 +39,8 @@
       </block>
     </swiper>
     <block wx:for="{{detailObj.videoList}}" wx:key='{{index}}'>
-      <video id="myVideo" src="{{item}}" controls poster="{{item+'?vframe/jpg/offset/0'}}">
-        <!-- <cover-view class='total-times'>5万次播放</cover-view> -->
+      <video id="myVideo" src="{{item}}" controls show-center-play-btn='{{false}}' poster="{{item+'?vframe/jpg/offset/0'}}" bindpause='videoPause' bindended='videoEnded' page-gesture direction='0'>
+        <cover-image class="weui-uploader__file-content" bindtap="videoPlay" style='width:4rem;height:4rem;'  src="http://p3mjvv81y.bkt.clouddn.com/icon/icon_paly_white.png" wx:if='{{showPalyIcon}}' />
       </video>
     </block>
     <view class='content-txt'>{{detailObj.textContent}}</view>
@@ -49,8 +49,9 @@
       <view class='weui-flex__item'>
         <view class='icon-talk'>{{detailObj.plNum}}</view>
       </view>
+      <view class='view-num'>3856次浏览</view>
       <view class='icon-like {{detailObj.hasDz>0?"active":""}}' bindtap='like'>{{detailObj.dzNum}}</view>
-      <view class='icon-share'></view>
+      <!-- <view class='icon-share'></view> -->
     </view>
   </view>
 </view>

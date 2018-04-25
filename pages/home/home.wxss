@@ -1,58 +1,60 @@
 /* pages/home/home.wxss */
 
 .category {
-    left: 0;
-    right: 0;
-    top: 0;
-    font-size: 0;
-    line-height: 0;
-    white-space: nowrap;
-    background-color: #fff;
-    position: fixed;
-    z-index: 10000;
+  left: 0;
+  right: 0;
+  top: 0;
+  font-size: 0;
+  line-height: 0;
+  white-space: nowrap;
+  background-color: #fff;
+  position: fixed;
+  z-index: 10000;
 }
+
 .myVideo {
-    height: 560rpx;
-    width: 100%;
+  height: 560rpx;
+  width: 100%;
 }
+
 .category scroll-view {
-    background-color: #fff;
-    line-height: 50px;
-    height: 50px;
-    position: relative;
-    width: 100%;
+  background-color: #fff;
+  line-height: 50px;
+  height: 50px;
+  position: relative;
+  width: 100%;
 }
 
 .category scroll-view .cat-tag {
-    position: absolute;
-    left: 0;
-    top: 88rpx;
-    width: 0;
-    height: 2px;
-    background: #02bbbd;
-    transition: all 0.1s;
-    z-index: 99;
+  position: absolute;
+  left: 0;
+  top: 88rpx;
+  width: 0;
+  height: 2px;
+  background: #02bbbd;
+  transition: all 0.1s;
+  z-index: 99;
 }
 
 .category scroll-view .item {
-    display: inline-block;
-    padding: 0 30rpx;
-    position: relative;
-    transition: all 0.1s;
-    font-size: 32rpx;
-    box-sizing: border-box;
+  display: inline-block;
+  padding: 0 30rpx;
+  position: relative;
+  transition: all 0.1s;
+  font-size: 32rpx;
+  box-sizing: border-box;
 }
 
 .category scroll-view .item:first-child {
-    /* margin-left: 30rpx; */
+  /* margin-left: 30rpx; */
 }
 
 .category scroll-view .item.active {
-    color: #02bbbd;
-    /* transform: scale(1.1); */
-    transform-origin: 50% 100%;
-    font-weight: bold;
-    font-style: unset;
+  color: #02bbbd;
+  /* transform: scale(1.1); */
+  transform-origin: 50% 100%;
+  font-weight: bold;
+  font-style: unset;
 }
 
 /* .category scroll-view .item.q.active:after {
@@ -67,172 +69,173 @@
 } */
 
 .main-content {
-    margin-top: 10rpx;
+  margin-top: 10rpx;
 }
 
 .main-content .main-header {
-    padding: 20rpx 30rpx;
-    border-bottom: 1rpx solid #f0f0f0;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
 }
 
 .main-content .main-header .avatar {
-    width: 90rpx;
-    height: 90rpx;
-    border-radius: 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: 1rpx solid #eee;
-    margin-right: 20rpx;
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 1rpx solid #eee;
+  margin-right: 20rpx;
 }
 
 .main-content .main-header .name {
-    color: #686868;
-    font-size: 34rpx;
+  color: #686868;
+  font-size: 34rpx;
 }
 
 .main-content .main-header .name .s-title {
-    font-size: 24rpx;
-    color: #999;
-    background: #efefef;
-    padding: 6rpx 16rpx;
-    line-height: 100%;
-    /* vertical-align: middle; */
-    border-radius: 10rpx;
-    display: inline-block;
-    transform-origin: center;
-    transform: scale(0.9);
+  font-size: 24rpx;
+  color: #999;
+  background: #efefef;
+  padding: 6rpx 16rpx;
+  line-height: 100%;
+  /* vertical-align: middle; */
+  border-radius: 10rpx;
+  display: inline-block;
+  transform-origin: center;
+  transform: scale(0.9);
 }
 
 .main-content .main-header .user-wrap .intro view,
 .main-content .main-header .user-wrap .intro view text {
-    font-size: 26rpx;
-    color: #999;
+  font-size: 26rpx;
+  color: #999;
 }
 
 .grade {
-    width: 86rpx;
-    height: 28rpx;
-    background-size: contain;
-    background-repeat: no-repeat;
-    /* margin-right:10rpx; */
-    display: inline-block;
-    vertical-align: middle;
+  width: 86rpx;
+  height: 28rpx;
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* margin-right:10rpx; */
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .grade.province {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-sj.png);
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-sj.png);
 }
 
 .grade.countries {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-gj.png);
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-gj.png);
 }
 
 .grade.city {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-szj.png);
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-szj.png);
 }
 
 .grade.county {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-xqj.png);
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-xqj.png);
 }
 
 .grade.students {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-xy.png);
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-xy.png);
 }
 
 .user-wrap {
-    position: relative;
+  position: relative;
 }
 
 .intro {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .main-content .main-header .user-wrap .intro .address {
-    font-size: 24rpx;
-    color: #666;
-    padding-left: 20rpx;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/addr-icon.png);
-    background-size: 18rpx;
-    background-repeat: no-repeat;
+  font-size: 24rpx;
+  color: #666;
+  padding-left: 20rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/art/addr-icon.png);
+  background-size: 18rpx;
+  background-repeat: no-repeat;
 }
 
 .main-content .content {
-    padding: 20rpx 30rpx;
+  padding: 20rpx 30rpx;
 }
 
 .main-content .content .content-img {
-    width: 100%;
-    height: 420rpx;
-    margin-top: 20rpx;
+  width: 100%;
+  height: 420rpx;
+  margin-top: 20rpx;
 }
 
 .main-content .content .icon-wrap {
-    margin-top: 30rpx;
+  margin-top: 30rpx;
 }
 
 .main-content .content .icon-heart, .main-content .content .icon-talk,
 .main-content .content .icon-like, .main-content .content .icon-share {
-    width: 38rpx;
-    height: 36rpx;
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: relative;
+  width: 38rpx;
+  height: 36rpx;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
 .icon-share button {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
 }
 
 .main-content .content .icon-heart {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/heart2.png);
-    margin-right: 60rpx;
-    height: 39rpx;
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/heart2.png);
+  margin-right: 60rpx;
+  height: 39rpx;
 }
 
 .main-content .content .icon-heart.active {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/heart1.png);
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/heart1.png);
 }
 
 .main-content .content .icon-talk {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/talk1.png);
-    padding-left: 68rpx;
-    background-position: left center;
-    background-size: 38rpx;
-    color: #999;
-    line-height: 36rpx;
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/talk1.png);
+  padding-left: 68rpx;
+  background-position: left center;
+  background-size: 38rpx;
+  color: #999;
+  line-height: 36rpx;
 }
 
 .main-content .content .icon-like {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/like1.png);
-    padding-left: 50rpx;
-    background-position: left center;
-    background-size: 38rpx;
-    color: #999;
-    margin-right: 20rpx;
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/like1.png);
+  padding-left: 50rpx;
+  /* background-position: left center; */
+  background-size: 39rpx;
+  color: #999;
+  margin-right: 20rpx;
+  line-height: 36rpx;
 }
 
 .main-content .content .icon-like.active {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/zan1.png);
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/zan1.png);
 }
 
 .main-content .content .icon-share {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/share-icon.png);
-    padding: 0 20rpx;
-    background-position: center;
-    background-size: 36rpx;
-    color: #999;
-    margin-left: 50rpx;
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/art/share-icon.png);
+  padding: 0 20rpx;
+  background-position: center;
+  background-size: 36rpx;
+  color: #999;
+  margin-left: 50rpx;
 }
 
 /* .main-content .content .icon-like.active{
@@ -240,117 +243,127 @@
 } */
 
 @keyframes commentaries {
-    from {
-        opacity: 0;
-        transform: scaleY(0);
-    }
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
 
-    to {
-        opacity: 1;
-        transform: scaleY(1);
-    }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 }
 
 .commentaries {
-    transform-origin: 0 0;
-    background: #efefef;
-    margin-top: 30rpx;
-    /* padding: 20rpx; */
-    position: relative;
-    animation: commentaries 0.2s;
+  transform-origin: 0 0;
+  background: #efefef;
+  margin-top: 30rpx;
+  /* padding: 20rpx; */
+  position: relative;
+  animation: commentaries 0.2s;
 }
 
 .commentaries:before {
-    position: absolute;
-    left: 100rpx;
-    top: -18rpx;
-    font-size: 0;
-    line-height: 0;
-    border-width: 10px;
-    border-color: #efefef;
-    border-top-width: 0;
-    border-style: dashed;
-    border-bottom-style: solid;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    content: '';
+  position: absolute;
+  left: 100rpx;
+  top: -18rpx;
+  font-size: 0;
+  line-height: 0;
+  border-width: 10px;
+  border-color: #efefef;
+  border-top-width: 0;
+  border-style: dashed;
+  border-bottom-style: solid;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  content: '';
 }
 
 .commentaries .com-avatar {
-    width: 100rpx;
-    height: 100rpx;
-    border-radius: 50%;
-    border: 1rpx solid #fff;
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin-right: 26rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border: 1rpx solid #fff;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-right: 26rpx;
 }
 
 .commentaries .com-name {
-    color: #999;
+  color: #999;
 }
 
 .commentaries .com-name text {
-    font-size: 22rpx;
-    margin-left: 10rpx;
+  font-size: 22rpx;
+  margin-left: 10rpx;
 }
 
 .commentaries .com-content {
-    color: #666;
-    line-height: 34rpx;
-    margin-top: 10rpx;
+  color: #666;
+  line-height: 34rpx;
+  margin-top: 10rpx;
 }
 
 .commentaries .com-time {
-    margin-top: 40rpx;
+  margin-top: 40rpx;
 }
 
 .commentaries .com-time view, .commentaries .com-time view text {
-    color: #999;
+  color: #999;
 }
 
 .commentaries .com-time .com-like {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/like1.png);
-    padding-left: 50rpx;
-    background-position: left center;
-    background-size: 34rpx;
-    /* padding-right: 20rpx; */
-    color: #999;
-    background-repeat: no-repeat;
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/like1.png);
+  padding-left: 50rpx;
+  background-position: left center;
+  background-size: 34rpx;
+  /* padding-right: 20rpx; */
+  color: #999;
+  background-repeat: no-repeat;
 }
 
 .commentaries .com-time .com-like.active {
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/zan1.png);
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/zan1.png);
 }
 
 .video {
-    height: 420rpx;
-    width: 100%;
-    background-color: #999;
-    background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-video1.png);
-    background-size: 100rpx;
-    background-repeat: no-repeat;
-    background-position: center center;
+  height: 420rpx;
+  width: 100%;
+  background-color: #999;
+  background-image: url(http://oj1itelvn.bkt.clouddn.com/art/icon-video1.png);
+  background-size: 100rpx;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
+
 .click {
-    position: absolute;
-    bottom: 14rpx;
-    left: 30rpx;
-    right: 0;
-    color: #fff;
-    background-color: rgba(0,0,0,.5);
-    width: 70rpx;
-    min-width: 70rpx;
-    height: 40rpx;
-    border-radius: 35rpx;
-    font-size: 26rpx;
-    line-height: 40rpx;
-    text-align: center;
+  position: absolute;
+  bottom: 14rpx;
+  left: 30rpx;
+  right: 0;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 70rpx;
+  min-width: 70rpx;
+  height: 40rpx;
+  border-radius: 35rpx;
+  font-size: 26rpx;
+  line-height: 40rpx;
+  text-align: center;
 }
+
 .commentaries .reply {
-    font-size: 28rpx;
-    color: #03b9bb;
-    padding: 6rpx 20rpx;
-    background-color: #eee;
-    margin-right: 40rpx;
+  font-size: 28rpx;
+  color: #03b9bb;
+  padding: 6rpx 20rpx;
+  background-color: #eee;
+  margin-right: 40rpx;
+}
+
+.view-num {
+  padding-left: 50rpx;
+  background-position: left center;
+  background-size: 38rpx;
+  color: #999;
+  margin-right: 20rpx;
 }
