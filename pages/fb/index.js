@@ -5,9 +5,9 @@ const app = getApp()
 Page({
   data: {
     current: 1,
-    audioList: [
-      { name: "歌曲1", src: "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46" },
-      { name: "歌曲2", src: "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46" }
+    musicList: [
+      { id:"music_01",name: "歌曲1", src: "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46" },
+      { id: "music_02",name: "歌曲2", src: "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46" }
     ],
     audioNum:null,
     isModal: false,
@@ -18,7 +18,8 @@ Page({
       typeList: null,
       location: '',
       textContent: '',
-      modelType:'0'
+      modelType:'0',
+      musicId:'' //背景音乐
     },//图片表单数据
     videoObj: {
       videoList: [],
@@ -27,7 +28,8 @@ Page({
       typeList: null,
       location: '',
       textContent: '',
-      modelType: '1'
+      modelType: '1',
+      musicId:''
     },//视频表单数据
     textObj: {
       title: '',
@@ -57,6 +59,27 @@ Page({
       this.setData({
         'textObj.artType': typeKey,
       })
+    }
+  },
+  // 背景音乐
+  musicChange(evt){
+    const { model } = evt.currentTarget.dataset
+    if (model == '1') {//图片
+      var musicId = this.data.musicList[evt.detail.value].id
+      console.log(musicId)
+      this.setData({
+        'imgObj.musicId': musicId,
+      })
+    } else if (model == '2') {//视频
+      var musicId = this.data.musicList[evt.detail.value].id
+      this.setData({
+        'videoObj.musicId': musicId,
+      })
+    } else {
+      // var typeKey = this.data.videoObj.typeList[evt.detail.value].k
+      // this.setData({
+      //   'textObj.artType': typeKey,
+      // })
     }
   },
   openMap(evt) {

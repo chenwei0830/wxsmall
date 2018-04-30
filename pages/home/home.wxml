@@ -34,12 +34,12 @@
         </image>
       </view>
       <view class='weui-flex icon-wrap align'>
-        <view class='icon-heart' catchtap='keepClick' data-pos="{{[index,index2]}}"></view>
+        <view class='icon-heart {{item.hasCollected>0?"active":""}}' catchtap='keepClick' data-index="{{index}}"></view>
         <view class='weui-flex__item'>
           <view class='icon-talk'>{{item.plNum}}</view>
         </view>
-        <view class='view-num'>3856次浏览</view>
-        <view class='icon-like' catchtap='likeClick'>{{item.dzNum}}</view>
+        <view class='view-num'>{{item.viewNum}}次{{item.modelType=='1'?'播放':'浏览'}}</view>
+        <view class='icon-like {{item.hasDz>0?"active":""}}' catchtap='likeClick' data-index="{{index}}">{{item.dzNum}}</view>
         <!-- <view class='icon-share'><button open-type='share'></button></view> -->
       </view>
       <block wx:for='{{item.hotCommentList}}' wx:for-item='comment' wx:for-index="index3" wx:key="{{i-k}}" wx:if='{{comment.id}}'>

@@ -9,21 +9,17 @@ Page({
   },
   onLoad: function (options) {
     getApp().editTabBar()
-    //获取分类
-    this.initCategoryList()
-  },
-  onReady: function () {
-    var that = this
-    wx.showLoading({
-      title: '',
-    })
-    that.loadData(that)
-    wx.hideLoading()
   },
   onShow: function () {
     this.setData({
       'tabbar.list[3].msg': 2
     })
+    wx.showLoading({
+      title: '',
+    })
+    //获取分类
+    this.initCategoryList()
+    
   },
   initCategoryList: function () {
     var that = this
@@ -33,6 +29,7 @@ Page({
         that.setData({
           categoryList: res.data.data
         })
+        that.loadData(that)
       },
       fail: function (error) { },
       complete: function () { }
@@ -68,6 +65,7 @@ Page({
     searchObj.artTypeParam = that.data.categoryList[current].id
     searchObj.pageNo = that.data.contentObj[current].pageNo
     searchObj.pageSize = that.data.contentObj[current].pageSize
+    searchObj.openId = app.openId
     wx.request({
       url: app.apiUrl + '/api/listHome',
       header: {
@@ -95,7 +93,7 @@ Page({
       },
       fail: function (error) {
         console.error('获取数据失败...: ' + error);
-      }, complete: function () { }
+      }, complete: function () { wx.hideLoading() }
     })
   },
   //分类点击事件
@@ -127,8 +125,6 @@ Page({
   onCatScroll: function (e) {
     catScrollLeft = e.detail.scrollLeft
   },
-
-
   onReachBottom: function () {
     //上拉加载
     this.loadData(this)
@@ -136,8 +132,8 @@ Page({
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading()
     //下拉刷新
-    const { current } = this.data
-    const id = this.data.category[current]
+    // const { current } = this.data
+    // const id = this.data.category[current]
     
     // cate.total = 2
     // cate.page = 1
@@ -146,91 +142,79 @@ Page({
     //   [`category[${current}]`]: cate
     // })
     // this.loadData()
+    wx.hideNavigationBarLoading()
+    wx.stopPullDownRefresh()
   },
-
-
   //收藏
-  keepClick(evt) {
+  keepClick:function(evt) {
     //此处请求接口
-    const { pos } = evt.currentTarget.dataset
-    const { is_keep } = this.data.category[pos[0]].content[pos[1]]
-
+    const { index } = evt.currentTarget.dataset
+    const { current } = this.data
+    this.setData({
+      [`contentObj[${current}].artWorksList[${index}].hasCollected`]: this.data.contentObj[current].artWorksList[index].hasCollected > 0 ? 0 : 1
+    })
+    //保存或取消关注
     var collectObj = {}
-    collectObj.openId = 'o7tbx0KPXyVui_VUg9YgK4UauIWc'
-    collectObj.artWorksId = '828d882ea22347c6801c375c0d6b1509'
+    collectObj.openId = app.openId
     collectObj.orgId = app.orgId
-    if (is_keep === 0 || !is_keep) {//收藏
-      collectObj.type = 1
-      wx.request({
-        url: app.apiUrl + '/api/collectArtworks',
-        data: JSON.stringify(collectObj),
-        dataType: 'json',
-        method: 'POST',
-        success: function (res) {
-          if (res.data.code == '0') {
-            console.log('收藏成功')
-          } else {
-            console.log('收藏失败')
-          }
-
-        },
-        fail: function (error) {
-          console.error(' 收藏异常: ' + error);
-        },
-        complete: function () {
-          wx.hideLoading()
+    collectObj.artWorksId = this.data.contentObj[current].artWorksList[index].id
+    collectObj.type = this.data.contentObj[current].artWorksList[index].hasCollected
+    
+    wx.request({
+      url: app.apiUrl + '/api/collectArtworks',
+      data: JSON.stringify(collectObj),
+      dataType: 'json',
+      method: 'POST',
+      success: function (res) {
+        if (res.data.code == '0') {
+          console.log('收藏成功')
+        } else {
+          console.log('收藏失败')
         }
-      })
-    } else {//取消收藏
-      collectObj.type = 0
-      wx.request({
-        url: app.apiUrl + '/api/collectArtworks',
-        data: JSON.stringify(collectObj),
-        dataType: 'json',
-        method: 'POST',
-        success: function (res) {
-          if (res.data.code == '0') {
-            console.log('取消收藏成功')
-          } else {
-            console.log('取消收藏失败')
-          }
 
-        },
-        fail: function (error) {
-          console.error('取消收藏异常: ' + error);
-        },
-        complete: function () {
-          wx.hideLoading()
-        }
-      })
-    }
-    this.setData({
-      [`category[${pos[0]}].content[${pos[1]}].is_keep`]: !is_keep
+      },
+      fail: function (error) {
+        console.error(' 系统异常: ' + error);
+      },
+      complete: function () { }
     })
   },
-  commentClick(evt) {
-    //此处请求评论列表的接口
-    const { pos } = evt.currentTarget.dataset
-    const { is_comment } = this.data.category[pos[0]].content[pos[1]]
-    this.setData({
-      [`category[${pos[0]}].content[${pos[1]}].is_comment`]: !is_comment
-    })
-  },
-
-  likeComment(evt) {
-    const [x, y, z] = evt.currentTarget.dataset.pos
-    console.log(x, y, z)
-    this.setData({
-      [`category[${x}].content[${y}].commentList[${z}].isLike`]: !this.data.category[x].content[y].commentList[z].isLike
-    })
+  //评论点赞
+  likeComment:function(evt) {
   },
   //点赞
-  likeClick(evt) {
-    //此处请求接口
-    const { pos } = evt.currentTarget.dataset
-    const { is_like } = this.data.category[pos[0]].content[pos[1]]
+  likeClick:function(evt) {
+    const { index } = evt.currentTarget.dataset
+    const { current } = this.data
     this.setData({
-      [`category[${pos[0]}].content[${pos[1]}].is_like`]: !is_like
+      [`contentObj[${current}].artWorksList[${index}].hasDz`]: this.data.contentObj[current].artWorksList[index].hasDz > 0 ? 0 : 1,
+      [`contentObj[${current}].artWorksList[${index}].dzNum`]: this.data.contentObj[current].artWorksList[index].hasDz > 0 ? this.data.contentObj[current].artWorksList[index].dzNum - 1 : this.data.contentObj[current].artWorksList[index].dzNum + 1
+    })
+    
+    //保存或取消点赞
+    var dzObj = {}
+    dzObj.openId = app.openId
+    dzObj.orgId = app.orgId
+    dzObj.targetId = this.data.contentObj[current].artWorksList[index].id
+    dzObj.type = '0' //0-作品 1-评论
+    dzObj.delFlag = this.data.contentObj[current].artWorksList[index].hasDz > 0 ? '0' : '1'
+    
+    wx.request({
+      url: app.apiUrl + '/api/targetDz',
+      data: JSON.stringify(dzObj),
+      dataType: 'json',
+      method: 'POST',
+      success: function (res) {
+        if (res.data.code == '0') {
+          console.log('点赞或取消点赞成功')
+        } else {
+          console.log('点赞或取消点赞失败')
+        }
+      },
+      fail: function (error) {
+        console.error(' 系统异常: ' + error);
+      },
+      complete: function () { }
     })
   },
   onShareAppMessage() {

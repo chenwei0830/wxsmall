@@ -47,10 +47,10 @@ const tabbar = {
 }
 App({
   onLaunch: function () {
-    var openid = wx.getStorageSync("openid") || ''
     var that = this
-    if (openid=='') {
-      //缓存中未获取到openId,则重新获取
+    //缓存中未获取到openId,则重新获取
+    var openId = wx.getStorageSync('openid')||''
+    if (openId==''){
       wx.login({
         success: function (res) {
           if (res.code) {
@@ -61,7 +61,7 @@ App({
                 jsCode: res.code
               },
               success: function (res) {
-                if (res.data.data.openid === undefined) {
+                if (res.data.data.openid == undefined) {
                   console.log("获取openId失败");
                 } else {
                   that.openId = res.data.data.openid //赋值全局
@@ -70,19 +70,16 @@ App({
 
               },
               fail: function (error) {
-                console.error('获取openId失败...: ' + error);
+                console.error('获取openId异常...: ' + error);
               }
             })
           }
         }
       })
-    } else {
-      this.openId = openid
+    }else{
+      that.openId = openId
     }
-    ////登录注册
-    wx.showLoading({
-      title: '加载中...',
-    })
+    
     wx.getUserInfo({
       success: info => {
         //将用户信息全局保存
@@ -118,8 +115,6 @@ App({
             console.error(' 登录异常: ' + error);
           },
           complete: function () {
-            wx.hideLoading()
-            console.log(that.user)
           }
         })
       }
@@ -137,9 +132,9 @@ App({
       tabbar
     })
   },
-  apiUrl: 'http://localhost:8080/sourthArtSys',//接口地址 https://www.chenqimao.com/sourthArtSys
+  apiUrl: 'https://www.chenqimao.com/sourthArtSys',//接口地址 http://localhost:8080/sourthArtSys
   user: null,//用户信息
-  openId: 'o0d4A0ZtUXqc2-VvTbcvNwYJNiS4',//用户唯一标识  
+  openId: '',//用户唯一标识  
   orgId: '2',//组织机构ID
 
   requireHttp() {

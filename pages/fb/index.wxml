@@ -17,7 +17,7 @@
     <view class='form'>
       <block wx:if="{{current==1}}">
         <view class='img-list'>
-          <image data-src="{{item}}" data-index="{{index}}" bindtap='imgClick' mode='aspectFill' wx:for="{{imgObj.imgList}}" style='width:{{imgSize}}px;height:{{imgSize-5}}px' src='{{item}}' class='img'></image>
+          <image data-src="{{item}}" data-index="{{index}}" bindtap='imgClick' mode='aspectFill' wx:key="{{index}}" wx:for="{{imgObj.imgList}}" style='width:{{imgSize}}px;height:{{imgSize-5}}px' src='{{item}}' class='img'></image>
           <view class='add img' style='width:{{imgSize}}px;height:{{imgSize-5}}px;background-size:{{imgSize/3+10}}px' bindtap='chooseImg'>
             <image src='/assets/icon/btn-add-img.png'></image>
           </view>
@@ -33,6 +33,15 @@
           <view class='weui-flex__item tr'>
             <picker range="{{imgObj.typeList}}" range-key="v" value='{{index}}' bindchange='typeChange' data-model='1'>
               {{imgObj.typeList[imgObj.artType].v||"请选择"}}
+            </picker>
+          </view>
+          <text class='arrow-right'></text>
+        </view>
+        <view class='weui-flex cell border_bottom1'>
+          <view class='label'>背景音乐</view>
+          <view class='weui-flex__item tr'>
+            <picker range="{{musicList}}" range-key="name" value='{{index}}' bindchange='musicChange' data-model='1'>
+              {{musicList[index].name||"请选择"}}
             </picker>
           </view>
           <text class='arrow-right'></text>
@@ -79,7 +88,7 @@
           <textarea placeholder='撰写你的大作吧~' class='textarea' maxlength='-1' bindinput='onText' value='{{videoObj.textContent}}' bindblur='saveCache' data-model='2'></textarea>
         </view>
       </block>
-      <block wx:if="{{current==3}}">
+      <!-- <block wx:if="{{current==3}}">
         <view class='weui-flex cell border_top1 border_bottom1'>
           <view class='label mr-20'>标题</view>
           <view class='weui-flex__item tr'>
@@ -113,12 +122,12 @@
         <view  class='cell tip border_top1' style='line-height:70rpx;'>当前背景音乐：{{dataUrl.name||"未选择"}}
         </view>
         <audio name='{{dataUrl.name}}' src='{{dataUrl.src}}'></audio>
-      </block>
+      </block> -->
     </view>
   </view>
   <view style='height:100rpx;' wx:if='{{current!=4}}'></view>
   <view class='submit' wx:if='{{current!=4}}' bindtap='submit'>发 布</view>
-  <view wx:if='{{current==4}}' class='computer bg-white mt-10'>
+  <!-- <view wx:if='{{current==4}}' class='computer bg-white mt-10'>
     <view style='margin-bottom:50rpx;'>电脑端编辑器主要是方便大家对图片文字以及视频进行自由的排版类似于公众号文章的编辑。可以通过以下流程来进行编辑</view>
     <view class='column-wrap'>
       <view class='column-item'>1、电脑端登陆
@@ -132,16 +141,16 @@
       <view class='column-item'>7、点击发布。</view>
       <view class='column-item'>8、手机端我的作品便可以查看了。</view>
     </view>
-  </view>
+  </view> -->
 </view>
-<view class='c-mask modal' hidden='{{!isAudio}}'>
+<!-- <view class='c-mask modal' hidden='{{!isAudio}}'>
   <view class='modal-content'>
     <view class='weui-flex title mb-10'>
       <view class='weui-flex__item tc'>选择背景音乐</view>
       <view class='close' bindtap='closeModal'></view>
     </view>
     <view class='audo-list pd-10 mb-20'>
-      <view bindtap='clickAudio' data-index='{{index}}' wx:for="{{audioList}}" class='weui-flex audio border_bottom1 pd-5 mb-5'>
+      <view bindtap='clickAudio' data-index='{{index}}' wx:for="{{audioList}}"  class='weui-flex audio border_bottom1 pd-5 mb-5'>
         <view class='weui-flex__item'>{{item.name}}</view>
         <view wx:if="{{audioNum==index}}">
           <icon type='success_no_circle'></icon>
@@ -149,9 +158,9 @@
       </view>
     </view>
   </view>
-</view>
+</view> -->
 
-<view class='c-mask modal' hidden='{{!isModal}}'>
+<!-- <view class='c-mask modal' hidden='{{!isModal}}'>
   <view class='modal-content'>
     <view class='weui-flex title mb-10'>
       <view class='weui-flex__item tc'>是否继续编辑未完成文章</view>
@@ -162,7 +171,7 @@
     </view>
     <view class='confirm' bindtap='continueEdit'>继续编辑</view>
   </view>
-</view>
+</view> -->
 
 <navigator url='/pages/home/home' hover-class='none' class='return tc'>
   <view>返回</view>
